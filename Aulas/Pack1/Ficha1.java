@@ -15,12 +15,13 @@ public class Ficha1 {
 
         switch (questao){
 
-            case 1:
+            case 1: 
                 double cel, far;
                 System.out.println("Qual e o valor, em graus celsius, que deseja introduzir?\n");
                 cel  = input.nextDouble();
                 far = exercicio.celsiusParaFahrenheit(cel);
                 System.out.println("A temperatura " + cel + " graus Celsius equivale a " + far + "Fahrenheit.\n"); 
+                break;
 
 
             case 2:
@@ -31,6 +32,7 @@ public class Ficha1 {
                 b = input.nextInt();
                 resultado = exercicio.maximoNumeros(a, b);
                 System.out.println("O maximo entre os dois numeros, e : " + resultado + "\n");
+                break;
 
 
             case 3: 
@@ -39,6 +41,7 @@ public class Ficha1 {
                 nome = input.next();
                 double saldo = input.nextDouble();
                 System.out.println(exercicio.criaDescricaoConta(nome, saldo));
+                break;
 
             case 4:
                 double euros;
@@ -50,6 +53,7 @@ public class Ficha1 {
                 resposta = exercicio.eurosParaLibras(euros, taxa);
                 System.out.println("A conversao foi efetuada com sucesso!\n");
                 System.out.println("O valor convertido e igual a: " + resposta + " GBP.\n");
+                break;
                 
 
             case 5:
@@ -58,12 +62,15 @@ public class Ficha1 {
                 num1 = input.nextInt();
                 num2 = input.nextInt();
                 System.out.println(exercicio.crescenteMedia(num1,num2)); 
+                break;
                 
             case 6:
                 int fac;
                 System.out.println("Digite um numero inteiro. \n");
                 fac = input.nextInt();
                 System.out.println(exercicio.factorial(fac));
+                break; 
+                
             case 7:
 
             int mS, mF, fatorial;
@@ -72,6 +79,7 @@ public class Ficha1 {
             long resposta1 = exercicio.factorial(fatorial);
             long resposta2 = exercicio.tempoGasto();
             System.out.println("O resultado do fatorial e: " + resposta1 + ". E a duracao do programa e de: " + resposta2 + "\n");
+                break;
 
             
 
@@ -133,11 +141,12 @@ public class Ficha1 {
     }
 
 
-    public long tempoGasto(){
+    public long tempoGasto(int fatorial){
         int milisecondS, milisecondF;
         LocalDateTime now = LocalDateTime.now();
         milisecondS = now.getNano();
         System.out.println(milisecondS);
+        factorial(fatorial);
         milisecondF = now.getNano();
         System.out.println(milisecondF);
 
