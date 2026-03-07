@@ -1,4 +1,4 @@
-public class Application {
+public class ApplicationEficiente {
     public static void main (String[] args){
        // aqui não ha mada de novo a acrescentar, apenas vamos operar com o ficheiro EncomendaEficiente, pois e o que realmente interessa.
 
