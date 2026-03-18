@@ -95,7 +95,7 @@ public class EncomendaEficiente {
 
     public boolean equalsE(Object o){
         if(o == this) return true;
-        if(o == null || this.getClass() == o.getClass()) return false;
+        if(o == null || this.getClass() != o.getClass()) return false;
         EncomendaEficiente other = (EncomendaEficiente) o;
         return (this.nome == other.nome && this.nif == other.nif && this.morada == other.morada &&
                 this.numEnc == other.numEnc && this.data == other.data && this.encomenda == other.encomenda);
