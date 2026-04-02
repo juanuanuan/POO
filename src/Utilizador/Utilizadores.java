@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
+
 public class Utilizadores implements Serializable {
-    private HashMap<Integer, Utilizador> utilizadores;
+    private HashMap<Integer, Utilizador> utilizadores; // não sei se troco para String por causa do email
 
     public Utilizadores(){
         this.utilizadores = new HashMap<>();
     }
+
 
     public Utilizadores(HashMap<Integer,Utilizador> utilizadores){
         this.utilizadores = utilizadores;
@@ -41,9 +43,15 @@ public class Utilizadores implements Serializable {
 
     // dúvida se vale a pena fazer o método clone"
 
-    public boolean addUser(Utilizador user){
-        if(utilizadores.containsKey(user.getIdUtilizador()) && utilizadores.containsKey(user.getNIF())) return false;
-        else utilizadores.put(user.getIdUtilizador(), user);
-        return true;
+    public boolean existeUser(int id){
+        return utilizadores.containsKey(id);
     }
+
+
+
+
+
+
+
+
 }

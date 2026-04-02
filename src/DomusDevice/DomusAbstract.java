@@ -77,7 +77,11 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
         this.estadoAtual = Estado.OFF;
     }
 
-    public abstract DomusAbstract duplicate();
+
+
+
+
+
 
     
 

@@ -1,5 +1,7 @@
 package Utilizador;
 
+import Domus.Casa;
+
 public class Utilizador {
     private String nome;
     private int NIF;
@@ -74,15 +76,15 @@ public class Utilizador {
         this.idUtilizador = idUtilizador;
     }
 
-    public String toString() {
+    public String exibirPerfil(Casa casa, Utilizador user) {
         return "As informações sobre o utilizador são: " + "\n" +
                 "Nome: " + getNome() + "\n" +
                 "NIF: " + getNIF() + "\n" +
                 "Número de Telemóvel: " + getTlm() + "\n" +
                 "Email associado: " + getEmail() + "\n" +
                 "ID DomusControl: " + getIdUtilizador() + "\n" +
-                "Palavra-Passe DomusControl: " + "*********" + "\n"; // fazer verificação se é o dono da casa
-    }
+                (ehHost(casa, user) ? "Palavra-Passe " + getPassWord() + "\n" : "Palavra-passe:" + "******" + "\n");// fazer verificação se é o dono da casa
+    } // Assim o host tem controlo total de quem está na aplicação da casa dele
 
     public boolean equals(Object o){
         if (o == this) return true;
@@ -91,5 +93,15 @@ public class Utilizador {
         return (this.NIF == other.NIF && this.email == other.email && this.tlm == other.tlm && this.idUtilizador == other.idUtilizador);
     }
 
-    public
+    public boolean ehHost(Casa casa, Utilizador user){
+        return casa.getIdHost() == user.getIdUtilizador();
+    }
+
+
+
+
+
+
+
+
 }

@@ -6,6 +6,6 @@ public interface DomusDevice {
 
     void desligaObj();
 
-
+    public DomusDevice clone();
 
 }

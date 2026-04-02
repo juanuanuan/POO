@@ -1,6 +1,7 @@
 package Domus;
 
 import DomusDevice.DomusAbstract;
+import DomusDevice.DomusComplexo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,11 +30,7 @@ public class Divisao implements Serializable {
     public Divisao(Divisao other) {
         this.Divisao = other.getDivisao();
         this.idDivisao = other.getIdDivisao();
-        // this.dispositivos = new ArrayList<>(other.getDispositivos()); // !!Duvida!!
-        this.dispositivos = new ArrayList<>();
-         for( DomusAbstract d : other.getDispositivos()){
-             this.dispositivos.add(d.duplicate());
-         }
+        this.dispositivos = new ArrayList<>(other.getDispositivos()); // !!Duvida!! Problema com a memória
     }
 
 
@@ -78,7 +75,8 @@ public class Divisao implements Serializable {
 
     }
 
-    public Divisao duplicate(){
+
+    public Divisao clone(){
         return new Divisao(this);
     }
 
@@ -101,6 +99,24 @@ public class Divisao implements Serializable {
             dispositivo.desligaObj();
         }
     }
+
+    public void boostAll(){
+        for(DomusAbstract dispositivo : dispositivos){
+            if(dispositivo instanceof DomusComplexo dispositivoComplexo){
+                dispositivoComplexo.boostObj();
+            }
+        } // não sei se está bem, não tocar aqui!
+    }
+
+    public void ecoAll(){
+        for(DomusAbstract dispositivo : dispositivos){
+            if(dispositivo instanceof DomusComplexo dispositivoComplexo){
+                dispositivoComplexo.ecoObj();
+            }
+        }
+    }
+
+
 
 
 
