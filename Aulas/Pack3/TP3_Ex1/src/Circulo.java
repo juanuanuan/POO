@@ -50,7 +50,7 @@ public class Circulo {
 
     public boolean equalsC(Object o){
         if(o == this) return true;
-        if(o != null && this.getClass() == o.getClass()) return false;
+        if(o == null || this.getClass() != o.getClass()) return false;
         Circulo other = (Circulo) o;
         return (this.x == other.x && this.y == other.y);
     }
