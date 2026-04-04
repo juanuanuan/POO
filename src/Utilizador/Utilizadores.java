@@ -6,18 +6,18 @@ import java.util.Objects;
 
 
 public class Utilizadores implements Serializable {
-    private HashMap<Integer, Utilizador> utilizadores; // não sei se troco para String por causa do email
+    private HashMap<String, Utilizador> utilizadores; // não sei se troco para String por causa do email
 
     public Utilizadores(){
         this.utilizadores = new HashMap<>();
     }
 
 
-    public Utilizadores(HashMap<Integer,Utilizador> utilizadores){
+    public Utilizadores(HashMap<String,Utilizador> utilizadores){
         this.utilizadores = utilizadores;
     }
 
-    public HashMap<Integer, Utilizador> getUtilizadores() {
+    public HashMap<String, Utilizador> getUtilizadores() {
         return this.utilizadores;
     }
 
@@ -45,6 +45,18 @@ public class Utilizadores implements Serializable {
 
     public boolean existeUser(int id){
         return utilizadores.containsKey(id);
+    }
+
+    public void addUser(Utilizador user){
+        utilizadores.put(user.getEmail(), user);
+    }
+
+    public Utilizador efetuaLogin(String novoEmail, String novaPass){
+        for(Utilizador currentUser : utilizadores.values()){
+            if(currentUser.login(novoEmail,novaPass)){
+                return currentUser;
+            }
+        } return null;
     }
 
 

@@ -10,4 +10,17 @@ public class DomusLampada extends DomusAbstract implements DomusComplexo, DomusD
         super.setestadoAtual(Estado.ECO);
     }
 
+    public DomusLampada(){
+        super();
+    }
+
+    public DomusLampada(DomusLampada other){
+        super(other); // na duvida se esta certo.
+    }
+
+    public DomusLampada clone(){
+        return new DomusLampada(this);
+    }
+
+
 }

@@ -10,8 +10,6 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
         ON, OFF, ECO, BOOST
     }
 
-    
-
     public DomusAbstract(){
         this.consumoObjeto = 0;
         this.estadoAtual = Estado.OFF;
@@ -27,7 +25,7 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
     public DomusAbstract (DomusAbstract other){
         this.idObjeto = other.getIdObjeto();
         this.consumoObjeto = other.getConsumoObjeto();
-        this.estadoAtual = other.getestadoAtual();
+        this.estadoAtual = other.getEstadoAtual();
     }
 
     public int getIdObjeto() {
@@ -38,7 +36,7 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
         return this.consumoObjeto;
     }
 
-    public Estado getestadoAtual() {
+    public Estado getEstadoAtual() {
         return this.estadoAtual;
     }
 
@@ -76,6 +74,9 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
     public void desligaObj(){
         this.estadoAtual = Estado.OFF;
     }
+
+    @Override
+    public abstract DomusAbstract clone();
 
 
 

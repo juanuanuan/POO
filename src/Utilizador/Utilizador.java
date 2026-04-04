@@ -76,14 +76,14 @@ public class Utilizador {
         this.idUtilizador = idUtilizador;
     }
 
-    public String exibirPerfil(Casa casa, Utilizador user) {
+    public String toString() {
         return "As informações sobre o utilizador são: " + "\n" +
                 "Nome: " + getNome() + "\n" +
                 "NIF: " + getNIF() + "\n" +
                 "Número de Telemóvel: " + getTlm() + "\n" +
                 "Email associado: " + getEmail() + "\n" +
-                "ID DomusControl: " + getIdUtilizador() + "\n" +
-                (ehHost(casa, user) ? "Palavra-Passe " + getPassWord() + "\n" : "Palavra-passe:" + "******" + "\n");// fazer verificação se é o dono da casa
+                "ID DomusControl: " + getIdUtilizador() + "\n" ;
+                //(ehHost(casa, user) ? "Palavra-Passe " + getPassWord() + "\n" : "Palavra-passe:" + "******" + "\n");// fazer verificação se é o dono da casa
     } // Assim o host tem controlo total de quem está na aplicação da casa dele
 
     public boolean equals(Object o){
@@ -96,6 +96,12 @@ public class Utilizador {
     public boolean ehHost(Casa casa, Utilizador user){
         return casa.getIdHost() == user.getIdUtilizador();
     }
+
+    public boolean login(String eemail, String ppassWord){
+        return eemail.equals(this.getEmail()) && ppassWord.equals(this.getPassWord());
+    } // na duvida se coloco isto na classe controlador
+
+
 
 
 
