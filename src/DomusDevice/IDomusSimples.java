@@ -1,11 +1,11 @@
 package DomusDevice;
 
-public interface DomusDevice {
+public interface IDomusSimples {
 
     void ligaObj();
 
     void desligaObj();
 
-    DomusDevice clone();
+    IDomusSimples clone();
 
 }

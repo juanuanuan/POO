@@ -1,7 +1,7 @@
 package Domus;
 
-import DomusDevice.DomusAbstract;
-import DomusDevice.DomusComplexo;
+import DomusDevice.ADomusSimples;
+import DomusDevice.ADomusComplexo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,14 +14,14 @@ public class Divisao implements Serializable {
 
     private String divisao;
     private int idDivisao;
-    private List<DomusAbstract> dispositivos;
+    private List<ADomusSimples> dispositivos; // perfeito como está, encaixa a lógica de simples e complexo perfeitamente
 
     public Divisao() {
         this.divisao = "";
         this.dispositivos = new ArrayList<>();
     }
 
-    public Divisao(String newDivisao, int idDivisao, ArrayList<DomusAbstract> dispositivos) {
+    public Divisao(String newDivisao, int idDivisao, ArrayList<ADomusSimples> dispositivos) {
         this.divisao = newDivisao;
         this.dispositivos = dispositivos;
         this.idDivisao = idDivisao;
@@ -42,7 +42,7 @@ public class Divisao implements Serializable {
         return this.idDivisao;
     }
 
-    public List<DomusAbstract> getDispositivos() {
+    public List<ADomusSimples> getDispositivos() {
         return this.dispositivos;
     }
 
@@ -54,7 +54,7 @@ public class Divisao implements Serializable {
         this.idDivisao = idDivisao;
     }
 
-    public void setDispositivos(List<DomusAbstract> dispositivos) {
+    public void setDispositivos(List<ADomusSimples> dispositivos) {
         this.dispositivos = dispositivos;
     }
 
@@ -78,39 +78,39 @@ public class Divisao implements Serializable {
 
     public Divisao clone(){
         return new Divisao(this);
-    }
+    } // incompleto
 
-    public void addObj(DomusAbstract dispositivo){
+    public void addObj(ADomusSimples dispositivo){
         dispositivos.add(dispositivo);
     }
 
-    public void removeObj(DomusAbstract dispositivo){
+    public void removeObj(ADomusSimples dispositivo){
         dispositivos.remove(dispositivo);
     }
 
     public void ligaAll(){
-        for(DomusAbstract dispositivo : dispositivos){
+        for(ADomusSimples dispositivo : dispositivos){
             dispositivo.ligaObj();
         }
     }
 
     public void desligaAll(){
-        for(DomusAbstract dispositivo : dispositivos){
+        for(ADomusSimples dispositivo : dispositivos){
             dispositivo.desligaObj();
         }
     }
 
     public void boostAll(){
-        for(DomusAbstract dispositivo : dispositivos){
-            if(dispositivo instanceof DomusComplexo dispositivoComplexo){
+        for(ADomusSimples dispositivo : dispositivos){
+            if(dispositivo instanceof ADomusComplexo dispositivoComplexo){
                 dispositivoComplexo.boostObj();
             }
         } // não sei se está bem, não tocar aqui!
     }
 
     public void ecoAll(){
-        for(DomusAbstract dispositivo : dispositivos){
-            if(dispositivo instanceof DomusComplexo dispositivoComplexo){
+        for(ADomusSimples dispositivo : dispositivos){
+            if(dispositivo instanceof ADomusComplexo dispositivoComplexo){
                 dispositivoComplexo.ecoObj();
             }
         }

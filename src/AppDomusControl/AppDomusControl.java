@@ -1,7 +1,14 @@
 package AppDomusControl;
 
+import Domus.Divisao;
+import DomusDevice.ADomusSimples;
+import DomusDevice.DomusLampada;
+import DomusDevice.Estados;
 import Utilizador.Utilizador;
 import Utilizador.Utilizadores;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import java.io.Serializable;
@@ -14,7 +21,16 @@ public class AppDomusControl implements Serializable {
         Scanner input = new Scanner(System.in); // !!! NÃO ESTOU A FAZER A MAIN. APENAS ESTOU A TESTAR COMO FUNCIONAM OS MÉTODOS !!!!
         Random rand = new Random();
         String login1, login2;
-        Utilizadores users = new Utilizadores(); // colocar aqui no início um ciclo do-while para o programa não estar sempre a fechar.
+        Utilizadores users = new Utilizadores();// colocar aqui no início um ciclo do-while para o programa não estar sempre a fechar.
+
+
+        ADomusSimples dispositivo1 = new DomusLampada(112, "Lampadas Casio", "KX40", 50, 20, 30, true);
+        ADomusSimples dispositivo2 = new DomusLampada(113, "Lampadas Casio", "KX40", 50, 20, 30, true);
+        Divisao div1 = new Divisao("Sala de Estar", 2200, new ArrayList<ADomusSimples>(List.of(dispositivo2,dispositivo1)));
+
+
+        System.out.println(dispositivo2.equals(dispositivo1));
+        /*
         do {
 
             //Utilizador user = new Utilizador();
@@ -76,5 +92,9 @@ public class AppDomusControl implements Serializable {
                     break;
             }
         } while (inpt != 3);
+
+         */
     }
+
+
 }

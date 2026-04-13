@@ -1,9 +1,9 @@
 package DomusDevice;
 
-public class DomusRegador extends DomusAbstract{
+public class DomusRegador extends ADomusSimples {
 
     private int fluxoAgua;
-    private int duracaoMinutos;
+    private int duracaoMinutos; // o que é isto. para que serve
 
     public DomusRegador(){
         super();
@@ -12,7 +12,7 @@ public class DomusRegador extends DomusAbstract{
     }
 
     public DomusRegador(int idObjeto, String marca, String modelo, double consumo, int fluxoAgua, int duracaoMinutos){
-        super(idObjeto, marca, modelo, consumo, Estado.OFF);
+        super(idObjeto, marca, modelo, consumo, Estados.OFF);
         this.fluxoAgua = fluxoAgua;
         this.duracaoMinutos = duracaoMinutos;
     }
@@ -51,12 +51,14 @@ public class DomusRegador extends DomusAbstract{
         return result;
     }
 
-    public boolean equals(Object o) {
+    /*public boolean equals(Object o) { !!!! isto nao faz sentido, problemas com apontadores e conflitos com comparações entre objetos de casas diferentes.
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusRegador other = (DomusRegador) o;
         return super.equals(o) && this.fluxoAgua == other.getFluxoAgua();
     }
+    \*
+     */
 
 }
 

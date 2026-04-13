@@ -1,84 +1,62 @@
 package DomusDevice;
 
-public class DomusPercianas extends DomusAbstract{
+public class DomusPercianas extends ADomusSimples {
 
     private int percentagemAbertura; // 0 'e fechado e 100 aberto completo
 
-    public DomusPercianas(){
+    public DomusPercianas() {
         super();
         this.percentagemAbertura = 0;
     }
 
-    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, int percentagemAbertura){
-        super(idObjeto, marca, modelo, consumo, Estado.OFF);
+    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, int percentagemAbertura) {
+        super(idObjeto, marca, modelo, consumo, Estados.OFF);
         this.percentagemAbertura = percentagemAbertura;
     }
 
-    public DomusPercianas(DomusPercianas other){
+    public DomusPercianas(DomusPercianas other) {
         super(other);
         this.percentagemAbertura = other.getPercentagemAbertura();
     }
 
     //getters e setters
 
-    public int getPercentagemAbertura(){
+    public int getPercentagemAbertura() {
         return this.percentagemAbertura;
     }
 
-    public void setPercentagemAbertura(int percentagemAbertura){
-        if(percentagemAbertura >= 0 && percentagemAbertura <= 100)
-        this.percentagemAbertura = percentagemAbertura;
+    public void setPercentagemAbertura(int percentagemAbertura) {
+        if (percentagemAbertura >= 0 && percentagemAbertura <= 100)
+            this.percentagemAbertura = percentagemAbertura;
     }
 
-    public DomusPercianas clone(){
+    public DomusPercianas clone() {
         return new DomusPercianas(this);
     }
 
-    public String toString(){
+    public String toString() {
         String result = super.toString();
-            if(this.percentagemAbertura == 0){
-                result += " | fechada!";
-            } else {
-                result += " | abertura: " + this.percentagemAbertura + "%";
-            }
+        if (this.percentagemAbertura == 0) {
+            result += " | fechada!";
+        } else {
+            result += " | abertura: " + this.percentagemAbertura + "%";
+        }
         return result;
-}
+    }
 
     public boolean equals(Object o) {
-        if(o == this) return true;
-        if(o == null || this.getClass() != o.getClass()) return false;
+        if (o == this) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
         DomusPercianas other = (DomusPercianas) o;
-        return super.equals(o) && this.percentagemAbertura == other.getPercentagemAbertura();
+        return super.equals(o); //&& this.percentagemAbertura == other.getPercentagemAbertura();
     }
+
+
+
+
+
 
 }
 
-
-
-
-/* public void ligaObj(){
-        super.setestadoAtual(Estado.ON);
-    public void ligaObj(){
-        super.setEstadoAtual(Estado.ON);
-    }
-
-    public void desligaObj(){
-        super.setEstadoAtual(Estado.OFF);
-    }
-
-    public DomusPercianas(){
-        super();
-    }
-
-    public DomusPercianas(DomusPercianas other){
-        super(other);
-    }
-
-    public DomusPercianas clone(){
-        return new DomusPercianas(this);
-    }
-
-
-*/
 
 

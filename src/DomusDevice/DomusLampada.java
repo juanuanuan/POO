@@ -1,6 +1,6 @@
 package DomusDevice;
 
-public class DomusLampada extends DomusComplexo{
+public class DomusLampada extends ADomusComplexo {
 
     private int intensidade;      // 0 a 100 (percentagem)
     private int temperaturaCorK;  // 2700K a 4000K (0 se não suportar)
@@ -53,13 +53,13 @@ public class DomusLampada extends DomusComplexo{
 
     @Override
     public void boostObj() {
-        super.setEstadoAtual(Estado.BOOST);
+        //super.setEstadoAtual(Estado.BOOST);
         this.intensidade = 100;
     }
 
     @Override
     public void ecoObj() {
-        super.setEstadoAtual(Estado.ECO);
+        //super.setEstadoAtual(Estados.ECO);
         this.intensidade = 30;
     }
 
@@ -81,10 +81,10 @@ public class DomusLampada extends DomusComplexo{
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusLampada other = (DomusLampada) o;
-        return super.equals(o) &&
-                this.intensidade == other.intensidade &&
-                this.temperaturaCorK == other.temperaturaCorK &&
-                this.temCor == other.temCor;
+        return super.equals(o); //&&
+                //this.intensidade == other.intensidade &&
+                //this.temperaturaCorK == other.temperaturaCorK &&
+                //this.temCor == other.temCor;
 }
 
 

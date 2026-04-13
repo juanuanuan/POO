@@ -1,13 +1,13 @@
 package DomusDevice;
 
-public class DomusAC extends DomusComplexo{
+public class DomusAC extends ADomusComplexo {
 
     private int temperaturaAC; // entre 16 e 30
     private ModoAC modoAC;
 
     protected enum ModoAC{
         ARREFECER, AQUECER, VENTILAR
-    }
+    } // penso seriamente em criar uma classe chamada Estados.java para estados de objetos.
 
     public DomusAC(){
         super();
@@ -47,38 +47,28 @@ public class DomusAC extends DomusComplexo{
         this.modoAC = modoAC;
     }
 
-    public void boostObj(){
-        super.setEstadoAtual(Estado.BOOST);
-        if(this.modoAC == ModoAC.AQUECER){
-            this.temperaturaAC = 30;
-        } else if(this.modoAC == ModoAC.ARREFECER) {
-            this.temperaturaAC = 16;
-        }
-    }
+
+
 
 
     // nao sei se aqui a logica das temperaturas faz muito sentido
-    public void ecoObj(){
-        super.setEstadoAtual(Estado.ECO);
-        if(this.modoAC == ModoAC.AQUECER){
-            this.temperaturaAC = 21;
-        } else if(this.modoAC == ModoAC.ARREFECER) {
-            this.temperaturaAC = 18;
-        }
-    }
+
+    // acho que as funções eco e boost não podem estar definidas nem aqui, nem desta maneira
 
     public DomusAC clone(){
         return new DomusAC(this);
     }
 
-    public boolean equals(Object o) {
+    /* public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusAC other = (DomusAC) o;
         return super.equals(o) &&
                 this.temperaturaAC == other.temperaturaAC &&
-                this.modoAC == other.modoAC;
+                this.modoAC == other.modoAC; !!! SEM SENTIDO !!!
     }
+
+     */
 
     public String toString(){
         String result = super.toString() + " | temperatura: " + this.temperaturaAC + " graus " +
@@ -86,39 +76,23 @@ public class DomusAC extends DomusComplexo{
         return result;
     }
 
+    public void boostObj(){
+        this.temperaturaAC = 25;
+    }
+
+    public void ecoObj(){
+        this.temperaturaAC = 15;
+    }
+
+
+
+
+
+
+
+
 
 
 
 
 }
-    /* public void ligaObj(){
-        super.setestadoAtual(Estado.ON);
-    }
-
-    public void desligaObj(){
-        super.setEstadoAtual(Estado.OFF);
-    }
-
-    public void boostObj(){
-        super.setEstadoAtual(Estado.BOOST);
-    }
-
-    public void ecoObj(){
-        super.setEstadoAtual(Estado.ECO);
-    }
-
-    public DomusAC(){
-        super();
-    }
-
-    public DomusAC(DomusAC other){
-        super(other);
-    }
-
-    public DomusAC clone(){
-        return new DomusAC(this);
-    }
- */
-
-
-
