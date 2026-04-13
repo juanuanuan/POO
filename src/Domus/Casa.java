@@ -26,7 +26,7 @@ public class Casa implements Serializable {
     }
 
     public HashMap<Integer, Divisao> getDivisao() {
-        return this.divisao;
+        return new HashMap<>(this.divisao); // alterei para nao devolver a referencia direta 
     }
 
     public int getIdHost() {
