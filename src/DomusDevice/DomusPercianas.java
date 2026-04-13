@@ -6,12 +6,12 @@ public class DomusPercianas extends DomusAbstract{
 
     public DomusPercianas(){
         super();
-        this.percentagemAbertura = 0; 
+        this.percentagemAbertura = 0;
     }
 
     public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, int percentagemAbertura){
         super(idObjeto, marca, modelo, consumo, Estado.OFF);
-        this.percentagemAbertura = percentagemAbertura; 
+        this.percentagemAbertura = percentagemAbertura;
     }
 
     public DomusPercianas(DomusPercianas other){
@@ -19,10 +19,10 @@ public class DomusPercianas extends DomusAbstract{
         this.percentagemAbertura = other.getPercentagemAbertura();
     }
 
-    //getters e setters 
+    //getters e setters
 
     public int getPercentagemAbertura(){
-        return this.percentagemAbertura; 
+        return this.percentagemAbertura;
     }
 
     public void setPercentagemAbertura(int percentagemAbertura){
@@ -43,7 +43,7 @@ public class DomusPercianas extends DomusAbstract{
             }
         return result;
 }
-        
+
     public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
@@ -58,10 +58,12 @@ public class DomusPercianas extends DomusAbstract{
 
 /* public void ligaObj(){
         super.setestadoAtual(Estado.ON);
+    public void ligaObj(){
+        super.setEstadoAtual(Estado.ON);
     }
 
     public void desligaObj(){
-        super.setestadoAtual(Estado.OFF);
+        super.setEstadoAtual(Estado.OFF);
     }
 
     public DomusPercianas(){
@@ -74,4 +76,9 @@ public class DomusPercianas extends DomusAbstract{
 
     public DomusPercianas clone(){
         return new DomusPercianas(this);
-    } */
+    }
+
+
+*/
+
+

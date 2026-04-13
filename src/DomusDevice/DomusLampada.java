@@ -28,16 +28,16 @@ public class DomusLampada extends DomusComplexo{
     }
 
     // Getters
-    public int getIntensidade() { 
-        return this.intensidade; 
+    public int getIntensidade() {
+        return this.intensidade;
     }
 
-    public int getTemperaturaCorK() { 
-        return this.temperaturaCorK; 
+    public int getTemperaturaCorK() {
+        return this.temperaturaCorK;
     }
 
     public boolean isTemCor() {
-        return this.temCor; 
+        return this.temCor;
     }
 
     // Setters
@@ -53,13 +53,13 @@ public class DomusLampada extends DomusComplexo{
 
     @Override
     public void boostObj() {
-        super.setestadoAtual(Estado.BOOST);
+        super.setEstadoAtual(Estado.BOOST);
         this.intensidade = 100;
     }
 
     @Override
     public void ecoObj() {
-        super.setestadoAtual(Estado.ECO);
+        super.setEstadoAtual(Estado.ECO);
         this.intensidade = 30;
     }
 
@@ -76,12 +76,12 @@ public class DomusLampada extends DomusComplexo{
         }
         return result;
     }
-    
+
     public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusLampada other = (DomusLampada) o;
-        return super.equals(o) && 
+        return super.equals(o) &&
                 this.intensidade == other.intensidade &&
                 this.temperaturaCorK == other.temperaturaCorK &&
                 this.temCor == other.temCor;
@@ -93,14 +93,16 @@ public class DomusLampada extends DomusComplexo{
 }
 
 
-// deixei isto em comentario, nao sei se precisavas disto ou nao    
+// deixei isto em comentario, nao sei se precisavas disto ou nao
 
 /*     public void boostObj(){
         super.setestadoAtual(Estado.BOOST);
+    public void boostObj(){
+        super.setEstadoAtual(Estado.BOOST);
     }
 
     public void ecoObj(){
-        super.setestadoAtual(Estado.ECO);
+        super.setEstadoAtual(Estado.ECO);
     }
 
     public DomusLampada(){

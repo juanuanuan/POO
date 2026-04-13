@@ -1,7 +1,7 @@
 package DomusDevice;
 
 public class DomusAC extends DomusComplexo{
-    
+
     private int temperaturaAC; // entre 16 e 30
     private ModoAC modoAC;
 
@@ -17,7 +17,7 @@ public class DomusAC extends DomusComplexo{
 
     public DomusAC(int idObjeto, String marca, String modelo, double consumo, int temperaturaAC, ModoAC modoAC){
         super(idObjeto, marca, modelo, consumo);
-        this.temperaturaAC = temperaturaAC; 
+        this.temperaturaAC = temperaturaAC;
         this.modoAC = modoAC;
     }
 
@@ -27,7 +27,7 @@ public class DomusAC extends DomusComplexo{
         this.modoAC = other.getModoAC();
     }
 
-    //getters e setters 
+    //getters e setters
 
     public int getTemperaturaAC(){
         return this.temperaturaAC;
@@ -48,7 +48,7 @@ public class DomusAC extends DomusComplexo{
     }
 
     public void boostObj(){
-        super.setestadoAtual(Estado.BOOST);
+        super.setEstadoAtual(Estado.BOOST);
         if(this.modoAC == ModoAC.AQUECER){
             this.temperaturaAC = 30;
         } else if(this.modoAC == ModoAC.ARREFECER) {
@@ -58,8 +58,8 @@ public class DomusAC extends DomusComplexo{
 
 
     // nao sei se aqui a logica das temperaturas faz muito sentido
-    public void ecoObj(){ 
-        super.setestadoAtual(Estado.ECO);
+    public void ecoObj(){
+        super.setEstadoAtual(Estado.ECO);
         if(this.modoAC == ModoAC.AQUECER){
             this.temperaturaAC = 21;
         } else if(this.modoAC == ModoAC.ARREFECER) {
@@ -75,7 +75,7 @@ public class DomusAC extends DomusComplexo{
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusAC other = (DomusAC) o;
-        return super.equals(o) && 
+        return super.equals(o) &&
                 this.temperaturaAC == other.temperaturaAC &&
                 this.modoAC == other.modoAC;
     }
@@ -83,28 +83,28 @@ public class DomusAC extends DomusComplexo{
     public String toString(){
         String result = super.toString() + " | temperatura: " + this.temperaturaAC + " graus " +
                                            " | modo: " + this.modoAC;
-        return result; 
+        return result;
     }
 
-    
 
 
 
-}  
+
+}
     /* public void ligaObj(){
         super.setestadoAtual(Estado.ON);
     }
 
     public void desligaObj(){
-        super.setestadoAtual(Estado.OFF);
+        super.setEstadoAtual(Estado.OFF);
     }
 
     public void boostObj(){
-        super.setestadoAtual(Estado.BOOST);
+        super.setEstadoAtual(Estado.BOOST);
     }
 
     public void ecoObj(){
-        super.setestadoAtual(Estado.ECO);
+        super.setEstadoAtual(Estado.ECO);
     }
 
     public DomusAC(){

@@ -12,30 +12,30 @@ public class Divisao implements Serializable {
     // So criar classes de outras divisões quando estritamente necessário. I.e, quando outra divisão
     // apresenta atributos e comportamentos completamente diferentes de outra divisão
 
-    private String Divisao;
+    private String divisao;
     private int idDivisao;
     private List<DomusAbstract> dispositivos;
 
     public Divisao() {
-        this.Divisao = "";
+        this.divisao = "";
         this.dispositivos = new ArrayList<>();
     }
 
     public Divisao(String newDivisao, int idDivisao, ArrayList<DomusAbstract> dispositivos) {
-        this.Divisao = newDivisao;
+        this.divisao = newDivisao;
         this.dispositivos = dispositivos;
         this.idDivisao = idDivisao;
     }
 
     public Divisao(Divisao other) {
-        this.Divisao = other.getDivisao();
+        this.divisao = other.getDivisao();
         this.idDivisao = other.getIdDivisao();
-        this.dispositivos = new ArrayList<>(other.getDispositivos()); // !!Duvida!! Problema com a memória
+        this.dispositivos = new ArrayList<>(other.getDispositivos()); // FAZER CICLO FOR EACH para copiar todos os objetos.
     }
 
 
     public String getDivisao() {
-        return this.Divisao;
+        return this.divisao;
     }
 
     public int getIdDivisao() {
@@ -47,7 +47,7 @@ public class Divisao implements Serializable {
     }
 
     public void setDivisao(String divisao) {
-        Divisao = divisao;
+        this.divisao = divisao;
     }
 
     public void setIdDivisao(int idDivisao) {

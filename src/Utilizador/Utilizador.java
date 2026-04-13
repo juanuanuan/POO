@@ -90,7 +90,7 @@ public class Utilizador {
         if (o == this) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
         Utilizador other = (Utilizador) o;
-        return (this.NIF == other.NIF && this.email == other.email && this.tlm == other.tlm && this.idUtilizador == other.idUtilizador);
+        return (this.NIF == other.NIF && this.email.equals(other.email)&& this.tlm == other.tlm && this.idUtilizador == other.idUtilizador);
     }
 
     public boolean ehHost(Casa casa, Utilizador user){

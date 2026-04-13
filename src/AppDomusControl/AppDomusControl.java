@@ -19,13 +19,14 @@ public class AppDomusControl implements Serializable {
 
             //Utilizador user = new Utilizador();
             // int inpt;
+            // Podemos implementar Thread Sleeps(1/2 segundos) para deixar um programa mais fluido e natural
             System.out.println("  ____                                ____            _             _ ");
             System.out.println(" |  _ \\  ___  _ __ ___  _   _ ___   / ___|___  _ __ | |_ _ __ ___ | |");
             System.out.println(" | | | |/ _ \\| '_ ` _ \\| | | / __| | |   / _ \\| '_ \\| __| '__/ _ \\| |");
             System.out.println(" | |_| | (_) | | | | | | |_| \\__ \\ | |__| (_) | | | | |_| | | (_) | |");
             System.out.println(" |____/ \\___/|_| |_| |_|\\__,_|___/  \\____\\___/|_| |_|\\__|_|  \\___/|_|");
             System.out.println("=======================================================================");
-            System.out.println("                             Bem-vindo/(a)!                               ");
+            System.out.println("                               Welcome!                              ");
             System.out.println("=======================================================================");
             System.out.println("         1- Login         2- Create Account          3- Exit               ");
             System.out.println("=======================================================================");
@@ -38,11 +39,13 @@ public class AppDomusControl implements Serializable {
                     login2 = input.next();
                     currentUser = users.efetuaLogin(login1, login2);
                     if (currentUser != null) {
-                        System.out.println(currentUser.getIdUtilizador()); // apagar esta linha, é apenas para saber se o programa aceita um utilizador!
+                        System.out.println("Foi-lhe atribuído um Id. Não partilhe este ID com ninguém!" + currentUser.getIdUtilizador()); // esta linha até pode ser interessante. Vamos tentar manter o id escondido
+                        // estou a pensar em criar uma classe à parte, chamado Menu.java, com o único objetivo de não andar a poluir a main. a classe main deve ser o mais "burra" e limpa possível
+                        // Ou cria se uma classe a parte, ou faz se isto na classe Controlador. Com isso apagamos o switch por completo. Ficando com uma main bastante limpa e legível.
                     } else {
-                        System.out.println("O seu logIn de início se sessão esta incorreto. Tente novamente;");
-                        break;
-                    }
+                        System.out.println("O seu logIn de início de sessão está incorreto. Tente novamente.");
+
+                    } break;
 
                 case 2:
                     // registar novo user e os seus metodos
@@ -52,18 +55,18 @@ public class AppDomusControl implements Serializable {
                     String email;
                     String password;
                     input.nextLine(); // acrescentei aqui um input vazio para o programa não confundir o input do menu com os caracteres do login
-                    System.out.println("Primeiro e ultimo nome. \n");
+                    System.out.println("Primeiro e último nome. \n");
                     name = input.nextLine(); // para nomes (primeiro e último) colocamos sempre nextLine() para o programa ler para além do primeiro espaço.
-                    System.out.println("Numero de Identificação Fiscal. \n");
+                    System.out.println("Número de Identificação Fiscal. \n");
                     nif = input.nextInt();
-                    System.out.println("Numero de Telemóvel. \n");
+                    System.out.println("Número de Telemóvel. \n");
                     telemovel = input.nextInt();
                     System.out.println("Email. \n");
                     email = input.next(); // como o email é tudo junto e não pode ter espaços, colocamos apenas next()
                     System.out.println("PassWord. \n");
                     password = input.next();
-                    int id = rand.nextInt(900000) + 100000; // porque tem estes números? para não gerar números negativos. Também para todos os users terem um Id com 6 dígitos, abrangendo um maior range de users e maior diferenciação de Id´s.
-
+                    int id = rand.nextInt(900000) + 100000; // porque tem estes números? para não gerar números negativos. Também para todos os users terem um Id com 6 dígitos, obtendo um maior range de users e uma maior diferenciação de Id´s.
+                    input.nextLine(); // assegurar que o buffer do input é sempre limpo antes de criar outro utilizador ou ao sair do case 2.
                     Utilizador novoUser = new Utilizador(name, nif, telemovel, email, password, id);
                     users.addUser(novoUser);
                     System.out.println(users.getUtilizadores());

@@ -2,15 +2,15 @@ package DomusDevice;
 
 
 public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbstract> {
-    private int    idObjeto;
+    private int idObjeto;
     private double consumoObjeto; // consumo em kW/h
     private Estado estadoAtual;
     private String marca;
     private String modelo; // o enunciado pede estes dois atributos
-    
+
     protected enum Estado{
         ON, OFF, ECO, BOOST
-    }
+    } // aceitável se apenas os devices herdarem este enum, o que acho que seja o lógico a fazer.
 
     public DomusAbstract(){
         this.idObjeto      = -1;
@@ -22,7 +22,7 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
 
     public DomusAbstract(int idObjeto, String marca, String modelo, double consumoObjeto, Estado estadoAtual){
         this.idObjeto      = idObjeto;
-        this.marca         = marca; 
+        this.marca         = marca;
         this.modelo        = modelo;
         this.consumoObjeto = consumoObjeto;
         this.estadoAtual   = estadoAtual;
@@ -30,11 +30,11 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
     }
 
     public DomusAbstract (DomusAbstract other){
-        this.idObjeto      = other.getIdObjeto();
+        this.idObjeto = other.getIdObjeto();
         this.consumoObjeto = other.getConsumoObjeto();
         this.estadoAtual   = other.getEstadoAtual();
-        this.marca         = other.getMarca();
-        this.modelo        = other.getModelo();
+        this.marca = other.getMarca();
+        this.modelo = other.getModelo();
     }
 
 
@@ -66,7 +66,7 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
         this.consumoObjeto = consumoObjeto;
     }
 
-    public void setestadoAtual(Estado estadoAtual) {
+    public void setEstadoAtual(Estado estadoAtual) {
         this.estadoAtual = estadoAtual;
     }
 
@@ -77,7 +77,7 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
     public void setModelo(String modelo){
         this.modelo = modelo;
     }
-    
+
 
     public boolean equals(Object o) {
         if(o == this) return true;
@@ -86,10 +86,9 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
         return (this.idObjeto == other.idObjeto);
     }
 
-    @Override
     public String toString() {
-        return "ID: " + this.idObjeto + " | Marca: " + this.marca + 
-                " | Modelo: " + this.modelo + " | Consumo: " + this.consumoObjeto + 
+        return "ID: " + this.idObjeto + " | Marca: " + this.marca +
+                " | Modelo: " + this.modelo + " | Consumo: " + this.consumoObjeto +
                 "Wh | Estado: " + this.estadoAtual;
 }
 
@@ -112,4 +111,13 @@ public abstract class DomusAbstract implements DomusDevice, Comparable<DomusAbst
     @Override
     public abstract DomusAbstract clone();
 }
+
+
+
+
+    
+
+
+
+
 

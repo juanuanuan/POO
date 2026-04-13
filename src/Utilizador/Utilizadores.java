@@ -6,18 +6,19 @@ import java.util.Objects;
 
 
 public class Utilizadores implements Serializable {
-    private HashMap<String, Utilizador> utilizadores; // não sei se troco para String por causa do email
+    private HashMap<Integer, Utilizador> utilizadores; // para não haver erros na Heap, ºe melhor colocar a chave do mapa para um ID fixo e imutável
 
     public Utilizadores(){
         this.utilizadores = new HashMap<>();
     }
 
 
-    public Utilizadores(HashMap<String,Utilizador> utilizadores){
+    public Utilizadores(HashMap<Integer,Utilizador> utilizadores){
         this.utilizadores = utilizadores;
     }
 
-    public HashMap<String, Utilizador> getUtilizadores() {
+
+    public HashMap<Integer, Utilizador> getUtilizadores() {
         return this.utilizadores;
     }
 
@@ -41,14 +42,14 @@ public class Utilizadores implements Serializable {
         return Objects.hash(utilizadores);
     }
 
-    // dúvida se vale a pena fazer o método clone"
+    
 
     public boolean existeUser(int id){
         return utilizadores.containsKey(id);
     }
 
     public void addUser(Utilizador user){
-        utilizadores.put(user.getEmail(), user);
+        utilizadores.put(user.getIdUtilizador(), user);
     }
 
     public Utilizador efetuaLogin(String novoEmail, String novaPass){

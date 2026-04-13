@@ -3,27 +3,27 @@ package DomusDevice;
 public class DomusRegador extends DomusAbstract{
 
     private int fluxoAgua;
-    private int duracaoMinutos; 
+    private int duracaoMinutos;
 
     public DomusRegador(){
         super();
-        this.fluxoAgua = 0; 
-        this.duracaoMinutos = 0; 
+        this.fluxoAgua = 0;
+        this.duracaoMinutos = 0;
     }
 
     public DomusRegador(int idObjeto, String marca, String modelo, double consumo, int fluxoAgua, int duracaoMinutos){
         super(idObjeto, marca, modelo, consumo, Estado.OFF);
         this.fluxoAgua = fluxoAgua;
-        this.duracaoMinutos = duracaoMinutos; 
+        this.duracaoMinutos = duracaoMinutos;
     }
-   
+
     public DomusRegador(DomusRegador other){
         super(other);
-        this.fluxoAgua = other.getFluxoAgua(); 
+        this.fluxoAgua = other.getFluxoAgua();
         this.duracaoMinutos = other.getDuracaoMinutos();
     }
 
-    //getters e setters 
+    //getters e setters
 
     public int getFluxoAgua(){
         return this.fluxoAgua;
@@ -34,7 +34,7 @@ public class DomusRegador extends DomusAbstract{
     }
 
     public void setFluxoAgua(int fluxoAgua){
-        this.fluxoAgua = fluxoAgua; 
+        this.fluxoAgua = fluxoAgua;
     }
 
     public void setDuracaoMinutos(int duracaoMinutos){
@@ -48,7 +48,7 @@ public class DomusRegador extends DomusAbstract{
     public String toString(){
         String result = super.toString() + " | fluxo de agua: " + this.fluxoAgua +
                                            " | duracao em minutos: " + this.duracaoMinutos;
-        return result;                                  
+        return result;
     }
 
     public boolean equals(Object o) {
@@ -57,34 +57,36 @@ public class DomusRegador extends DomusAbstract{
         DomusRegador other = (DomusRegador) o;
         return super.equals(o) && this.fluxoAgua == other.getFluxoAgua();
     }
-    
-} 
+
+}
 
 
 
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /* public void ligaObj(){
         super.setestadoAtual(Estado.ON);
+    public void ligaObj(){
+        super.setEstadoAtual(Estado.ON);
     }
 
     public void desligaObj(){
-        super.setestadoAtual(Estado.OFF);
+        super.setEstadoAtual(Estado.OFF);
     }
 
     public DomusRegador(){
@@ -97,8 +99,9 @@ public class DomusRegador extends DomusAbstract{
 
     public DomusRegador clone(){
         return new DomusRegador(this);
-    } */
+    }
 
+     */
 
 
 
