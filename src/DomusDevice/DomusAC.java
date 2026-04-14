@@ -5,7 +5,7 @@ public class DomusAC extends ADomusComplexo {
     private int temperaturaAC; // entre 16 e 30
     private ModoAC modoAC;
 
-    protected enum ModoAC{
+    public enum ModoAC{
         ARREFECER, AQUECER, VENTILAR
     } // penso seriamente em criar uma classe chamada Estados.java para estados de objetos.
 
@@ -15,8 +15,8 @@ public class DomusAC extends ADomusComplexo {
         this.modoAC = ModoAC.VENTILAR;
     }
 
-    public DomusAC(int idObjeto, String marca, String modelo, double consumo, int temperaturaAC, ModoAC modoAC){
-        super(idObjeto, marca, modelo, consumo);
+    public DomusAC(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int temperaturaAC, ModoAC modoAC){
+        super(idObjeto, marca, modelo, consumo, consumoAtual);
         this.temperaturaAC = temperaturaAC;
         this.modoAC = modoAC;
     }
@@ -71,17 +71,17 @@ public class DomusAC extends ADomusComplexo {
      */
 
     public String toString(){
-        String result = super.toString() + " | temperatura: " + this.temperaturaAC + " graus " +
+        return super.toString() + " | temperatura: " + this.temperaturaAC + " graus " +
                                            " | modo: " + this.modoAC;
-        return result;
     }
 
-    public void boostObj(){
-        this.temperaturaAC = 25;
+
+    public void aquecerAC(){
+        this.modoAC = ModoAC.AQUECER;
     }
 
-    public void ecoObj(){
-        this.temperaturaAC = 15;
+    public void arrefecerAC(){
+        this.modoAC = ModoAC.ARREFECER;
     }
 
 

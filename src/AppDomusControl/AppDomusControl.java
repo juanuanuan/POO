@@ -1,18 +1,15 @@
 package AppDomusControl;
 
+import Domus.Casa;
 import Domus.Divisao;
-import DomusDevice.ADomusSimples;
-import DomusDevice.DomusLampada;
-import DomusDevice.Estados;
+import DomusDevice.*;
 import Utilizador.Utilizador;
 import Utilizador.Utilizadores;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.lang.*;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 public class AppDomusControl implements Serializable {
     public static void main(String[] args){
@@ -24,12 +21,23 @@ public class AppDomusControl implements Serializable {
         Utilizadores users = new Utilizadores();// colocar aqui no início um ciclo do-while para o programa não estar sempre a fechar.
 
 
-        ADomusSimples dispositivo1 = new DomusLampada(112, "Lampadas Casio", "KX40", 50, 20, 30, true);
-        ADomusSimples dispositivo2 = new DomusLampada(113, "Lampadas Casio", "KX40", 50, 20, 30, true);
-        Divisao div1 = new Divisao("Sala de Estar", 2200, new ArrayList<ADomusSimples>(List.of(dispositivo2,dispositivo1)));
+        ADomusComplexo dispositivo1 = new DomusLampada(112, "Lampadas Casio", "KX40", 50, 0, 0, 30, true);
+        ADomusComplexo dispositivo2 = new DomusLampada(113, "Lampadas Casio", "KX45", 20, 0, 0, 40, true);
+        ADomusSimples dispositivo3 = new DomusPercianas(113, "HouseCare.Lda", "P2", 65, 0, 0);
+        Divisao div1 = new Divisao("Sala de Estar", 2200, new ArrayList<ADomusSimples>(List.of(dispositivo2)));
+        Divisao div2 = new Divisao("Quarto Principal", 2201, new ArrayList<ADomusSimples>(List.of(dispositivo1, dispositivo3)));
+        Casa casa = new Casa();
+        casa.addDiv(div1);
+        casa.addDiv(div2);
 
+        System.out.println("Loading...");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            System.out.println("Fail to load! Check for any corrupted files. Any doubts contact our Support Team!");
+        }
+        System.out.println(casa.toString());
 
-        System.out.println(dispositivo2.equals(dispositivo1));
         /*
         do {
 

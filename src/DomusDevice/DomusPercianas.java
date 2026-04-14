@@ -9,8 +9,8 @@ public class DomusPercianas extends ADomusSimples {
         this.percentagemAbertura = 0;
     }
 
-    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, int percentagemAbertura) {
-        super(idObjeto, marca, modelo, consumo, Estados.OFF);
+    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int percentagemAbertura) {
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual);
         this.percentagemAbertura = percentagemAbertura;
     }
 
@@ -37,9 +37,9 @@ public class DomusPercianas extends ADomusSimples {
     public String toString() {
         String result = super.toString();
         if (this.percentagemAbertura == 0) {
-            result += " | fechada!";
+            result += "| Perciana Fechada";
         } else {
-            result += " | abertura: " + this.percentagemAbertura + "%";
+            result += "| abertura: " + getPercentagemAbertura() + "%";
         }
         return result;
     }

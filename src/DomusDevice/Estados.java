@@ -4,3 +4,5 @@ package DomusDevice;
         ON, OFF, ECO, BOOST
     }
 
+
+

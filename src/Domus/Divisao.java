@@ -66,6 +66,12 @@ public class Divisao implements Serializable {
         return (this.idDivisao == other.idDivisao);
     }
 
+    public String toString(){
+        return  getDivisao() +
+                " Com ID atribuído: " + getIdDivisao() + "\n" +
+                "Lista de dispositivos associados: " + getDispositivos() + "\n";
+    }
+
     public int compareTo(Divisao o){
         if(this.idDivisao < o.idDivisao){
             return -1;

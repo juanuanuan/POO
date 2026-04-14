@@ -13,8 +13,8 @@ public class DomusLampada extends ADomusComplexo {
         this.temCor = false;
     }
 
-    public DomusLampada(int idObjeto, String marca, String modelo, double consumo, int intensidade, int temperaturaCorK, boolean temCor) {
-        super(idObjeto, marca, modelo, consumo);
+    public DomusLampada(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int intensidade, int temperaturaCorK, boolean temCor) {
+        super(idObjeto, marca, modelo, consumo, consumoAtual);
         this.intensidade = intensidade;
         this.temperaturaCorK = temperaturaCorK;
         this.temCor = temCor;
@@ -53,13 +53,13 @@ public class DomusLampada extends ADomusComplexo {
 
     @Override
     public void boostObj() {
-        //super.setEstadoAtual(Estado.BOOST);
+        super.boostObj();
         this.intensidade = 100;
     }
 
     @Override
     public void ecoObj() {
-        //super.setEstadoAtual(Estados.ECO);
+        super.ecoObj();
         this.intensidade = 30;
     }
 
@@ -70,9 +70,9 @@ public class DomusLampada extends ADomusComplexo {
 
    @Override
     public String toString() {
-        String result = super.toString() + " | Intensidade: " + this.intensidade + "%";
+        String result = super.toString() + "| Intensidade: " + getIntensidade() + "%";
         if (this.temCor) {
-            result += " | Cor: " + this.temperaturaCorK + "K";
+            result += "| Cor: " + getTemperaturaCorK() + "K";
         }
         return result;
     }

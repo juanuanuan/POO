@@ -11,8 +11,8 @@ public class DomusRegador extends ADomusSimples {
         this.duracaoMinutos = 0;
     }
 
-    public DomusRegador(int idObjeto, String marca, String modelo, double consumo, int fluxoAgua, int duracaoMinutos){
-        super(idObjeto, marca, modelo, consumo, Estados.OFF);
+    public DomusRegador(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int fluxoAgua, int duracaoMinutos){
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual);
         this.fluxoAgua = fluxoAgua;
         this.duracaoMinutos = duracaoMinutos;
     }
@@ -46,19 +46,18 @@ public class DomusRegador extends ADomusSimples {
     }
 
     public String toString(){
-        String result = super.toString() + " | fluxo de agua: " + this.fluxoAgua +
-                                           " | duracao em minutos: " + this.duracaoMinutos;
-        return result;
+        return super.toString() + " | Fluxo de água: " + getFluxoAgua() +
+                                  " | Duração em minutos: " + getDuracaoMinutos();
+
     }
 
-    /*public boolean equals(Object o) { !!!! isto nao faz sentido, problemas com apontadores e conflitos com comparações entre objetos de casas diferentes.
+    public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusRegador other = (DomusRegador) o;
-        return super.equals(o) && this.fluxoAgua == other.getFluxoAgua();
+        return super.equals(o);
     }
-    \*
-     */
+
 
 }
 
