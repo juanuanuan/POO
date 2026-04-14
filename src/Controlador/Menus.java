@@ -1,7 +1,12 @@
 package Controlador;
 
-public class Menus {
-    public enum Screen{
+import Domus.Casa;
+import Utilizador.Utilizador;
+import Utilizador.Utilizadores;
 
-    }
+import java.util.Scanner;
+
+public class Menus{
+
 }
+

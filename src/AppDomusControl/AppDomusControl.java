@@ -1,5 +1,7 @@
 package AppDomusControl;
 
+import Controlador.Controlador;
+import Controlador.Menus;
 import Domus.Casa;
 import Domus.Divisao;
 import DomusDevice.*;
@@ -19,8 +21,8 @@ public class AppDomusControl implements Serializable {
         Random rand = new Random();
         String login1, login2;
         Utilizadores users = new Utilizadores();// colocar aqui no início um ciclo do-while para o programa não estar sempre a fechar.
-
-
+        Controlador controller = new Controlador();
+/*
         ADomusComplexo dispositivo1 = new DomusLampada(112, "Lampadas Casio", "KX40", 50, 0, 0, 30, true);
         ADomusComplexo dispositivo2 = new DomusLampada(113, "Lampadas Casio", "KX45", 20, 0, 0, 40, true);
         ADomusSimples dispositivo3 = new DomusPercianas(113, "HouseCare.Lda", "P2", 65, 0, 0);
@@ -37,6 +39,12 @@ public class AppDomusControl implements Serializable {
             System.out.println("Fail to load! Check for any corrupted files. Any doubts contact our Support Team!");
         }
         System.out.println(casa.toString());
+
+
+ */
+        controller.start();
+
+
 
         /*
         do {
