@@ -9,8 +9,9 @@ public class DomusPercianas extends ADomusSimples {
         this.percentagemAbertura = 0;
     }
 
-    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int percentagemAbertura) {
-        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual);
+    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int percentagemAbertura,
+        int numAtivacoes, long tempoAcumulado, long momentoLigado) {
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
         this.percentagemAbertura = percentagemAbertura;
     }
 
@@ -44,18 +45,12 @@ public class DomusPercianas extends ADomusSimples {
         return result;
     }
 
-    public boolean equals(Object o) {
+   /*  public boolean equals(Object o) {
         if (o == this) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         DomusPercianas other = (DomusPercianas) o;
         return super.equals(o); //&& this.percentagemAbertura == other.getPercentagemAbertura();
-    }
-
-
-
-
-
-
+    } */
 }
 
 

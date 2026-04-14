@@ -11,8 +11,9 @@ public class DomusRegador extends ADomusSimples {
         this.duracaoMinutos = 0;
     }
 
-    public DomusRegador(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int fluxoAgua, int duracaoMinutos){
-        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual);
+    public DomusRegador(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int fluxoAgua, int duracaoMinutos,
+        int numAtivacoes, long tempoAcumulado, long momentoLigado){
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
         this.fluxoAgua = fluxoAgua;
         this.duracaoMinutos = duracaoMinutos;
     }
@@ -51,12 +52,12 @@ public class DomusRegador extends ADomusSimples {
 
     }
 
-    public boolean equals(Object o) {
+  /*   public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusRegador other = (DomusRegador) o;
         return super.equals(o);
-    }
+    } */
 
 
 }

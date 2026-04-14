@@ -11,8 +11,9 @@ public class DomusSoundSystem extends ADomusSimples {
         this.estacao = "";
     }
 
-    public DomusSoundSystem(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int volume, String estacao){
-        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual);
+    public DomusSoundSystem(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int volume, String estacao,
+        int numAtivacoes, long tempoAcumulado, long momentoLigado){
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
         this.volume = volume; 
         this.estacao = estacao; 
     }
@@ -48,12 +49,12 @@ public class DomusSoundSystem extends ADomusSimples {
                                   " | Estacao: " + getEstacao();
     }
 
-    public boolean equals(Object o) {
+ /*    public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusSoundSystem other = (DomusSoundSystem) o;
         return super.equals(o);
-    }
+    } */
 
 
     

@@ -1,35 +1,44 @@
 package DomusDevice;
 
 
-import DomusDevice.Estados;
-
 public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusSimples> {
     private int idObjeto;
     private double consumoObjeto; // consumo em kW/h
     private double consumoAtual;
     private Estados estadoAtual;
     private String marca;
-    private String modelo; // o enunciado pede estes dois atributos
+    private String modelo;
+    private int numAtivacoes;
+    private long tempoAcumulado; // tempo total
+    private long momentoLigado; // momento em que foi ligado
     // adicionar um private nivel que serviria de volume da coluna, intensidade de uma lampada, fluxo de agua do regador, etc
 
 
 
     public ADomusSimples(){
-        this.idObjeto      = -1;
-        this.consumoObjeto = 0;
-        this.consumoAtual = 0;
-        this.estadoAtual = Estados.OFF;
-        this.marca         = "";
-        this.modelo        = "";
+        this.idObjeto       = -1;
+        this.consumoObjeto  = 0;
+        this.consumoAtual   = 0;
+        this.estadoAtual    = Estados.OFF;
+        this.marca          = "";
+        this.modelo         = "";
+        this.numAtivacoes   = 0; 
+        this.tempoAcumulado = 0;
+        this.momentoLigado  = 0;
     }
 
-    public ADomusSimples(int idObjeto, String marca, String modelo, double consumoObjeto, Estados estadoAtual, double consumoAtual){
+    public ADomusSimples(int idObjeto, String marca, String modelo, double consumoObjeto, Estados estadoAtual, 
+                         double consumoAtual, int numAtivacoes, long tempoAcumulado, long momentoLigado){
+        
         this.idObjeto      = idObjeto;
         this.marca         = marca;
         this.modelo        = modelo;
         this.consumoObjeto = consumoObjeto;
-        this.consumoAtual = consumoAtual;
+        this.consumoAtual  = consumoAtual;
         this.estadoAtual   = estadoAtual;
+        this.numAtivacoes  = numAtivacoes;
+        this.tempoAcumulado = tempoAcumulado; 
+        this.momentoLigado = momentoLigado;
 
     }
 
@@ -40,6 +49,9 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         this.estadoAtual   = other.getEstadoAtual();
         this.marca = other.getMarca();
         this.modelo = other.getModelo();
+        this.numAtivacoes  = other.getNumAtivacoes();
+        this.tempoAcumulado = other.getTempoAcumulado(); 
+        this.momentoLigado = other.getMomentoLigado();
     }
 
 
@@ -59,8 +71,6 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         return this.estadoAtual;
     }
 
-
-
     public String getMarca(){
         return this.marca;
     }
@@ -68,6 +78,19 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
     public String getModelo(){
         return this.modelo;
     }
+
+    public int getNumAtivacoes() {
+        return this.numAtivacoes;
+    }
+
+    public long getTempoAcumulado(){
+        return this.tempoAcumulado;
+    }
+
+    public long getMomentoLigado(){
+        return this.momentoLigado;
+    }
+
 
     public void setIdObjeto(int idObjeto) {
         this.idObjeto = idObjeto;
@@ -85,10 +108,23 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         this.estadoAtual = estadoAtual;
     }
 
+    public void setNumAtivacoes(int numAtivacoes){
+        this.numAtivacoes = numAtivacoes;
+    }
+
+    public void setTempoAcumulado(long tempoAcumulado){
+        this.tempoAcumulado = tempoAcumulado;
+    }
+
+    public void setMomentoLigado(long momentoLigado){
+        this.momentoLigado = momentoLigado;
+    }
 
 
-    public void ligaObj() {
+
+    public void ligaObj() {        
         this.estadoAtual = Estados.ON;
+        numAtivacoes++;
     }
 
     public void desligaObj() {
@@ -129,6 +165,17 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
 
 
     public abstract ADomusSimples clone();
+
+
+    public double getMultiplicadorConsumo(){
+        switch(this.estadoAtual){
+            case OFF: return 0.0;
+            case ON: return 1.0;
+            case ECO: return 0.6;
+            case BOOST: return 1.5;
+            default: return 1.0;
+        }
+    }
 }
 
 

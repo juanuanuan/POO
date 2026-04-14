@@ -6,8 +6,9 @@ public abstract class ADomusComplexo extends ADomusSimples implements IDomusComp
         super();
     }
 
-    public ADomusComplexo(int idObjeto, String marca, String modelo, double consumo, double consumoAtual){
-        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual);
+    public ADomusComplexo(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, 
+        int numAtivacoes, long tempoAcumulado, long momentoLigado){
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
     }
 
     public ADomusComplexo(ADomusComplexo other){

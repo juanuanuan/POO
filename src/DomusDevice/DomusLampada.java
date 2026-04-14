@@ -13,8 +13,8 @@ public class DomusLampada extends ADomusComplexo {
         this.temCor = false;
     }
 
-    public DomusLampada(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int intensidade, int temperaturaCorK, boolean temCor) {
-        super(idObjeto, marca, modelo, consumo, consumoAtual);
+    public DomusLampada(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int intensidade, int temperaturaCorK, boolean temCor, int numAtivacoes, long tempoAcumulado, long momentoLigado) {
+        super(idObjeto, marca, modelo, consumo, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
         this.intensidade = intensidade;
         this.temperaturaCorK = temperaturaCorK;
         this.temCor = temCor;
@@ -77,15 +77,15 @@ public class DomusLampada extends ADomusComplexo {
         return result;
     }
 
-    public boolean equals(Object o) {
+  /*   public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         DomusLampada other = (DomusLampada) o;
         return super.equals(o); //&&
                 //this.intensidade == other.intensidade &&
                 //this.temperaturaCorK == other.temperaturaCorK &&
-                //this.temCor == other.temCor;
-}
+                //this.temCor == other.temCor; 
+}*/
 
 
 
