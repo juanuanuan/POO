@@ -10,6 +10,7 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
     private Estados estadoAtual;
     private String marca;
     private String modelo; // o enunciado pede estes dois atributos
+    // adicionar um private nivel que serviria de volume da coluna, intensidade de uma lampada, fluxo de agua do regador, etc
 
 
 

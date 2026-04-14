@@ -11,14 +11,19 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
+import Utilizador.Utilizador;
+import Utilizador.Utilizadores;
 
 
 // Classe abstrata Menu. Aqui fica uma série de menus e subMenus.
 public abstract class Menu {
     protected Scanner input;
     protected Controlador controlador;
+    protected Utilizador user;
+    protected Utilizadores users;
 
 
-    //public abstract Menu executarMenu();
+
+    public abstract Menu executarMenu();
 
 }
