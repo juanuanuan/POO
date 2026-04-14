@@ -1,31 +1,46 @@
 package Utilizador;
 
 import Domus.Casa;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Utilizador {
-    private String nome;
-    private int NIF;
-    private int tlm;
-    private String email;
-    private String passWord;
-    private int idUtilizador;
+    private String        nome;
+    private int           NIF;
+    private int           tlm;
+    private String        email;
+    private String        passWord;
+    private int           idUtilizador;
+    private List<Integer> idCasas;
 
-    public Utilizador (){
-        this.nome = "";
-        this.NIF = 0;
-        this.tlm = 0;
-        this.email = "";
-        this.passWord = "";
+    public Utilizador(){
+        this.nome         = "";
+        this.NIF          = 0;
+        this.tlm          = 0;
+        this.email        = "";
+        this.passWord     = "";
         this.idUtilizador = 0;
+        this.idCasas      = new ArrayList<>();
     }
 
-    public Utilizador (String nome, int NIF, int tlm, String email, String passWord, int idUtilizador){
-        this.nome = nome;
-        this.NIF = NIF;
-        this.tlm = tlm;
-        this.email = email;
-        this.passWord = passWord;
+    public Utilizador (String nome, int NIF, int tlm, String email, String passWord, int idUtilizador, List<Integer> idCasas){
+        this.nome         = nome;
+        this.NIF          = NIF;
+        this.tlm          = tlm;
+        this.email        = email;
+        this.passWord     = passWord;
         this.idUtilizador = idUtilizador;
+        this.idCasas      = idCasas; 
+    }
+
+    public Utilizador(Utilizador other){
+        this.nome         = other.getNome();
+        this.NIF          = other.getNIF();
+        this.tlm          = other.getTlm();
+        this.email        = other.getEmail();
+        this.passWord     = other.getPassWord();
+        this.idUtilizador = other.getIdUtilizador();
+        this.idCasas      = new ArrayList<>(other.getIdCasas());
     }
 
     public String getNome() {
@@ -52,6 +67,10 @@ public class Utilizador {
         return this.idUtilizador;
     }
 
+    public List<Integer> getIdCasas(){
+        return new ArrayList<>(this.idCasas);
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -74,6 +93,15 @@ public class Utilizador {
 
     public void setIdUtilizador(int idUtilizador) {
         this.idUtilizador = idUtilizador;
+    }
+
+    public void setIdCasas(List<Integer> idCasas){
+        this.idCasas = idCasas;
+    }
+
+
+    public Utilizador clone(){
+        return new Utilizador(this);
     }
 
     public String toString() {
@@ -100,14 +128,4 @@ public class Utilizador {
     public boolean login(String eemail, String ppassWord){
         return eemail.equals(this.getEmail()) && ppassWord.equals(this.getPassWord());
     } // na duvida se coloco isto na classe controlador
-
-
-
-
-
-
-
-
-
-
 }

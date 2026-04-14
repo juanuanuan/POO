@@ -17,6 +17,10 @@ public class Utilizadores implements Serializable {
         this.utilizadores = utilizadores;
     }
 
+    public Utilizadores(Utilizadores other){
+        this.utilizadores = new HashMap<>(other.getUtilizadores());
+    }
+
 
     public HashMap<Integer, Utilizador> getUtilizadores() {
         return this.utilizadores;
@@ -27,7 +31,11 @@ public class Utilizadores implements Serializable {
 
 
     public String toString() {
-       return "Lista de Utilizadores: " + getUtilizadores() + "\n";
+        String result = "Lista de Utilizadores:\n";
+        for (Utilizador u : this.utilizadores.values()) {
+            result += u.toString() + "\n";
+            }
+        return result;
     }
 
     public boolean equals(Object o){ // para ser útil na classe Controlador em questões de save e load e verificação do estado do ficheiro. Ainda não sei se vale a pena
@@ -52,6 +60,10 @@ public class Utilizadores implements Serializable {
         utilizadores.put(user.getIdUtilizador(), user);
     }
 
+    public void removeUser(Utilizador user){
+        utilizadores.remove(user.getIdUtilizador(), user);
+    }
+
     public Utilizador efetuaLogin(String novoEmail, String novaPass){
         for(Utilizador currentUser : utilizadores.values()){
             if(currentUser.login(novoEmail,novaPass)){
@@ -60,11 +72,5 @@ public class Utilizadores implements Serializable {
         } return null;
     }
 
-
-
-
-
-
-
-
+    // eventualmente fazer um logout!!! pensar nisto 
 }
