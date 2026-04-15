@@ -105,14 +105,14 @@ public class Controlador implements Serializable {
         return this.utilizadores.equals(other.utilizadores) &&
                this.casas.equals(other.casas);
     }
-   /*
+
     public void start(){
         Scanner input = new Scanner(System.in);
         int selecao;
         while(this.currentScreen != null){
             switch (this.currentScreen){
                 case Screen.MENU_AUTH -> {
-                    System.out.println("Bem vindo");
+                    System.out.println("Bem vindo!");
                     selecao = input.nextInt();
                     if(selecao == 1){
                         String login1, login2;
@@ -122,16 +122,21 @@ public class Controlador implements Serializable {
                         login2 = input.next();
                         Utilizador currentUser = null;
                         currentUser = utilizadores.efetuaLogin(login1,login2);
-                        if(currentUser != null){
+                        if(currentUser != null && currentUser.ehHost()){
                             //avanca
                         } else break;
+                    } else if(selecao == 2){
+                          //criar conta
                     }
                 }
-            }
+
+                case Screen.MAIN_MENU -> {
+                    System.out.println("");
+                }
+            } while (selecao != 3);
         }
     }
 
-    */
 
 
 }
