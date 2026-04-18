@@ -7,6 +7,7 @@ import Domus.Divisao;
 import DomusDevice.*;
 import Utilizador.Utilizador;
 import Utilizador.Utilizadores;
+import Controlador.MenuAuth;
 
 import java.util.*;
 import java.lang.*;
@@ -15,13 +16,14 @@ import java.io.Serializable;
 
 public class AppDomusControl implements Serializable {
     public static void main(String[] args){
-        int inpt;
+        Scanner inpt = new Scanner (System.in);
         Utilizador currentUser = null;
         Scanner input = new Scanner(System.in); // !!! NÃO ESTOU A FAZER A MAIN. APENAS ESTOU A TESTAR COMO FUNCIONAM OS MÉTODOS !!!!
         Random rand = new Random();
         String login1, login2;
         Utilizadores users = new Utilizadores();// colocar aqui no início um ciclo do-while para o programa não estar sempre a fechar.
         Controlador controller = new Controlador();
+        Menus menu = new MenuAuth(inpt);
 /*
         ADomusComplexo dispositivo1 = new DomusLampada(112, "Lampadas Casio", "KX40", 50, 0, 0, 30, true);
         ADomusComplexo dispositivo2 = new DomusLampada(113, "Lampadas Casio", "KX45", 20, 0, 0, 40, true);
@@ -42,7 +44,7 @@ public class AppDomusControl implements Serializable {
 
 
  */
-        controller.start();
+        //controller.start();
 
 
 

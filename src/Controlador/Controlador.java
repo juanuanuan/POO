@@ -21,17 +21,12 @@ public class Controlador implements Serializable {
 
     private Utilizadores utilizadores; 
     private HashMap<Integer, Casa> casas;
-    private Screen currentScreen;
     private Utilizador user;
 
-    public enum Screen{
-        MENU_AUTH, MAIN_MENU, MENU_GESTAO_CASA, MENU_GESTAO_DIS,
-    }
 
     public Controlador(){
         this.utilizadores = new Utilizadores();
         this.casas = new HashMap<>();
-        this.currentScreen = Screen.MENU_AUTH;
     }
 
     //não precisamos de contrutor parametrizado, o controlador começa sempre vazio e vai "enchendo" conforme o uso da aplicação
@@ -39,7 +34,6 @@ public class Controlador implements Serializable {
     public Controlador(Controlador other){
         this.utilizadores = other.getUtilizadores();
         this.casas = new HashMap<>(other.getCasas());
-        this.currentScreen = other.getCurrentScreen();
     }
 
     public Utilizadores getUtilizadores(){
@@ -50,9 +44,6 @@ public class Controlador implements Serializable {
         return new HashMap<>(this.casas);
     }
 
-    public Screen getCurrentScreen() {
-        return this.currentScreen;
-    }
 
     public void setUtilizadores(Utilizadores utilizadores){
         this.utilizadores = utilizadores;
@@ -62,9 +53,6 @@ public class Controlador implements Serializable {
         this.casas = new HashMap<>(hashMap);
     }
 
-    public void setCurrentScreen(Screen currentScreen) {
-        this.currentScreen = currentScreen;
-    }
 
 
     // um pouco confusas de entender mas funcionam
@@ -106,36 +94,7 @@ public class Controlador implements Serializable {
                this.casas.equals(other.casas);
     }
 
-    public void start(){
-        Scanner input = new Scanner(System.in);
-        int selecao;
-        while(this.currentScreen != null){
-            switch (this.currentScreen){
-                case Screen.MENU_AUTH -> {
-                    System.out.println("Bem vindo!");
-                    selecao = input.nextInt();
-                    if(selecao == 1){
-                        String login1, login2;
-                        System.out.println("Digite o seu email.");
-                        login1 = input.next();
-                        System.out.println("Digite a sua palavra-passe.");
-                        login2 = input.next();
-                        Utilizador currentUser = null;
-                        currentUser = utilizadores.efetuaLogin(login1,login2);
-                        if(currentUser != null && currentUser.ehHost()){
-                            //avanca
-                        } else break;
-                    } else if(selecao == 2){
-                          //criar conta
-                    }
-                }
 
-                case Screen.MAIN_MENU -> {
-                    System.out.println("");
-                }
-            } while (selecao != 3);
-        }
-    }
 
 
 

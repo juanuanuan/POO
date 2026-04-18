@@ -169,11 +169,11 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
 
     public double getMultiplicadorConsumo(){
         switch(this.estadoAtual){
-            case OFF: return 0.0;
-            case ON: return 1.0;
-            case ECO: return 0.6;
-            case BOOST: return 1.5;
-            default: return 1.0;
+            case OFF -> {return 0.0;}
+            case ON -> {return 1.0;}
+            case ECO -> {return 0.6;}
+            case BOOST -> {return 1.5;}
+            default -> {return 1.0;}
         }
     }
 }

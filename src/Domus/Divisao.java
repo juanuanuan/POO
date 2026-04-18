@@ -30,7 +30,10 @@ public class Divisao implements Serializable {
     public Divisao(Divisao other) {
         this.divisao = other.getDivisao();
         this.idDivisao = other.getIdDivisao();
-        this.dispositivos = new ArrayList<>(other.getDispositivos()); // FAZER CICLO FOR EACH para copiar todos os objetos.
+        this.dispositivos = new ArrayList<>();
+        for(ADomusSimples d : this.getDispositivos()){
+            this.dispositivos.add(d.clone());
+        }
     }
 
 
