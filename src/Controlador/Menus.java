@@ -19,11 +19,10 @@ public abstract class Menus{
       public abstract void mostraOpcao();
 
       public int lerInput(){
+          System.out.println("\n ==== " + this.nomeMenu + "====\n");
           this.mostraOpcao();
           return input.nextInt();
       }
-
-
 
 }
 
