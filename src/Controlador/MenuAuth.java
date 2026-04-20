@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MenuAuth extends Menus{
 
     public MenuAuth(Scanner input){
-        super(input, "Bem-vindo à app DomusControl");
+        super(input, "Welcome to the Authentication Menu. For any inconveniences, contact our support team.");
     }
 
 

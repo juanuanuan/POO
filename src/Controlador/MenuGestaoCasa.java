@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MenuGestaoCasa extends Menus{
 
     public MenuGestaoCasa(Scanner input){
-        super(input, "Single propriety management menu.");
+        super(input, "Single Propriety Management Menu.");
     }
 
     @Override

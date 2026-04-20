@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MenuGestaoDiv extends Menus{
 
     public MenuGestaoDiv(Scanner input){
-        super(input, "Single division management.");
+        super(input, "Single Division Management Menu.");
     }
 
     @Override
