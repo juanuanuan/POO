@@ -2,6 +2,10 @@ package Domus;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import DomusDevice.ADomusSimples;
 
 public class Casa implements Serializable {
     // Vamos criar um HashMap para ser mais fácil adicionar, remover e até mesmo aceder às divisões.
@@ -86,6 +90,29 @@ public class Casa implements Serializable {
     public void addDiv(Divisao div){
         divisao.put(div.getIdDivisao(), div);
 
+    }
+
+    public double getConsumoTotal() {
+        return this.divisao.values().stream()
+            .flatMap(d -> d.getDispositivos().stream())
+            .mapToDouble(d -> d.getConsumoAtual() * d.getMultiplicadorConsumo())
+            .sum();
+    }
+
+    public List<ADomusSimples> top3DevicesPorTempo(long momentoAtual) {
+        return this.divisao.values().stream()
+            .flatMap(d -> d.getDispositivos().stream())
+            .sorted(Comparator.comparingLong(d -> -d.getTempoTotal(momentoAtual)))
+            .limit(3)
+            .collect(Collectors.toList());
+    }
+
+    public List<ADomusSimples> top3DevicesPorAtivacoes() {
+        return this.divisao.values().stream()
+            .flatMap(d -> d.getDispositivos().stream())
+            .sorted(Comparator.comparingInt(d -> -d.getNumAtivacoes()))
+            .limit(3)
+            .collect(Collectors.toList());
     }
 
 

@@ -2,6 +2,8 @@ package Domus;
 
 import DomusDevice.ADomusSimples;
 import DomusDevice.ADomusComplexo;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class Divisao implements Serializable {
         this.divisao = other.getDivisao();
         this.idDivisao = other.getIdDivisao();
         this.dispositivos = new ArrayList<>();
-        for(ADomusSimples d : this.getDispositivos()){
+        for(ADomusSimples d : other.getDispositivos()){
             this.dispositivos.add(d.clone());
         }
     }
@@ -123,6 +125,24 @@ public class Divisao implements Serializable {
                 dispositivoComplexo.ecoObj();
             }
         }
+    }
+
+    public int getNumDispositivos() {
+        return this.dispositivos.size();
+    }
+
+    public List<ADomusSimples> top3PorTempo(long momentoAtual) {
+        return this.dispositivos.stream()
+            .sorted(Comparator.comparingLong(d -> -d.getTempoTotal(momentoAtual)))
+            .limit(3)
+            .collect(Collectors.toList());
+    }
+
+    public List<ADomusSimples> top3PorAtivacoes() {
+        return this.dispositivos.stream()
+            .sorted(Comparator.comparingInt(d -> -d.getNumAtivacoes()))
+            .limit(3)
+            .collect(Collectors.toList());
     }
 
 

@@ -124,11 +124,24 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
 
     public void ligaObj() {        
         this.estadoAtual = Estados.ON;
+        this.momentoLigado = momentoAtual;
         numAtivacoes++;
+
     }
 
-    public void desligaObj() {
+    public void desligaObj(long momentoAtual) {
+        if (this.estadoAtual != Estados.OFF && this.momentoLigado > 0) {
+            this.tempoAcumulado += momentoAtual - this.momentoLigado;
+        }
+        this.momentoLigado = 0;
         this.estadoAtual = Estados.OFF;
+    }
+
+    public long getTempoTotal(long momentoAtual) {
+        if (this.estadoAtual != Estados.OFF && this.momentoLigado > 0) {
+            return this.tempoAcumulado + (momentoAtual - this.momentoLigado);
+        }
+        return this.tempoAcumulado;
     }
 
     public void setMarca(String marca){
