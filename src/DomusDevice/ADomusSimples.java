@@ -122,7 +122,7 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
 
 
 
-    public void ligaObj() {        
+    public void ligaObj(long momentoAtual) {
         this.estadoAtual = Estados.ON;
         this.momentoLigado = momentoAtual;
         numAtivacoes++;

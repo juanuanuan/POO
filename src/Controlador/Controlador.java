@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import Domus.Divisao;
 import DomusDevice.ADomusSimples;
+import DomusDevice.DomusLampada;
+import java.util.ArrayList;
 
 import Domus.Casa;
 import Utilizador.Utilizador;
@@ -145,6 +147,62 @@ public class Controlador implements Serializable {
             .findFirst()
             .ifPresent(d -> d.desligaObj(this.tempoAtual));
     }
+
+    public void inicializaDadosTeste() {
+        DomusLampada l1 = new DomusLampada(1, "Philips", "HUE", 10.0, 10.0, 50, 2700, true, 0, 0, 0);
+        DomusLampada l2 = new DomusLampada(2, "Ikea", "Tradfri", 8.0, 8.0, 30, 0, false, 0, 0, 0);
+        DomusLampada l3 = new DomusLampada(3, "Xiaomi", "Yeelight", 9.0, 9.0, 70, 4000, true, 0, 0, 0);
+        DomusLampada l4 = new DomusLampada(4, "Philips", "HUE2", 12.0, 12.0, 80, 3000, true, 0, 0, 0);
+        DomusLampada l5 = new DomusLampada(5, "Osram", "Smart+", 7.0, 7.0, 40, 0, false, 0, 0, 0);
+        DomusLampada l6 = new DomusLampada(6, "Ikea", "Tradfri2", 6.0, 6.0, 20, 0, false, 0, 0, 0);
+        DomusLampada l7 = new DomusLampada(7, "Philips", "HUE3", 11.0, 11.0, 60, 2700, true, 0, 0, 0);
+
+        // Casa 1 - 2 divisões
+        Divisao sala1 = new Divisao("Sala", 1, new ArrayList<>());
+        Divisao quarto1 = new Divisao("Quarto", 2, new ArrayList<>());
+        sala1.addObj(l1);
+        sala1.addObj(l2);
+        sala1.addObj(l3);
+        quarto1.addObj(l4);
+
+        Casa casa1 = new Casa(new HashMap<>(), 1, 1, "Rua A", "Casa Principal");
+        casa1.addDiv(sala1);
+        casa1.addDiv(quarto1);
+        this.casas.put(1, casa1);
+// Casa 2 - 2 divisões
+        Divisao cozinha = new Divisao("Cozinha", 3, new ArrayList<>());
+        Divisao escritorio = new Divisao("Escritorio", 4, new ArrayList<>());
+        cozinha.addObj(l5);
+        cozinha.addObj(l6);
+        escritorio.addObj(l7);
+
+        Casa casa2 = new Casa(new HashMap<>(), 1, 2, "Rua B", "Casa de Ferias");
+        casa2.addDiv(cozinha);
+        casa2.addDiv(escritorio);
+        this.casas.put(2, casa2);
+
+        // Simular uso - casa1 consome mais
+        l1.ligaObj(0); l2.ligaObj(0); l3.ligaObj(0); l4.ligaObj(0);
+        this.tempoAtual = 120;
+        l1.desligaObj(120); // 120 min, 3 ativacoes no total da casa1
+        l2.desligaObj(120);
+        l3.desligaObj(120);
+        l4.desligaObj(120);
+
+        // l5 e l6 ligam menos tempo
+        l5.ligaObj(120); l6.ligaObj(120);
+        this.tempoAtual = 150;
+        l5.desligaObj(150); // 30 min
+        l6.desligaObj(150);
+
+        // l1 liga outra vez - mais ativacoes
+        l1.ligaObj(150);
+        l1.ligaObj(150); // mais uma ativacao
+        this.tempoAtual = 200;
+        l3.ligaObj(200); // l3 tem menos tempo total mas mais ativacoes
+        l3.ligaObj(200);
+        l3.ligaObj(200);
+    } // isto nao pode ficar assim!!!!!!!!!! MUDAR DEPOIS
 
 
 

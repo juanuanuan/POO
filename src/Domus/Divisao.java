@@ -99,15 +99,15 @@ public class Divisao implements Serializable {
         dispositivos.remove(dispositivo);
     }
 
-    public void ligaAll(){
+    public void ligaAll(long momentoAtual){
         for(ADomusSimples dispositivo : dispositivos){
-            dispositivo.ligaObj();
+            dispositivo.ligaObj(momentoAtual);
         }
     }
 
-    public void desligaAll(){
+    public void desligaAll(long momentoAtual){
         for(ADomusSimples dispositivo : dispositivos){
-            dispositivo.desligaObj();
+            dispositivo.desligaObj(momentoAtual);
         }
     }
 

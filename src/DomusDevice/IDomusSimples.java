@@ -2,9 +2,9 @@ package DomusDevice;
 
 public interface IDomusSimples {
 
-    void ligaObj();
+    void ligaObj(long momentoAtual);
 
-    void desligaObj();
+    void desligaObj(long momentoAtual);
 
     IDomusSimples clone();
 
