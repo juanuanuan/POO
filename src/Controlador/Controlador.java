@@ -148,7 +148,7 @@ public class Controlador implements Serializable {
             .ifPresent(d -> d.desligaObj(this.tempoAtual));
     }
 
-    public void inicializaDadosTeste() {
+    public void instantTest() {
         DomusLampada l1 = new DomusLampada(1, "Philips", "HUE", 10.0, 10.0, 50, 2700, true, 0, 0, 0);
         DomusLampada l2 = new DomusLampada(2, "Ikea", "Tradfri", 8.0, 8.0, 30, 0, false, 0, 0, 0);
         DomusLampada l3 = new DomusLampada(3, "Xiaomi", "Yeelight", 9.0, 9.0, 70, 4000, true, 0, 0, 0);
