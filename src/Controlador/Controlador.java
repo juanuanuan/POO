@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import Domus.Casa;
 import Utilizador.Utilizador;
 import Utilizador.Utilizadores;
+import Controlador.Menus;
 
 public class Controlador implements Serializable {
     // Recebe métodos que salvam e carregam o estado da aplicação
@@ -30,6 +31,7 @@ public class Controlador implements Serializable {
     private HashMap<Integer, Casa> casas;
     private Utilizador user;
     private long tempoAtual;
+    private List<Menus> menus;
 
 
     public Controlador(){
@@ -147,7 +149,7 @@ public class Controlador implements Serializable {
             .findFirst()
             .ifPresent(d -> d.desligaObj(this.tempoAtual));
     }
-
+  /*
     public void instantTest() {
         DomusLampada l1 = new DomusLampada(1, "Philips", "HUE", 10.0, 10.0, 50, 2700, true, 0, 0, 0);
         DomusLampada l2 = new DomusLampada(2, "Ikea", "Tradfri", 8.0, 8.0, 30, 0, false, 0, 0, 0);
@@ -202,9 +204,44 @@ public class Controlador implements Serializable {
         l3.ligaObj(200); // l3 tem menos tempo total mas mais ativacoes
         l3.ligaObj(200);
         l3.ligaObj(200);
+
+
     } // isto nao pode ficar assim!!!!!!!!!! MUDAR DEPOIS
+*/
 
 
+    public void start(){
+        Scanner input = new Scanner(System.in);
+        boolean running = true;
+        int estadoAtual = 0;
+        Menus menu;
+        menu = new MenuAuth(input);
+        int opcao = menu.lerInput();
+        while (running){
+            if(estadoAtual == 0){
+                //menu = new MenuAuth(input);
+                //int opcao = menu.lerInput();
+                if(opcao == 1){
+                    //login
+                    estadoAtual = 1;
+                } else if(opcao == 2){
+                    //create account
+                    estadoAtual = 1;
+                } else {
+                    running = false;
+                }
+
+            } else if(estadoAtual == 1){
+                menu = new MainMenu(input);
+                if(opcao == 1){
+                    //List all your corresponding proprieties
+                } else if(opcao == 2){
+                    
+                }
+
+            }
+        }
+    }
 
 
 }
