@@ -50,7 +50,7 @@ public class AppDomusControl implements Serializable {
 
 
     Controlador c = new Controlador();
-    c.instantTest(); // vês abaixo
+    //c.instantTest(); // vês abaixo
     System.out.println("Casa que mais consome: " + c.casaQueMaisConsome().getNomeCasa());
     System.out.println("Top 3 divisões: " + c.top3DivisoesComMaisDevices());
     System.out.println("Top 3 devices por tempo (casa 1): " + c.top3DevicesPorTempo(1));
