@@ -149,6 +149,14 @@ public class Controlador implements Serializable {
             .findFirst()
             .ifPresent(d -> d.desligaObj(this.tempoAtual));
     }
+
+    public String listaDispositivos(int idCasa, int idDivisao) {
+        return this.casas.get(idCasa).getDivisao().get(idDivisao).getDispositivos().toString();
+    }
+
+    public String listaDivisoes(int idCasa) {
+        return this.casas.get(idCasa).getDivisao().toString();
+    }
   /*
     public void instantTest() {
         DomusLampada l1 = new DomusLampada(1, "Philips", "HUE", 10.0, 10.0, 50, 2700, true, 0, 0, 0);
