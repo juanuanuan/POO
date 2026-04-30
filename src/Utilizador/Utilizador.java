@@ -128,4 +128,13 @@ public class Utilizador {
     public boolean login(String eemail, String ppassWord){
         return eemail.equals(this.getEmail()) && ppassWord.equals(this.getPassWord());
     } // na duvida se coloco isto na classe controlador
+
+    //procurei isto em todo lado e nao encontrei, nao esta a dar conflito por isso deixo estar
+    public void addCasa(int idCasa) {
+        this.idCasas.add(idCasa);
+    }
+
+    public void removeCasa(int idCasa){
+        this.idCasas.remove(Integer.valueOf(idCasa));
+    }
 }

@@ -27,27 +27,35 @@ public class MenuGestaoDiv extends Menus{
         do {
             opcao = lerInput();
             switch(opcao){
-                case 1 -> System.out.println(controlador.listaDispositivos(idCasa, idDivisao)); 
-                case 2 -> System.out.println(controlador.top3DevicesPorTempo(idCasa));
-                case 3 -> {
+                case 1: 
+                    System.out.println(controlador.listaDispositivos(idCasa, idDivisao)); 
+                    break;
+                case 2: System.out.println(controlador.top3DevicesPorTempo(idCasa));
+                    break;
+                case 3: {
                     System.out.println("Top 3 por tempo: " + controlador.top3DevicesPorTempo(idCasa));
                     System.out.println("Top 3 por ativações: " + controlador.top3DevicesPorAtivacoes(idCasa));
+                    break;
                 }
-                case 4 -> {
+                case 4: {
                     System.out.println("Device ID: ");
                     int id = input.nextInt();
                     controlador.ligaDispositivo(idCasa, idDivisao, id);
                     System.out.println("Dispositivo " + id + " ligado");
+                    break;
                 }
 
-                case 5 -> {
+                case 5: {
                     System.out.println("Device ID: ");
                     int id = input.nextInt();
                     controlador.desligaDispositivo(idCasa, idDivisao, id);
                     System.out.println("Dispositivo " + id + " desligado");
+                    break;
                 }
-                case 0 -> System.out.println("voltar atras. ");
-                case 99 -> System.exit(0);
+                case 0: System.out.println("voltar atras. ");
+                    break;
+                case 99: System.exit(0);
+                    break;
             }
             
         }

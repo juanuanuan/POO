@@ -14,7 +14,7 @@ import java.lang.*;
 
 import java.io.Serializable;
 
-public class AppDomusControl implements Serializable {
+/* public class AppDomusControl implements Serializable {
     public static void main(String[] args){
         Scanner inpt = new Scanner (System.in);
         Utilizador currentUser = null;
@@ -23,8 +23,28 @@ public class AppDomusControl implements Serializable {
         String login1, login2;
         Utilizadores users = new Utilizadores();// colocar aqui no início um ciclo do-while para o programa não estar sempre a fechar.
     
-        Menus menu = new MenuAuth(inpt);
-/*
+        Menus menu = new MenuAuth(inpt); */
+
+
+
+import Controlador.Controlador;
+import Controlador.MenuAuth;
+import java.util.Scanner;
+
+public class AppDomusControl {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Controlador controlador = new Controlador();
+        controlador.instantTest();
+
+        MenuAuth menuAuth = new MenuAuth(input);
+        menuAuth.executa(controlador);
+    }
+}
+
+
+
+        /*
         ADomusComplexo dispositivo1 = new DomusLampada(112, "Lampadas Casio", "KX40", 50, 0, 0, 30, true);
         ADomusComplexo dispositivo2 = new DomusLampada(113, "Lampadas Casio", "KX45", 20, 0, 0, 40, true);
         ADomusSimples dispositivo3 = new DomusPercianas(113, "HouseCare.Lda", "P2", 65, 0, 0);
@@ -49,7 +69,8 @@ public class AppDomusControl implements Serializable {
 
 
 
-    Controlador c = new Controlador();
+
+  /*   Controlador c = new Controlador();
     //c.instantTest(); // vês abaixo
     System.out.println("Casa que mais consome: " + c.casaQueMaisConsome().getNomeCasa());
     System.out.println("Top 3 divisões: " + c.top3DivisoesComMaisDevices());
@@ -57,7 +78,7 @@ public class AppDomusControl implements Serializable {
     System.out.println("Top 3 devices por ativações (casa 1): " + c.top3DevicesPorAtivacoes(1));
         //controller.start();
 
-
+ */
 
         /*
         do {
@@ -123,7 +144,7 @@ public class AppDomusControl implements Serializable {
         } while (inpt != 3);
 
          */
-    }
+//    }
 
 
-}
+//}

@@ -157,7 +157,49 @@ public class Controlador implements Serializable {
     public String listaDivisoes(int idCasa) {
         return this.casas.get(idCasa).getDivisao().toString();
     }
-  /*
+
+    public String listaCasasUtilizador(int idUtilizador){
+        return this.utilizadores.getUtilizadores().get(idUtilizador).getIdCasas().stream()
+            .map(id -> this.casas.get(id).toString())
+            .collect(Collectors.joining("\n"));
+    }
+
+    public double getConsumoCasa(int idCasa) {
+        return this.casas.get(idCasa).getConsumoTotal();
+    }
+
+    public void adicionaDivisao(int idCasa, String nomeDivisao, int idDivisao) {
+        Divisao div = new Divisao(nomeDivisao, idDivisao, new ArrayList<>());
+        this.casas.get(idCasa).addDiv(div);
+    }
+
+    public void removeDivisao(int idCasa, int idDivisao) {
+        this.casas.get(idCasa).removeDiv(idDivisao);
+    }
+
+    public void adicionaCasa(int idHost, int idCasa, String morada, String nomeCasa) { 
+        Casa novaCasa = new Casa(new HashMap<>(), idHost, idCasa, morada, nomeCasa);
+        this.casas.put(idCasa, novaCasa);
+        this.utilizadores.getUtilizadores().get(idHost).addCasa(idCasa);
+    }
+
+    public void removeCasa(int idUtilizador, int idCasa) {
+        this.casas.remove(idCasa);
+        this.utilizadores.getUtilizadores().get(idUtilizador).removeCasa(idCasa);
+    }
+  
+
+
+
+
+
+
+
+
+
+
+
+
     public void instantTest() {
         DomusLampada l1 = new DomusLampada(1, "Philips", "HUE", 10.0, 10.0, 50, 2700, true, 0, 0, 0);
         DomusLampada l2 = new DomusLampada(2, "Ikea", "Tradfri", 8.0, 8.0, 30, 0, false, 0, 0, 0);
@@ -212,10 +254,12 @@ public class Controlador implements Serializable {
         l3.ligaObj(200); // l3 tem menos tempo total mas mais ativacoes
         l3.ligaObj(200);
         l3.ligaObj(200);
+         Utilizador u1 = new Utilizador("João", 123456789, 912345678, "joao@gmail.com", "1234", 1, new ArrayList<>(List.of(1, 2)));
+        this.utilizadores.addUser(u1);
 
 
     } // isto nao pode ficar assim!!!!!!!!!! MUDAR DEPOIS
-*/
+
 
 
     public void start(){

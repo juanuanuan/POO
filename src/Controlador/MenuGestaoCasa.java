@@ -1,6 +1,7 @@
 package Controlador;
 
 import java.util.Scanner;
+import Controlador.Controlador;
 
 public class MenuGestaoCasa extends Menus{
 
@@ -24,7 +25,69 @@ public class MenuGestaoCasa extends Menus{
         System.out.println("14 - Division management.");
         System.out.println("0 - Go back.");
         System.out.println("99 - Exit.");
+    }
 
+    public void executa(Controlador controlador, int idCasa){
 
+        int opcao;
+        MenuGestaoDivs menuDivs = new MenuGestaoDivs(input);
+        do{
+            opcao = lerInput();
+            switch(opcao){
+                case 1:
+                    System.out.println("Funcionalidade ainda nao implementada.");
+                    break;
+                case 2: 
+                    System.out.println("Funcionalidade ainda nao implementada.");
+                    break;
+                case 3:
+                    System.out.println("Funcionalidade ainda nao implementada.");
+                    break;    
+                case 4: 
+                    System.out.println("Consumo atual da casa: " + controlador.getConsumoCasa(idCasa) + " Wh");
+                    break;
+                case 5:
+                    System.out.println("Funcionalidade ainda nao implementada.");
+                    break;
+                case 6:
+                    System.out.println("Top 3 divisoes com mais devices: " + controlador.top3DivisoesComMaisDevices());
+                    break;
+                case 7:
+                    System.out.println("Funcionalidade ainda nao implementada.");
+                    break;
+                case 8:
+                    System.out.println("Funcionalidade ainda nao implementada.");
+                    break;
+                case 9: 
+                    System.out.println("Funcionalidade ainda nao implementada.");
+                    break;
+                case 12: 
+                    System.out.println("Nome da divisao: ");
+                    String nomeDivisao = input.next();
+                    System.out.println("ID da divisao: ");
+                    int idDivisao = input.nextInt();
+                    controlador.adicionaDivisao(idCasa, nomeDivisao, idDivisao);
+                    System.out.println("Divisao adicionada.");
+                    break;
+                case 13:
+                    System.out.println("ID da divisao a remover: ");
+                    int idDiv = input.nextInt();
+                    controlador.removeDivisao(idCasa, idDiv);
+                    System.out.println("Divisao removida.");
+                    break;
+                case 14:
+                    menuDivs.executa(controlador, idCasa);
+                    break;
+                case 0:
+                    System.out.println("voltar atras.");
+                    break;
+                case 99: 
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("opcao invalida."); 
+                    break;
+            }
+        } while(opcao != 0);
     }
 }

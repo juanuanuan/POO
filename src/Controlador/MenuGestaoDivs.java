@@ -17,7 +17,7 @@ public class MenuGestaoDivs extends Menus{
 
     }
 
-    public void executa(Controlador controlador, int idCasa, int idDivisao){
+    public void executa(Controlador controlador, int idCasa){
 
         int opcao;
         MenuGestaoDiv menuDiv = new MenuGestaoDiv(input);
@@ -25,15 +25,20 @@ public class MenuGestaoDivs extends Menus{
         do {
             opcao = lerInput();
             switch(opcao){
-                case -> 1 {
+                case 1:  {
                     System.out.println(controlador.listaDivisoes(idCasa));
                     System.out.println("ID divisao: ");
                     int idDivisao = input.nextInt();
                     menuDiv.executa(controlador, idCasa, idDivisao);
+                    break;
                 }
-                case 0 -> System.out.println("voltar atras.");
-                case 99 -> System.exit(0);
-                //default -> System.out.println("opcao invalida.");
+                case 0: 
+                    System.out.println("voltar atras.");
+                    break;
+                case 99: System.exit(0);
+                    break;
+                default: System.out.println("opcao invalida.");
+                    break;
 
 
             }

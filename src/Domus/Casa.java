@@ -115,5 +115,9 @@ public class Casa implements Serializable {
             .collect(Collectors.toList());
     }
 
+    public void removeDiv(int idDivisao) {
+        this.divisao.remove(idDivisao);
+    }
+
 
 }
