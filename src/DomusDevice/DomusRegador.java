@@ -2,41 +2,45 @@ package DomusDevice;
 
 public class DomusRegador extends ADomusSimples {
 
-    private int fluxoAgua;
+    //private int fluxoAgua;
     private int duracaoMinutos; // o que é isto. para que serve
 
     public DomusRegador(){
         super();
-        this.fluxoAgua = 0;
+        //this.fluxoAgua = 0;
         this.duracaoMinutos = 0;
     }
 
     public DomusRegador(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int fluxoAgua, int duracaoMinutos,
-        int numAtivacoes, long tempoAcumulado, long momentoLigado){
-        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
-        this.fluxoAgua = fluxoAgua;
+        int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel){
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado, nivel);
+        //this.fluxoAgua = fluxoAgua;
         this.duracaoMinutos = duracaoMinutos;
     }
 
     public DomusRegador(DomusRegador other){
         super(other);
-        this.fluxoAgua = other.getFluxoAgua();
+        //this.fluxoAgua = other.getFluxoAgua();
         this.duracaoMinutos = other.getDuracaoMinutos();
     }
 
     //getters e setters
 
-    public int getFluxoAgua(){
+    /*public int getFluxoAgua(){
         return this.fluxoAgua;
     }
+
+     */
 
     public int getDuracaoMinutos(){
         return this.duracaoMinutos;
     }
 
-    public void setFluxoAgua(int fluxoAgua){
+    /*public void setFluxoAgua(int fluxoAgua){
         this.fluxoAgua = fluxoAgua;
     }
+
+     */
 
     public void setDuracaoMinutos(int duracaoMinutos){
         this.duracaoMinutos = duracaoMinutos;
@@ -47,7 +51,7 @@ public class DomusRegador extends ADomusSimples {
     }
 
     public String toString(){
-        return super.toString() + " | Fluxo de água: " + getFluxoAgua() +
+        return super.toString() + " | Fluxo de água: " + getNivel() +
                                   " | Duração em minutos: " + getDuracaoMinutos();
 
     }

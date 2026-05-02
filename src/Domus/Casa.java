@@ -33,7 +33,8 @@ public class Casa implements Serializable {
     }
 
     public Casa (Casa other){
-        this.divisao = other.getDivisao();
+        this.divisao = new HashMap<>();
+        other.divisao.forEach((k,v) -> this.divisao.put(k, v.clone())); // copiar aqui defensivamente
         this.idHost = other.getIdHost();
         this.idCasa = other.getIdCasa();
         this.morada = other.getMorada();
@@ -92,6 +93,10 @@ public class Casa implements Serializable {
 
     }
 
+    public Casa clone(){
+        return new Casa(this);
+    }
+
     public double getConsumoTotal() {
         return this.divisao.values().stream()
             .flatMap(d -> d.getDispositivos().stream())
@@ -104,6 +109,7 @@ public class Casa implements Serializable {
             .flatMap(d -> d.getDispositivos().stream())
             .sorted(Comparator.comparingLong(d -> -d.getTempoTotal(momentoAtual)))
             .limit(3)
+                .map(ADomusSimples::clone)
             .collect(Collectors.toList());
     }
 
@@ -112,11 +118,26 @@ public class Casa implements Serializable {
             .flatMap(d -> d.getDispositivos().stream())
             .sorted(Comparator.comparingInt(d -> -d.getNumAtivacoes()))
             .limit(3)
+                .map(ADomusSimples::clone)
             .collect(Collectors.toList());
+    }
+
+    public ADomusSimples top1DeviceConsumo(){
+        return this.divisao.values().stream()
+                .flatMap(d -> d.getDispositivos().stream())
+                .max(Comparator.comparingDouble(ADomusSimples::getConsumoAtual))
+                .map(ADomusSimples::clone)
+                .orElse(null);
     }
 
     public void removeDiv(int idDivisao) {
         this.divisao.remove(idDivisao);
+    }
+
+    public void desligaAllDevice(long momentoAtual){
+        this.divisao.values().stream()
+                .flatMap(d -> d.getDispositivos().stream())
+                .forEach(d -> d.desligaObj(momentoAtual));
     }
 
 

@@ -15,8 +15,8 @@ public class DomusAC extends ADomusComplexo {
         this.modoAC = ModoAC.VENTILAR;
     }
 
-    public DomusAC(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int temperaturaAC, ModoAC modoAC, int numAtivacoes, long tempoAcumulado, long momentoLigado){
-        super(idObjeto, marca, modelo, consumo, consumoAtual,numAtivacoes, tempoAcumulado, momentoLigado );
+    public DomusAC(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int temperaturaAC, ModoAC modoAC, int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel){
+        super(idObjeto, marca, modelo, consumo, consumoAtual,numAtivacoes, tempoAcumulado, momentoLigado, nivel );
         this.temperaturaAC = temperaturaAC;
         this.modoAC = modoAC;
     }

@@ -16,7 +16,7 @@ public class MenuGestaoCasa extends Menus{
         System.out.println("3 - List hosts");
         System.out.println("4 - Consult real time propriety consumption.");
         System.out.println("5 - Consult monthly propriety consumption");
-        System.out.println("6 - Show the top consuming division.");
+        System.out.println("6 - Show the top 3 consuming divisions.");
         System.out.println("7 - Remove user.");
         System.out.println("8 - Add user.");
         System.out.println("9 - Implement user permissions."); // na dúvida se esta linha vai realmente existir...
@@ -44,13 +44,13 @@ public class MenuGestaoCasa extends Menus{
                     System.out.println("Funcionalidade ainda nao implementada.");
                     break;    
                 case 4: 
-                    System.out.println("Consumo atual da casa: " + controlador.getConsumoCasa(idCasa) + " Wh");
+                    System.out.println("Current propriety consumption: " + controlador.getConsumoCasa(idCasa) + " Wh");
                     break;
                 case 5:
                     System.out.println("Funcionalidade ainda nao implementada.");
                     break;
                 case 6:
-                    System.out.println("Top 3 divisoes com mais devices: " + controlador.top3DivisoesComMaisDevices());
+                    System.out.println("Top 3 most consuming divisions: " + controlador.top3DivisoesComMaisDevices());
                     break;
                 case 7:
                     System.out.println("Funcionalidade ainda nao implementada.");
@@ -62,30 +62,31 @@ public class MenuGestaoCasa extends Menus{
                     System.out.println("Funcionalidade ainda nao implementada.");
                     break;
                 case 12: 
-                    System.out.println("Nome da divisao: ");
+                    System.out.println("Division name: ");
                     String nomeDivisao = input.next();
-                    System.out.println("ID da divisao: ");
+                    System.out.println("Division Id: "); // o utilizador sabe o id da divisão ?
                     int idDivisao = input.nextInt();
                     controlador.adicionaDivisao(idCasa, nomeDivisao, idDivisao);
-                    System.out.println("Divisao adicionada.");
+                    System.out.println("Division added.\n");
                     break;
                 case 13:
-                    System.out.println("ID da divisao a remover: ");
+                    System.out.println("To-remove division Id: ");
                     int idDiv = input.nextInt();
                     controlador.removeDivisao(idCasa, idDiv);
-                    System.out.println("Divisao removida.");
+                    System.out.println("Division removed.\n");
                     break;
                 case 14:
                     menuDivs.executa(controlador, idCasa);
                     break;
                 case 0:
-                    System.out.println("voltar atras.");
+                    System.out.println("Go back.");
+
                     break;
                 case 99: 
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("opcao invalida."); 
+                    System.out.println("Non-existent input.");
                     break;
             }
         } while(opcao != 0);

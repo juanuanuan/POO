@@ -1,7 +1,6 @@
 package Controlador;
 
 import java.util.Scanner;
-import Controlador.Controlador;
 
 public class MenuGestaoDiv extends Menus{
 
@@ -16,6 +15,8 @@ public class MenuGestaoDiv extends Menus{
         System.out.println("3 - Consult division stats.");
         System.out.println("4 - Turn on a device.");
         System.out.println("5 - Turn off a device.");
+        System.out.println("6 - Boost a device");
+        System.out.println("7 - Eco a device");
         System.out.println("0 - Go back");
         System.out.println("99 - Exit");
 
@@ -30,7 +31,8 @@ public class MenuGestaoDiv extends Menus{
                 case 1: 
                     System.out.println(controlador.listaDispositivos(idCasa, idDivisao)); 
                     break;
-                case 2: System.out.println(controlador.top3DevicesPorTempo(idCasa));
+                case 2:
+                    System.out.println(controlador.top1DeviceConsumo(idCasa)); // mudar aqui para o mais consumidor, e não os 3
                     break;
                 case 3: {
                     System.out.println("Top 3 por tempo: " + controlador.top3DevicesPorTempo(idCasa));
@@ -41,7 +43,7 @@ public class MenuGestaoDiv extends Menus{
                     System.out.println("Device ID: ");
                     int id = input.nextInt();
                     controlador.ligaDispositivo(idCasa, idDivisao, id);
-                    System.out.println("Dispositivo " + id + " ligado");
+                    System.out.println("Device with ID: " + id + " is ON\n");
                     break;
                 }
 
@@ -52,7 +54,23 @@ public class MenuGestaoDiv extends Menus{
                     System.out.println("Dispositivo " + id + " desligado");
                     break;
                 }
-                case 0: System.out.println("voltar atras. ");
+
+                case 6: {
+                    System.out.println("Device ID: ");
+                    int id = input.nextInt();
+                    controlador.boostDevice(idCasa, idDivisao, id);
+                    System.out.println("Device with ID: " + id + "is in BOOST mode.\n");
+                    break;
+                }
+
+                case 7: {
+                    System.out.println("Device ID: ");
+                    int id = input.nextInt();
+                    controlador.ecoDevice(idCasa, idDivisao, id);
+                    System.out.println("Device with ID: " + id + "is in ECO mode.\n");
+                    break;
+                }
+                case 0: System.out.println("Go back. ");
                     break;
                 case 99: System.exit(0);
                     break;

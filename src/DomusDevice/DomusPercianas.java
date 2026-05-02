@@ -2,34 +2,38 @@ package DomusDevice;
 
 public class DomusPercianas extends ADomusSimples {
 
-    private int percentagemAbertura; // 0 'e fechado e 100 aberto completo
+    //private int percentagemAbertura; // 0 'e fechado e 100 aberto completo
 
     public DomusPercianas() {
         super();
-        this.percentagemAbertura = 0;
+        //this.percentagemAbertura = 0;
     }
 
     public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int percentagemAbertura,
-        int numAtivacoes, long tempoAcumulado, long momentoLigado) {
-        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
-        this.percentagemAbertura = percentagemAbertura;
+        int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel) {
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado, nivel);
+       // this.percentagemAbertura = percentagemAbertura;
     }
 
     public DomusPercianas(DomusPercianas other) {
         super(other);
-        this.percentagemAbertura = other.getPercentagemAbertura();
+        //this.percentagemAbertura = other.getPercentagemAbertura();
     }
 
     //getters e setters
 
-    public int getPercentagemAbertura() {
+    /*public int getPercentagemAbertura() {
         return this.percentagemAbertura;
     }
 
-    public void setPercentagemAbertura(int percentagemAbertura) {
+     */
+
+    /*public void setPercentagemAbertura(int percentagemAbertura) {
         if (percentagemAbertura >= 0 && percentagemAbertura <= 100)
             this.percentagemAbertura = percentagemAbertura;
     }
+
+     */
 
     public DomusPercianas clone() {
         return new DomusPercianas(this);
@@ -37,10 +41,10 @@ public class DomusPercianas extends ADomusSimples {
 
     public String toString() {
         String result = super.toString();
-        if (this.percentagemAbertura == 0) {
+        if (getNivel()== 0) {
             result += "| Perciana Fechada";
         } else {
-            result += "| abertura: " + getPercentagemAbertura() + "%";
+            result += "| abertura: " + getNivel() + "%";
         }
         return result;
     }

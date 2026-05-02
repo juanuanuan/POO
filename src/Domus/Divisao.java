@@ -135,6 +135,7 @@ public class Divisao implements Serializable {
         return this.dispositivos.stream()
             .sorted(Comparator.comparingLong(d -> -d.getTempoTotal(momentoAtual)))
             .limit(3)
+                .map(ADomusSimples::clone)
             .collect(Collectors.toList());
     }
 
@@ -142,6 +143,7 @@ public class Divisao implements Serializable {
         return this.dispositivos.stream()
             .sorted(Comparator.comparingInt(d -> -d.getNumAtivacoes()))
             .limit(3)
+                .map(ADomusSimples::clone)
             .collect(Collectors.toList());
     }
 

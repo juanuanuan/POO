@@ -11,7 +11,7 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
     private int numAtivacoes;
     private long tempoAcumulado; // tempo total
     private long momentoLigado; // momento em que foi ligado
-    // adicionar um private nivel que serviria de volume da coluna, intensidade de uma lampada, fluxo de agua do regador, etc
+    private double nivel;
 
 
 
@@ -25,10 +25,11 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         this.numAtivacoes   = 0; 
         this.tempoAcumulado = 0;
         this.momentoLigado  = 0;
+        this.nivel = 0;
     }
 
     public ADomusSimples(int idObjeto, String marca, String modelo, double consumoObjeto, Estados estadoAtual, 
-                         double consumoAtual, int numAtivacoes, long tempoAcumulado, long momentoLigado){
+                         double consumoAtual, int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel){
         
         this.idObjeto      = idObjeto;
         this.marca         = marca;
@@ -39,6 +40,7 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         this.numAtivacoes  = numAtivacoes;
         this.tempoAcumulado = tempoAcumulado; 
         this.momentoLigado = momentoLigado;
+        this.nivel = nivel;
 
     }
 
@@ -52,6 +54,7 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         this.numAtivacoes  = other.getNumAtivacoes();
         this.tempoAcumulado = other.getTempoAcumulado(); 
         this.momentoLigado = other.getMomentoLigado();
+        this.nivel = other.getNivel();
     }
 
 
@@ -91,6 +94,9 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         return this.momentoLigado;
     }
 
+    public double getNivel() {
+        return this.nivel;
+    }
 
     public void setIdObjeto(int idObjeto) {
         this.idObjeto = idObjeto;
@@ -120,7 +126,11 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         this.momentoLigado = momentoLigado;
     }
 
-
+    public void setNivel(double nivel) {
+        if(nivel >= 0 && nivel <= 100) {
+            this.nivel = nivel;
+        }
+    }
 
     public void ligaObj(long momentoAtual) {
         this.estadoAtual = Estados.ON;
@@ -152,13 +162,14 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
         this.modelo = modelo;
     }
 
-
+    @Override
     public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || this.getClass() != o.getClass()) return false;
         ADomusSimples other = (ADomusSimples) o;
         return (this.idObjeto == other.idObjeto);
     }
+
 
     public String toString() {
         return "\n" + "| ID: " + getIdObjeto() + "\n" + "| Marca: " + getMarca() + "\n" +

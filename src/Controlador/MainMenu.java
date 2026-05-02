@@ -35,7 +35,7 @@ public class MainMenu extends Menus{
                     menuCasas.executa(controlador, idUtilizador);
                     break;
                 case 0:
-                    System.out.println("voltar atras.");
+                    System.out.println("Go back.");
                     break;
                 case 99:
                     System.exit(0);

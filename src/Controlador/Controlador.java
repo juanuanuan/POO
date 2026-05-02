@@ -6,15 +6,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import Domus.Divisao;
+import DomusDevice.ADomusComplexo;
 import DomusDevice.ADomusSimples;
 import DomusDevice.DomusLampada;
-import java.util.ArrayList;
 
 import Domus.Casa;
 import Utilizador.Utilizador;
@@ -115,6 +112,7 @@ public class Controlador implements Serializable {
     public Casa casaQueMaisConsome() {
         return this.casas.values().stream()
             .max(Comparator.comparingDouble(Casa::getConsumoTotal))
+                .map(Casa::clone)
             .orElse(null);
     }
 
@@ -123,15 +121,16 @@ public class Controlador implements Serializable {
             .flatMap(c -> c.getDivisao().values().stream())
             .sorted(Comparator.comparingInt(d -> -d.getNumDispositivos()))
             .limit(3)
+                .map(Divisao::clone)
             .collect(Collectors.toList());
     }
 
     public List<ADomusSimples> top3DevicesPorTempo(int idCasa) {
-        return this.casas.get(idCasa).top3DevicesPorTempo(this.tempoAtual);
+        return this.casas.get(idCasa).clone().top3DevicesPorTempo(this.tempoAtual);
     }
 
     public List<ADomusSimples> top3DevicesPorAtivacoes(int idCasa) {
-        return this.casas.get(idCasa).top3DevicesPorAtivacoes();
+        return this.casas.get(idCasa).clone().top3DevicesPorAtivacoes();
     }
 
     public void ligaDispositivo(int idCasa, int idDivisao, int idDevice) {
@@ -187,6 +186,60 @@ public class Controlador implements Serializable {
         this.casas.remove(idCasa);
         this.utilizadores.getUtilizadores().get(idUtilizador).removeCasa(idCasa);
     }
+
+    public boolean ehHost(){
+        return this.casas.values().stream()
+                .anyMatch(c -> c.getIdHost() == user.getIdUtilizador());
+    }
+
+    public ADomusSimples top1DeviceConsumo(int idCasa){
+        return this.casas.get(idCasa).top1DeviceConsumo().clone();
+    }
+
+
+    public void boostDevice(int idCasa, int idDivisao, int idDevice){
+        this.casas.get(idCasa).getDivisao().get(idDivisao)
+                .getDispositivos().stream()
+                .filter(dSimples -> dSimples instanceof ADomusComplexo)
+                .filter(dSimples -> dSimples.getIdObjeto() == idDevice)
+                .map(dSimples -> (ADomusComplexo) dSimples)
+                .findFirst()
+                .ifPresent(ADomusComplexo::boostObj);
+
+    }
+
+    public void ecoDevice(int idCasa, int idDivisao, int idDevice){
+        this.casas.get(idCasa).getDivisao().get(idDivisao)
+                .getDispositivos().stream()
+                .filter(dSimples -> dSimples instanceof ADomusComplexo)
+                .filter(dSimples -> dSimples.getIdObjeto() == idDevice)
+                .map(dSimples -> (ADomusComplexo) dSimples)
+                .findFirst()
+                .ifPresent(ADomusComplexo::ecoObj);
+    }
+
+    public void desligaAllDevice(int idCasa){
+        this.casas.get(idCasa).getDivisao().values().stream() // perguntar ao stor porque é que o intellij diz para tirar o stream.
+                .forEach(d -> d.desligaAll(this.getTempoAtual()));
+    }
+
+    public boolean existeConta(Utilizador user){
+        boolean existentUser = this.utilizadores.getUtilizadores().values().stream()
+                .anyMatch(u -> u.getNIF() == user.getNIF() || u.getEmail().equals(user.getEmail()));
+
+        if(!existentUser){
+            this.utilizadores.getUtilizadores().put(user.getIdUtilizador(), user);
+            return true;
+        }
+
+        System.out.println("User with this credentials already exists.\n");
+        return false;
+    }
+
+
+
+
+
   
 
 
@@ -200,7 +253,7 @@ public class Controlador implements Serializable {
 
 
 
-    public void instantTest() {
+    /*public void instantTest() {
         DomusLampada l1 = new DomusLampada(1, "Philips", "HUE", 10.0, 10.0, 50, 2700, true, 0, 0, 0);
         DomusLampada l2 = new DomusLampada(2, "Ikea", "Tradfri", 8.0, 8.0, 30, 0, false, 0, 0, 0);
         DomusLampada l3 = new DomusLampada(3, "Xiaomi", "Yeelight", 9.0, 9.0, 70, 4000, true, 0, 0, 0);
@@ -258,7 +311,9 @@ public class Controlador implements Serializable {
         this.utilizadores.addUser(u1);
 
 
-    } // isto nao pode ficar assim!!!!!!!!!! MUDAR DEPOIS
+    }
+    // isto nao pode ficar assim!!!!!!!!!! MUDAR DEPOIS
+     */
 
 
 

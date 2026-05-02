@@ -12,6 +12,7 @@ public class MenuGestaoDivs extends Menus{
     @Override
     public void mostraOpcao(){
         System.out.println("1 - Select division.");
+        System.out.println("2 - Shutdown Mode.\n");
         System.out.println("0 - Go back.");
         System.out.println("99 - Exit.");
 
@@ -27,17 +28,25 @@ public class MenuGestaoDivs extends Menus{
             switch(opcao){
                 case 1:  {
                     System.out.println(controlador.listaDivisoes(idCasa));
-                    System.out.println("ID divisao: ");
+                    System.out.println("Division ID: ");
                     int idDivisao = input.nextInt();
                     menuDiv.executa(controlador, idCasa, idDivisao);
                     break;
                 }
+
+                case 2: {
+                    System.out.println("The SM (Shutdown Mode) turns off all your devices. Only the owner, or any user with such permissions is able to shutdown");
+                    if(controlador.ehHost()){
+                        controlador.desligaAllDevice(idCasa);
+                    } else System.out.println("Permission denied.\n");
+                    break;
+                }
                 case 0: 
-                    System.out.println("voltar atras.");
+                    System.out.println("Go back.");
                     break;
                 case 99: System.exit(0);
                     break;
-                default: System.out.println("opcao invalida.");
+                default: System.out.println("Non-existent input.");
                     break;
 
 

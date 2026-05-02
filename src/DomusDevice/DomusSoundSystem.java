@@ -2,39 +2,43 @@ package DomusDevice;
 
 public class DomusSoundSystem extends ADomusSimples {
 
-    private int volume; // 0 a 100 
+    //private int volume; // 0 a 100
     private String estacao; 
 
     public DomusSoundSystem(){
         super();
-        this.volume = 0; 
+        //this.volume = 0;
         this.estacao = "";
     }
 
     public DomusSoundSystem(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int volume, String estacao,
-        int numAtivacoes, long tempoAcumulado, long momentoLigado){
-        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado);
-        this.volume = volume; 
+        int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel){
+        super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado, nivel);
+        //this.volume = volume;
         this.estacao = estacao; 
     }
 
     public DomusSoundSystem (DomusSoundSystem other){
         super(other);
-        this.volume = other.getVolume();
+        //this.volume = other.getVolume();
         this.estacao = other.getEstacao(); 
     }
 
-    public int getVolume(){
+    /*public int getVolume(){
         return this.volume;
     }
+
+     */
 
     public String getEstacao(){
         return this.estacao; 
     }
 
-    public void setVolume(int volume){
+    /*public void setVolume(int volume){
         this.volume = volume; 
     }
+
+     */
 
     public void setEstacao(String estacao){
         this.estacao = estacao; 
@@ -45,7 +49,7 @@ public class DomusSoundSystem extends ADomusSimples {
     }
 
     public String toString(){
-        return super.toString() + " | Volume: " + getVolume() +
+        return super.toString() + " | Volume: " + getNivel() +
                                   " | Estacao: " + getEstacao();
     }
 
