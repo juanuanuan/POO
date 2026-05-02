@@ -35,9 +35,9 @@ public class AppDomusControl {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         //controlador.instantTest();
-        Utilizador eu = new Utilizador("João Pontes", 267316020, 938756690, "joaomop3112@gmail.com", "balenicaga", 50098 ,new ArrayList<Integer>());
+        Utilizador user1 = new Utilizador("João Pontes", 267316020, 938756690, "joaomop3112@gmail.com", "balenciaga", 50098 ,new ArrayList<Integer>());
         Utilizadores users = new Utilizadores();
-        users.addUser(eu);
+        users.addUser(user1);
         System.out.println(users.getUtilizadores().toString());
         Controlador controlador = new Controlador();
         controlador.setUtilizadores(users);
