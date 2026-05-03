@@ -140,10 +140,10 @@ public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusS
     }
 
     public void desligaObj(long momentoAtual) {
-        if (this.estadoAtual != Estados.OFF && this.momentoLigado > 0) {
+        if (this.estadoAtual != Estados.OFF && this.momentoLigado >= 0) {
             this.tempoAcumulado += momentoAtual - this.momentoLigado;
         }
-        this.momentoLigado = 0;
+        this.momentoLigado = -1;
         this.estadoAtual = Estados.OFF;
     }
 

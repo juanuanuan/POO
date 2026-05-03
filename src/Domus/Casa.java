@@ -4,17 +4,19 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import DomusDevice.ADomusSimples;
 
 public class Casa implements Serializable {
-    // Vamos criar um HashMap para ser mais fácil adicionar, remover e até mesmo aceder às divisões.
-    // Presumindo que não vai ser necessário iterar todas as divisões com alta precisão e rapidez, é melhor um HashMap do que um ArrayList ou LinkedList.
+
     private HashMap<Integer, Divisao> divisao;
     private int idHost;
     private int idCasa;
     private String morada;
     private String nomeCasa;
+
+    private List<Integer> idGuests; // faltava isto para os guests, implementei os respetivos metodos e tunste tuntse
 
     public Casa (){
         this.divisao = new HashMap<>();
@@ -22,6 +24,7 @@ public class Casa implements Serializable {
         this.idCasa = -1;
         this.morada = "";
         this.nomeCasa = "";
+        this.idGuests = new ArrayList<>();
     }
 
     public Casa (HashMap<Integer, Divisao> divisao, int idHost, int idCasa, String morada, String nomeCasa){
@@ -30,6 +33,7 @@ public class Casa implements Serializable {
         this.idCasa = idCasa;
         this.morada = morada;
         this.nomeCasa = nomeCasa;
+        this.idGuests = new ArrayList<>(); // uma casa comeca sempre sem hosts 
     }
 
     public Casa (Casa other){
@@ -39,6 +43,7 @@ public class Casa implements Serializable {
         this.idCasa = other.getIdCasa();
         this.morada = other.getMorada();
         this.nomeCasa = other.getNomeCasa();
+        this.idGuests = new ArrayList<>(other.getIdGuests());
 
     }
 
@@ -60,6 +65,10 @@ public class Casa implements Serializable {
 
     public String getNomeCasa() {
         return this.nomeCasa;
+    }
+
+    public List<Integer> getIdGuests(){
+        return new ArrayList<>(this.idGuests);
     }
 
     public void setIdHost(int idHost) {
@@ -118,7 +127,7 @@ public class Casa implements Serializable {
             .flatMap(d -> d.getDispositivos().stream())
             .sorted(Comparator.comparingInt(d -> -d.getNumAtivacoes()))
             .limit(3)
-                .map(ADomusSimples::clone)
+            .map(ADomusSimples::clone)
             .collect(Collectors.toList());
     }
 
@@ -138,6 +147,27 @@ public class Casa implements Serializable {
         this.divisao.values().stream()
                 .flatMap(d -> d.getDispositivos().stream())
                 .forEach(d -> d.desligaObj(momentoAtual));
+    }
+
+    public void addGuest(int idGuest){
+        this.idGuests.add(idGuest);
+    }
+
+    public void removeGuest(int idGuest){
+        System.out.println("Antes: " + this.idGuests);
+        this.idGuests.remove(Integer.valueOf(idGuest));
+        System.out.println("Depois: " + this.idGuests);
+    }
+
+    public boolean ehGuest(int idUtilizador){
+        return this.idGuests.contains(idUtilizador);
+    }
+
+    public double getConsumoMensal(long momentoAtual) {
+        return this.divisao.values().stream()
+            .flatMap(d -> d.getDispositivos().stream())
+            .mapToDouble(d -> d.getConsumoObjeto() * d.getTempoTotal(momentoAtual) / 60.0)
+            .sum();
     }
 
 

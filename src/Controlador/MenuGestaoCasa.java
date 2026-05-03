@@ -35,28 +35,35 @@ public class MenuGestaoCasa extends Menus{
             opcao = lerInput();
             switch(opcao){
                 case 1:
-                    System.out.println("Funcionalidade ainda nao implementada.");
+                    System.out.println(controlador.listaGuests(idCasa));
+                    System.out.println(controlador.listaHost(idCasa));
                     break;
                 case 2: 
-                    System.out.println("Funcionalidade ainda nao implementada.");
+                    System.out.println(controlador.listaGuests(idCasa));
                     break;
                 case 3:
-                    System.out.println("Funcionalidade ainda nao implementada.");
+                    System.out.println(controlador.listaHost(idCasa));
                     break;    
                 case 4: 
                     System.out.println("Current propriety consumption: " + controlador.getConsumoCasa(idCasa) + " Wh");
                     break;
                 case 5:
-                    System.out.println("Funcionalidade ainda nao implementada.");
+                    System.out.println("Consumo mensal da casa: " + controlador.getConsumoMensalCasa(idCasa) + " Wh");
                     break;
                 case 6:
                     System.out.println("Top 3 most consuming divisions: " + controlador.top3DivisoesComMaisDevices());
                     break;
                 case 7:
-                    System.out.println("Funcionalidade ainda nao implementada.");
+                    System.out.println("ID do guest a remover: ");
+                    int idRemover = input.nextInt();
+                    controlador.removeGuest(idCasa, idRemover);
+                    System.out.println("Guest removido.");
                     break;
                 case 8:
-                    System.out.println("Funcionalidade ainda nao implementada.");
+                    System.out.println("ID do utilizador a adicionar: ");
+                    int idGuest = input.nextInt();
+                    controlador.adicionaGuest(idCasa, idGuest);
+                    System.out.println("Guest adicionado.");
                     break;
                 case 9: 
                     System.out.println("Funcionalidade ainda nao implementada.");

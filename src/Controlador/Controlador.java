@@ -236,6 +236,31 @@ public class Controlador implements Serializable {
         return false;
     }
 
+    public void adicionaGuest(int idCasa, int idGuest) {
+        this.casas.get(idCasa).addGuest(idGuest);
+        this.utilizadores.getUtilizadores().get(idGuest).addCasa(idCasa);
+    }
+
+    public void removeGuest(int idCasa, int idGuest){
+        this.casas.get(idCasa).removeGuest(idGuest);
+        this.utilizadores.getUtilizadores().get(idGuest).removeCasa(idCasa);
+    }
+
+    public String listaGuests(int idCasa){
+        return this.casas.get(idCasa).getIdGuests().stream()
+        .map(id -> this.utilizadores.getUtilizadores().get(id).toString())
+        .collect(Collectors.joining("\n")); // nao sei se isto esta bem tho
+    }
+
+    public String listaHost(int idCasa){
+        int idHost = this.casas.get(idCasa).getIdHost();
+        return this.utilizadores.getUtilizadores().get(idHost).toString();
+    }
+
+    public double getConsumoMensalCasa(int idCasa) {
+        return this.casas.get(idCasa).getConsumoMensal(this.tempoAtual);
+    }
+
 
 
 
@@ -252,68 +277,60 @@ public class Controlador implements Serializable {
 
 
 
+public void instantTest() {
+    System.out.println("INSTANT TEST A CORRER");
 
-    /*public void instantTest() {
-        DomusLampada l1 = new DomusLampada(1, "Philips", "HUE", 10.0, 10.0, 50, 2700, true, 0, 0, 0);
-        DomusLampada l2 = new DomusLampada(2, "Ikea", "Tradfri", 8.0, 8.0, 30, 0, false, 0, 0, 0);
-        DomusLampada l3 = new DomusLampada(3, "Xiaomi", "Yeelight", 9.0, 9.0, 70, 4000, true, 0, 0, 0);
-        DomusLampada l4 = new DomusLampada(4, "Philips", "HUE2", 12.0, 12.0, 80, 3000, true, 0, 0, 0);
-        DomusLampada l5 = new DomusLampada(5, "Osram", "Smart+", 7.0, 7.0, 40, 0, false, 0, 0, 0);
-        DomusLampada l6 = new DomusLampada(6, "Ikea", "Tradfri2", 6.0, 6.0, 20, 0, false, 0, 0, 0);
-        DomusLampada l7 = new DomusLampada(7, "Philips", "HUE3", 11.0, 11.0, 60, 2700, true, 0, 0, 0);
+    DomusLampada l1 = new DomusLampada(1, "Philips", "HUE",     10.0, 10.0, 2700, true,  0, 0, 0, 50.0);
+    DomusLampada l2 = new DomusLampada(2, "Ikea",    "Tradfri",  8.0,  8.0,    0, false, 0, 0, 0, 30.0);
+    DomusLampada l3 = new DomusLampada(3, "Xiaomi",  "Yeelight", 9.0,  9.0, 4000, true,  0, 0, 0, 70.0);
+    DomusLampada l4 = new DomusLampada(4, "Philips", "HUE2",    12.0, 12.0, 3000, true,  0, 0, 0, 80.0);
+    DomusLampada l5 = new DomusLampada(5, "Osram",   "Smart+",   7.0,  7.0,    0, false, 0, 0, 0, 40.0);
+    DomusLampada l6 = new DomusLampada(6, "Ikea",    "Tradfri2", 6.0,  6.0,    0, false, 0, 0, 0, 20.0);
+    DomusLampada l7 = new DomusLampada(7, "Philips", "HUE3",    11.0, 11.0, 2700, true,  0, 0, 0, 60.0);
 
-        // Casa 1 - 2 divisões
-        Divisao sala1 = new Divisao("Sala", 1, new ArrayList<>());
-        Divisao quarto1 = new Divisao("Quarto", 2, new ArrayList<>());
-        sala1.addObj(l1);
-        sala1.addObj(l2);
-        sala1.addObj(l3);
-        quarto1.addObj(l4);
+    Divisao sala1      = new Divisao("Sala",       1, new ArrayList<>());
+    Divisao quarto1    = new Divisao("Quarto",     2, new ArrayList<>());
+    Divisao cozinha    = new Divisao("Cozinha",    3, new ArrayList<>());
+    Divisao escritorio = new Divisao("Escritorio", 4, new ArrayList<>());
 
-        Casa casa1 = new Casa(new HashMap<>(), 1, 1, "Rua A", "Casa Principal");
-        casa1.addDiv(sala1);
-        casa1.addDiv(quarto1);
-        this.casas.put(1, casa1);
-// Casa 2 - 2 divisões
-        Divisao cozinha = new Divisao("Cozinha", 3, new ArrayList<>());
-        Divisao escritorio = new Divisao("Escritorio", 4, new ArrayList<>());
-        cozinha.addObj(l5);
-        cozinha.addObj(l6);
-        escritorio.addObj(l7);
+    sala1.addObj(l1); sala1.addObj(l2); sala1.addObj(l3);
+    quarto1.addObj(l4);
+    cozinha.addObj(l5); cozinha.addObj(l6);
+    escritorio.addObj(l7);
 
-        Casa casa2 = new Casa(new HashMap<>(), 1, 2, "Rua B", "Casa de Ferias");
-        casa2.addDiv(cozinha);
-        casa2.addDiv(escritorio);
-        this.casas.put(2, casa2);
+    Casa casa1 = new Casa(new HashMap<>(), 1, 1, "Rua A", "Casa Principal");
+    casa1.addDiv(sala1); casa1.addDiv(quarto1);
+    this.casas.put(1, casa1);
 
-        // Simular uso - casa1 consome mais
-        l1.ligaObj(0); l2.ligaObj(0); l3.ligaObj(0); l4.ligaObj(0);
-        this.tempoAtual = 120;
-        l1.desligaObj(120); // 120 min, 3 ativacoes no total da casa1
-        l2.desligaObj(120);
-        l3.desligaObj(120);
-        l4.desligaObj(120);
+    Casa casa2 = new Casa(new HashMap<>(), 1, 2, "Rua B", "Casa de Ferias");
+    casa2.addDiv(cozinha); casa2.addDiv(escritorio);
+    this.casas.put(2, casa2);
 
-        // l5 e l6 ligam menos tempo
-        l5.ligaObj(120); l6.ligaObj(120);
-        this.tempoAtual = 150;
-        l5.desligaObj(150); // 30 min
-        l6.desligaObj(150);
+    l1.ligaObj(0); l2.ligaObj(0); l3.ligaObj(0); l4.ligaObj(0);
 
-        // l1 liga outra vez - mais ativacoes
-        l1.ligaObj(150);
-        l1.ligaObj(150); // mais uma ativacao
-        this.tempoAtual = 200;
-        l3.ligaObj(200); // l3 tem menos tempo total mas mais ativacoes
-        l3.ligaObj(200);
-        l3.ligaObj(200);
-         Utilizador u1 = new Utilizador("João", 123456789, 912345678, "joao@gmail.com", "1234", 1, new ArrayList<>(List.of(1, 2)));
-        this.utilizadores.addUser(u1);
+    this.tempoAtual = 120;
+    l1.desligaObj(120); l2.desligaObj(120); l3.desligaObj(120); l4.desligaObj(120);
+    System.out.println("l3 tempoAcumulado apos desligar: " + l3.getTempoAcumulado());
+    System.out.println("l3 momentoLigado apos desligar: " + l3.getMomentoLigado());
 
+    l5.ligaObj(120); l6.ligaObj(120);
+    this.tempoAtual = 150;
+    l5.desligaObj(150); l6.desligaObj(150);
 
-    }
+    l1.ligaObj(150);
+    this.tempoAtual = 200;
+    l3.ligaObj(200);
+
+    System.out.println("l3 tempoTotal em 200: " + l3.getTempoTotal(200));
+
+    Utilizador u1 = new Utilizador("João Pontes", 267316020, 938756690, "joao@gmail.com", "1234", 50098, new ArrayList<>(List.of(1, 2)));
+    Utilizador u2 = new Utilizador("Maria", 987654321, 923456789, "maria@gmail.com", "1234", 2, new ArrayList<>());
+    this.utilizadores.addUser(u1);
+    this.utilizadores.addUser(u2);
+}
+
     // isto nao pode ficar assim!!!!!!!!!! MUDAR DEPOIS
-     */
+    
 
 
 

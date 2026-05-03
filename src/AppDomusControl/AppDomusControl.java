@@ -1,6 +1,6 @@
 package AppDomusControl;
 
-import Controlador.Controlador;
+/* import Controlador.Controlador;
 import Controlador.Menus;
 import Domus.Casa;
 import Domus.Divisao;
@@ -12,7 +12,7 @@ import Controlador.MenuAuth;
 import java.util.*;
 import java.lang.*;
 
-import java.io.Serializable;
+import java.io.Serializable; */
 
 /* public class AppDomusControl implements Serializable {
     public static void main(String[] args){
@@ -34,17 +34,13 @@ import java.util.Scanner;
 public class AppDomusControl {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        //controlador.instantTest();
-        Utilizador user1 = new Utilizador("João Pontes", 267316020, 938756690, "joaomop3112@gmail.com", "balenciaga", 50098 ,new ArrayList<Integer>());
-        Utilizadores users = new Utilizadores();
-        users.addUser(user1);
-        System.out.println(users.getUtilizadores().toString());
         Controlador controlador = new Controlador();
-        controlador.setUtilizadores(users);
+        controlador.instantTest();
         MenuAuth menuAuth = new MenuAuth(input);
         menuAuth.executa(controlador);
     }
 }
+
 
 
 
