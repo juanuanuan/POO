@@ -1,7 +1,6 @@
 package Controlador;
 
 import java.util.Scanner;
-import Controlador.Controlador;
 
 public class MainMenu extends Menus{
 
@@ -14,6 +13,7 @@ public class MainMenu extends Menus{
         System.out.println("1 - List all your corresponding proprieties.\n");
         System.out.println("2 - List all your own proprieties.\n");
         System.out.println("3 - List all the proprieties you´ve been invited to.\n"); // avança para o menu gestão de casas.
+        System.out.println("4 - Save state.\n");
         System.out.println("0 - Go back.");
         System.out.println("99 - Exit.");
     }
@@ -33,6 +33,10 @@ public class MainMenu extends Menus{
                     break;
                 case 3:
                     menuCasas.executa(controlador, idUtilizador);
+                    break;
+                case 4:
+                    controlador.guardaEstado("estado.dat");
+                    System.out.println("Estado guardado.");
                     break;
                 case 0:
                     System.out.println("Go back.");

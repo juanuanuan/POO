@@ -16,7 +16,6 @@ import DomusDevice.DomusLampada;
 import Domus.Casa;
 import Utilizador.Utilizador;
 import Utilizador.Utilizadores;
-import Controlador.Menus;
 
 public class Controlador implements Serializable {
     // Recebe métodos que salvam e carregam o estado da aplicação
@@ -28,7 +27,7 @@ public class Controlador implements Serializable {
     private HashMap<Integer, Casa> casas;
     private Utilizador user;
     private long tempoAtual;
-    private List<Menus> menus;
+    //private List<Menus> menus;
 
 
     public Controlador(){
@@ -278,8 +277,6 @@ public class Controlador implements Serializable {
 
 
 public void instantTest() {
-    System.out.println("INSTANT TEST A CORRER");
-
     DomusLampada l1 = new DomusLampada(1, "Philips", "HUE",     10.0, 10.0, 2700, true,  0, 0, 0, 50.0);
     DomusLampada l2 = new DomusLampada(2, "Ikea",    "Tradfri",  8.0,  8.0,    0, false, 0, 0, 0, 30.0);
     DomusLampada l3 = new DomusLampada(3, "Xiaomi",  "Yeelight", 9.0,  9.0, 4000, true,  0, 0, 0, 70.0);
@@ -307,11 +304,8 @@ public void instantTest() {
     this.casas.put(2, casa2);
 
     l1.ligaObj(0); l2.ligaObj(0); l3.ligaObj(0); l4.ligaObj(0);
-
     this.tempoAtual = 120;
     l1.desligaObj(120); l2.desligaObj(120); l3.desligaObj(120); l4.desligaObj(120);
-    System.out.println("l3 tempoAcumulado apos desligar: " + l3.getTempoAcumulado());
-    System.out.println("l3 momentoLigado apos desligar: " + l3.getMomentoLigado());
 
     l5.ligaObj(120); l6.ligaObj(120);
     this.tempoAtual = 150;
@@ -321,51 +315,9 @@ public void instantTest() {
     this.tempoAtual = 200;
     l3.ligaObj(200);
 
-    System.out.println("l3 tempoTotal em 200: " + l3.getTempoTotal(200));
-
-    Utilizador u1 = new Utilizador("João Pontes", 267316020, 938756690, "joao@gmail.com", "1234", 50098, new ArrayList<>(List.of(1, 2)));
-    Utilizador u2 = new Utilizador("Maria", 987654321, 923456789, "maria@gmail.com", "1234", 2, new ArrayList<>());
+    Utilizador u1 = new Utilizador("joao", 267316020, 938756690, "joao@gmail.com", "1234", 50098, new ArrayList<>(List.of(1, 2)));
+    Utilizador u2 = new Utilizador("zeca", 987654321, 923456789, "zeca@gmail.com", "4321", 2, new ArrayList<>());
     this.utilizadores.addUser(u1);
     this.utilizadores.addUser(u2);
-}
-
-    // isto nao pode ficar assim!!!!!!!!!! MUDAR DEPOIS
-    
-
-
-
-    public void start(){
-        Scanner input = new Scanner(System.in);
-        boolean running = true;
-        int estadoAtual = 0;
-        Menus menu;
-        menu = new MenuAuth(input);
-        int opcao = menu.lerInput();
-        while (running){
-            if(estadoAtual == 0){
-                //menu = new MenuAuth(input);
-                //int opcao = menu.lerInput();
-                if(opcao == 1){
-                    //login
-                    estadoAtual = 1;
-                } else if(opcao == 2){
-                    //create account
-                    estadoAtual = 1;
-                } else {
-                    running = false;
-                }
-
-            } else if(estadoAtual == 1){
-                menu = new MainMenu(input);
-                if(opcao == 1){
-                    //List all your corresponding proprieties
-                } else if(opcao == 2){
-                    
-                }
-
-            }
-        }
     }
-
-
 }

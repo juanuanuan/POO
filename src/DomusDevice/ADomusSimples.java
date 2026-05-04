@@ -1,7 +1,8 @@
 package DomusDevice;
 
+import java.io.Serializable;
 
-public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusSimples> {
+public abstract class ADomusSimples implements IDomusSimples, Comparable<ADomusSimples>, Serializable {
     private int idObjeto;
     private double consumoObjeto; // consumo em kW/h
     private double consumoAtual;

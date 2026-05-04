@@ -3,8 +3,9 @@ package Utilizador;
 import Domus.Casa;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Utilizador {
+public class Utilizador implements Serializable {
     private String nome;
     private int NIF;
     private int tlm;

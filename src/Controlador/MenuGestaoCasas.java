@@ -2,7 +2,6 @@ package Controlador;
 
 import java.util.Random;
 import java.util.Scanner;
-import Controlador.Controlador;
 
 public class MenuGestaoCasas extends Menus{
 

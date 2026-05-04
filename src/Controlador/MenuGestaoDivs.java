@@ -1,7 +1,6 @@
 package Controlador;
 
 import java.util.Scanner;
-import Controlador.Controlador; 
 
 public class MenuGestaoDivs extends Menus{
 

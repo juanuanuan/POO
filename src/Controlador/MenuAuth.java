@@ -3,7 +3,6 @@ package Controlador;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import Controlador.Controlador;
 import Utilizador.Utilizador;
 
 public class MenuAuth extends Menus{
