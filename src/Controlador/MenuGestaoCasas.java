@@ -35,10 +35,8 @@ public class MenuGestaoCasas extends Menus{
                     controlador.removeCasa(idUtilizador, idRemover);
                     System.out.println("Propriety has been removed.\n");
                     break;
-                case 4: 
-                    //controlador.adicionaCasa();
-                    System.out.println("Propriety Id: ");
-                    int idCasaNova = rand.nextInt(Integer.MAX_VALUE); // vi isto no javadoc, assim e muito difícil haver os mesmos ‘ids’
+                case 4:
+                    int idCasaNova = rand.nextInt(Integer.MAX_VALUE);
                     System.out.println("Address: ");
                     String morada = input.next();
                     System.out.println("Household name: ");
@@ -50,7 +48,11 @@ public class MenuGestaoCasas extends Menus{
                     System.out.println(controlador.listaCasasUtilizador(idUtilizador));
                     System.out.println("Propriety Id:");
                     int idCasa = input.nextInt();
-                    menuCasa.executa(controlador, idCasa);
+                    if(controlador.getUtilizadores().getUtilizadores().get(idUtilizador).getIdCasas().contains(idCasa)) {
+                        menuCasa.executa(controlador, idCasa);
+                    } else {
+                        System.out.println("Nao tem acesso a esta casa.");
+                    }
                     break;
                 case 0:
                     System.out.println("Go back.\n");
