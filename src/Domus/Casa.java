@@ -170,5 +170,7 @@ public class Casa implements Serializable {
             .sum();
     }
 
+    //FIXME: colocar aqui os metodos que retornam uma casa quaquer
+
 
 }

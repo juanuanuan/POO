@@ -72,5 +72,5 @@ public class Utilizadores implements Serializable {
         } return null;
     }
 
-    // eventualmente fazer um logout!!! pensar nisto 
+     //FIXME: ha metodos a colocar aqui tambem.
 }

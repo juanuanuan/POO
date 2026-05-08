@@ -19,7 +19,7 @@ public class Controlador implements Serializable {
     // nao sei bem o propósito desta classe, se fica so para gestão do estado da aplicação, ou se lhe passamos métodos de controlo sobre os utilizadores, i.e., login registo, etc
 
     private Utilizadores utilizadores; 
-    private HashMap<Integer, Casa> casas;
+    private HashMap<Integer, Casa> casas; // FIXME: colocar isto na classe Casas. E trazer as casas para aqui, os menus nao presicam de ser trocados, continuam a chamar o controlador
     private Utilizador user;
     private long tempoAtual;
     //private List<Menus> menus;
@@ -107,7 +107,7 @@ public class Controlador implements Serializable {
         return this.casas.values().stream()
             .max(Comparator.comparingDouble(Casa::getConsumoTotal))
                 .map(Casa::clone)
-            .orElse(null);
+            .orElse(null); // FIXME: colcar isto nas casas, e dá para perceber o resto
     }
 
     public List<Divisao> top3DivisoesComMaisDevices() {
