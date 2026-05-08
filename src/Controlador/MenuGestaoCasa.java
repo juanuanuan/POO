@@ -69,7 +69,7 @@ public class MenuGestaoCasa extends Menus{
                     break;
                 case 12: 
                     System.out.println("Division name: ");
-                    String nomeDivisao = input.next();
+                    String nomeDivisao = input.nextLine();
                     System.out.println("Division Id: "); // o utilizador sabe o id da divisão ?
                     int idDivisao = input.nextInt();
                     controlador.adicionaDivisao(idCasa, nomeDivisao, idDivisao);

@@ -17,6 +17,7 @@ public class MenuGestaoDiv extends Menus{
         System.out.println("5 - Turn off a device.");
         System.out.println("6 - Boost a device");
         System.out.println("7 - Eco a device");
+        System.out.println("8 - Add Device");
         System.out.println("0 - Go back");
         System.out.println("99 - Exit");
 
@@ -51,7 +52,7 @@ public class MenuGestaoDiv extends Menus{
                     System.out.println("Device ID: ");
                     int id = input.nextInt();
                     controlador.desligaDispositivo(idCasa, idDivisao, id);
-                    System.out.println("Dispositivo " + id + " desligado");
+                    System.out.println("Device: " + id + " is OFF");
                     break;
                 }
 
@@ -59,7 +60,7 @@ public class MenuGestaoDiv extends Menus{
                     System.out.println("Device ID: ");
                     int id = input.nextInt();
                     controlador.boostDevice(idCasa, idDivisao, id);
-                    System.out.println("Device with ID: " + id + "is in BOOST mode.\n");
+                    System.out.println("Device with ID: " + id + " is in BOOST mode.\n");
                     break;
                 }
 
@@ -67,10 +68,15 @@ public class MenuGestaoDiv extends Menus{
                     System.out.println("Device ID: ");
                     int id = input.nextInt();
                     controlador.ecoDevice(idCasa, idDivisao, id);
-                    System.out.println("Device with ID: " + id + "is in ECO mode.\n");
+                    System.out.println("Device with ID: " + id + " is in ECO mode.\n");
                     break;
                 }
-                case 0: System.out.println("Go back. ");
+
+                case 8: {
+                    MenuGestaoDis menuDis = new MenuGestaoDis(input);
+                    menuDis.executa(controlador, idCasa, idDivisao);
+                }
+                case 0: System.out.println("Go back.\n");
                     break;
                 case 99: System.exit(0);
                     break;

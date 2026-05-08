@@ -1,11 +1,6 @@
 package Controlador;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import Domus.Divisao;
@@ -80,7 +75,7 @@ public class Controlador implements Serializable {
         }
     }
 
-    public static Controlador carregaEstado(String ficheiro) {
+    public static Controlador carregaEstado(String ficheiro)  {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiro));
             Controlador c = (Controlador) ois.readObject();
@@ -260,6 +255,10 @@ public class Controlador implements Serializable {
         return this.casas.get(idCasa).getConsumoMensal(this.tempoAtual);
     }
 
+    public void adicionaDispositivo(int idCasa, int idDivisao, ADomusSimples device){
+        this.casas.get(idCasa).getDivisao().get(idDivisao).addObj(device);
+    }
+
 
 
 
@@ -288,7 +287,7 @@ public void instantTest() {
     Divisao sala1      = new Divisao("Sala",       1, new ArrayList<>());
     Divisao quarto1    = new Divisao("Quarto",     2, new ArrayList<>());
     Divisao cozinha    = new Divisao("Cozinha",    3, new ArrayList<>());
-    Divisao escritorio = new Divisao("Escritorio", 4, new ArrayList<>());
+    Divisao escritorio = new Divisao("Escritório", 4, new ArrayList<>());
 
     sala1.addObj(l1); sala1.addObj(l2); sala1.addObj(l3);
     quarto1.addObj(l4);

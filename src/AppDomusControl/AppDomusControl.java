@@ -2,6 +2,8 @@ package AppDomusControl;
 
 import Controlador.Controlador;
 import Controlador.MenuAuth;
+
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class AppDomusControl {

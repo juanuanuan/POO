@@ -38,9 +38,9 @@ public class MenuGestaoCasas extends Menus{
                 case 4:
                     int idCasaNova = rand.nextInt(Integer.MAX_VALUE);
                     System.out.println("Address: ");
-                    String morada = input.next();
+                    String morada = input.nextLine();
                     System.out.println("Household name: ");
-                    String nomeCasa = input.next();
+                    String nomeCasa = input.nextLine();
                     controlador.adicionaCasa(idUtilizador, idCasaNova, morada, nomeCasa);
                     System.out.println("Propriety added.\n");
                     break;
