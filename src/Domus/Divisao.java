@@ -190,32 +190,7 @@ public class Divisao implements Serializable {
 
     }
 
-    public void aquecerAC(int idDevice){
-        this.dispositivos.stream()
-                .filter(d -> d instanceof IDomusAC)
-                .filter(d -> d.getIdObjeto() == idDevice)
-                .map(d -> (IDomusAC) d)
-                .findFirst()
-                .ifPresent(IDomusAC::aquecerAC);
-    }
 
-    public void arrefecerAC(int idDevice){
-        this.dispositivos.stream()
-                .filter(d -> d instanceof IDomusAC)
-                .filter(d -> d.getIdObjeto() == idDevice)
-                .map(d -> (IDomusAC) d)
-                .findFirst()
-                .ifPresent(IDomusAC::arrefecerAC);
-    }
-
-    public void ventilarAC(int idDevice){
-        this.dispositivos.stream()
-                .filter(d -> d instanceof IDomusAC)
-                .filter(d -> d.getIdObjeto() == idDevice)
-                .map(d -> (IDomusAC) d)
-                .findFirst()
-                .ifPresent(IDomusAC::ventilarAC);
-    }
 
 
     //FIXME: colocar aqui os metodos que retornam divisoes

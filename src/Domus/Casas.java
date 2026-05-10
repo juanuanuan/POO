@@ -149,17 +149,7 @@ public class Casas implements Serializable {
         this.casas.get(idCasa).adicionaDispositivo(idDivisao, device);
     }
 
-    public void aquecerAC(int idCasa, int idDivisao, int idDevice){
-        this.casas.get(idCasa).aquecerAC(idDivisao, idDevice);
-    }
 
-    public void arrefecerAC(int idCasa, int idDivisao, int idDevice){
-        this.casas.get(idCasa).arrefecerAC(idDivisao, idDevice);
-    }
-
-    public void ventilarAC(int idCasa, int idDivisao, int idDevice){
-        this.casas.get(idCasa).ventilarAC(idDivisao, idDevice);
-    }
 
 
 

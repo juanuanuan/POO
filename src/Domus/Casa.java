@@ -204,17 +204,6 @@ public class Casa implements Serializable {
         this.divisao.get(idDivisao).addObj(device.clone());
     }
 
-    public void aquecerAC(int idDivisao, int idDevice){
-        this.divisao.get(idDivisao).aquecerAC(idDevice);
-    }
-
-    public void arrefecerAC(int idDivisao, int idDevice){
-        this.divisao.get(idDivisao).arrefecerAC(idDevice);
-    }
-
-    public void ventilarAC(int idDivisao, int idDevice){
-        this.divisao.get(idDivisao).ventilarAC(idDevice);
-    }
 
 
 

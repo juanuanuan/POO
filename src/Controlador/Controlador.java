@@ -259,15 +259,5 @@ public class Controlador implements Serializable {
         return id;
     }
 
-    public void aquecerAC(int idCasa, int idDivisao, int idDevice){
-        this.casas.aquecerAC(idCasa, idDivisao, idDevice);
-    }
 
-    public void arrefecerAC(int idCasa, int idDivisao, int idDevice){
-        this.casas.arrefecerAC(idCasa, idDivisao, idDevice);
-    }
-
-    public void ventilarAC(int idCasa, int idDivisao, int idDevice){
-        this.casas.ventilarAC(idCasa, idDivisao, idDevice);
-    }
 }
