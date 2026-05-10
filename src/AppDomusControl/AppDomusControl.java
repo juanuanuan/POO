@@ -12,11 +12,14 @@ import java.util.Scanner;
 public class AppDomusControl {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        boolean flagPopulate = false;
-        Controlador controlador = Controlador.carregaEstado("estado.dat");
+        boolean flagPopulate = true;
+        Controlador controlador = new Controlador();
         if(flagPopulate) {
-            //controlador = new Controlador();
             popular(controlador);
+        }
+        else{
+            controlador = Controlador.carregaEstado("estado.dat");
+
         }
         MenuAuth menuAuth = new MenuAuth(input);
         menuAuth.executa(controlador);
