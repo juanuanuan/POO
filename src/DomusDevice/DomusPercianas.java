@@ -9,7 +9,7 @@ public class DomusPercianas extends ADomusSimples {
         //this.percentagemAbertura = 0;
     }
 
-    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int percentagemAbertura,
+    public DomusPercianas(int idObjeto, String marca, String modelo, double consumo, double consumoAtual,
         int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel) {
         super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado, nivel);
        // this.percentagemAbertura = percentagemAbertura;

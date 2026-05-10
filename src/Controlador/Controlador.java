@@ -3,6 +3,8 @@ package Controlador;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import Domus.Casas;
 import Domus.Divisao;
 import DomusDevice.ADomusComplexo;
 import DomusDevice.ADomusSimples;
@@ -19,30 +21,46 @@ public class Controlador implements Serializable {
     // nao sei bem o propósito desta classe, se fica so para gestão do estado da aplicação, ou se lhe passamos métodos de controlo sobre os utilizadores, i.e., login registo, etc
 
     private Utilizadores utilizadores; 
-    private HashMap<Integer, Casa> casas; // FIXME: colocar isto na classe Casas. E trazer as casas para aqui, os menus nao presicam de ser trocados, continuam a chamar o controlador
+    private Casas casas; // FIXME: colocar isto na classe Casas. E trazer as casas para aqui, os menus nao presicam de ser trocados, continuam a chamar o controlador
     private Utilizador user;
     private long tempoAtual;
+    private Set<Integer> idUsados;
+    private static final Random rand = new Random();
     //private List<Menus> menus;
 
 
     public Controlador(){
         this.utilizadores = new Utilizadores();
-        this.casas = new HashMap<>();
+        this.casas = new Casas();
+        this.idUsados = new HashSet<>();
+        this.tempoAtual = 0;
+        this.user = new Utilizador();
     }
 
     //não precisamos de contrutor parametrizado, o controlador começa sempre vazio e vai "enchendo" conforme o uso da aplicação
 
     public Controlador(Controlador other){
         this.utilizadores = other.getUtilizadores();
-        this.casas = new HashMap<>(other.getCasas());
+        this.casas = other.getCasas();
+        this.user = other.getUser();
+        this.tempoAtual = other.getTempoAtual();
+        this.idUsados = other.getIdUsados();
+    }
+
+    public Set<Integer> getIdUsados() {
+        return this.idUsados;
     }
 
     public Utilizadores getUtilizadores(){
         return this.utilizadores;
     }
 
-    public HashMap <Integer, Casa> getCasas(){
-        return new HashMap<>(this.casas);
+    public Utilizador getUser() {
+        return this.user;
+    }
+
+    public Casas getCasas(){
+        return this.casas;
     }
 
     public long getTempoAtual() {
@@ -58,11 +76,13 @@ public class Controlador implements Serializable {
         this.utilizadores = utilizadores;
     }
 
-    public void setCasas(HashMap<Integer, Casa> hashMap){
-        this.casas = new HashMap<>(hashMap);
+    public void setCasas(Casas casas){
+        this.casas = casas;
     }
 
-
+    public void setTempoAtual(long tempoAtual) {
+        this.tempoAtual = tempoAtual;
+    }
 
     // um pouco confusas de entender mas funcionam
     public void guardaEstado(String ficheiro) {
@@ -104,117 +124,85 @@ public class Controlador implements Serializable {
     }
 
     public Casa casaQueMaisConsome() {
-        return this.casas.values().stream()
-            .max(Comparator.comparingDouble(Casa::getConsumoTotal))
-                .map(Casa::clone)
-            .orElse(null); // FIXME: colcar isto nas casas, e dá para perceber o resto
+        return this.casas.casaQueMaisConsome();
     }
 
     public List<Divisao> top3DivisoesComMaisDevices() {
-        return this.casas.values().stream()
-            .flatMap(c -> c.getDivisao().values().stream())
-            .sorted(Comparator.comparingInt(d -> -d.getNumDispositivos()))
-            .limit(3)
-                .map(Divisao::clone)
-            .collect(Collectors.toList());
+        return this.casas.top3DivisoesComMaisDevices();
     }
 
     public List<ADomusSimples> top3DevicesPorTempo(int idCasa) {
-        return this.casas.get(idCasa).clone().top3DevicesPorTempo(this.tempoAtual);
+        return this.casas.top3DevicesPorTempo(idCasa, this.getTempoAtual());
     }
 
     public List<ADomusSimples> top3DevicesPorAtivacoes(int idCasa) {
-        return this.casas.get(idCasa).clone().top3DevicesPorAtivacoes();
+        return this.casas.top3DevicesPorAtivacoes(idCasa);
     }
 
     public void ligaDispositivo(int idCasa, int idDivisao, int idDevice) {
-        this.casas.get(idCasa).getDivisao().get(idDivisao)
-            .getDispositivos().stream()
-            .filter(d -> d.getIdObjeto() == idDevice)
-            .findFirst()
-            .ifPresent(d -> d.ligaObj(this.tempoAtual));
+        this.casas.ligaDispositivo(idCasa, idDivisao, idDevice, this.getTempoAtual());
     }
 
     public void desligaDispositivo(int idCasa, int idDivisao, int idDevice) {
-        this.casas.get(idCasa).getDivisao().get(idDivisao)
-            .getDispositivos().stream()
-            .filter(d -> d.getIdObjeto() == idDevice)
-            .findFirst()
-            .ifPresent(d -> d.desligaObj(this.tempoAtual));
+        this.casas.desligaDispositivo(idCasa, idDivisao, idDevice, this.getTempoAtual());
     }
 
     public String listaDispositivos(int idCasa, int idDivisao) {
-        return this.casas.get(idCasa).getDivisao().get(idDivisao).getDispositivos().toString();
+        return this.casas.listaDispositivos(idCasa, idDivisao);
     }
 
     public String listaDivisoes(int idCasa) {
-        return this.casas.get(idCasa).getDivisao().toString();
+        return this.casas.listaDivisoes(idCasa);
     }
 
     public String listaCasasUtilizador(int idUtilizador){
-        return this.utilizadores.getUtilizadores().get(idUtilizador).getIdCasas().stream()
-            .map(id -> this.casas.get(id).toString())
-            .collect(Collectors.joining("\n"));
+        return this.utilizadores.listaCasasUtilizador(idUtilizador, this.casas);
     }
 
     public double getConsumoCasa(int idCasa) {
-        return this.casas.get(idCasa).getConsumoTotal();
+        return this.casas.getConsumoCasa(idCasa);
     }
 
     public void adicionaDivisao(int idCasa, String nomeDivisao, int idDivisao) {
         Divisao div = new Divisao(nomeDivisao, idDivisao, new ArrayList<>());
-        this.casas.get(idCasa).addDiv(div);
+        this.casas.adicionaDivisao(idCasa, div);
     }
 
     public void removeDivisao(int idCasa, int idDivisao) {
-        this.casas.get(idCasa).removeDiv(idDivisao);
+        this.casas.removeDivisao(idCasa, idDivisao);
     }
 
     public void adicionaCasa(int idHost, int idCasa, String morada, String nomeCasa) { 
         Casa novaCasa = new Casa(new HashMap<>(), idHost, idCasa, morada, nomeCasa);
-        this.casas.put(idCasa, novaCasa);
-        this.utilizadores.getUtilizadores().get(idHost).addCasa(idCasa);
+        this.casas.adicionaCasa(novaCasa);
+        this.utilizadores.adicionaCasaUser(idHost, idCasa);
     }
 
     public void removeCasa(int idUtilizador, int idCasa) {
-        this.casas.remove(idCasa);
-        this.utilizadores.getUtilizadores().get(idUtilizador).removeCasa(idCasa);
+        this.casas.removeCasa(idCasa);
+        this.utilizadores.removeCasaUser(idUtilizador,idCasa);
     }
 
     public boolean ehHost(){
-        return this.casas.values().stream()
-                .anyMatch(c -> c.getIdHost() == user.getIdUtilizador());
+        return this.casas.ehHost(this.user);
     }
 
     public ADomusSimples top1DeviceConsumo(int idCasa){
-        return this.casas.get(idCasa).top1DeviceConsumo().clone();
+        return this.casas.top1DeviceConsumo(idCasa);
     }
 
 
     public void boostDevice(int idCasa, int idDivisao, int idDevice){
-        this.casas.get(idCasa).getDivisao().get(idDivisao)
-                .getDispositivos().stream()
-                .filter(dSimples -> dSimples instanceof ADomusComplexo)
-                .filter(dSimples -> dSimples.getIdObjeto() == idDevice)
-                .map(dSimples -> (ADomusComplexo) dSimples)
-                .findFirst()
-                .ifPresent(ADomusComplexo::boostObj);
+        this.casas.boostDevice(idCasa,idDivisao,idDevice);
 
     }
 
     public void ecoDevice(int idCasa, int idDivisao, int idDevice){
-        this.casas.get(idCasa).getDivisao().get(idDivisao)
-                .getDispositivos().stream()
-                .filter(dSimples -> dSimples instanceof ADomusComplexo)
-                .filter(dSimples -> dSimples.getIdObjeto() == idDevice)
-                .map(dSimples -> (ADomusComplexo) dSimples)
-                .findFirst()
-                .ifPresent(ADomusComplexo::ecoObj);
+        this.casas.ecoDevice(idCasa, idDivisao, idDevice);
     }
 
     public void desligaAllDevice(int idCasa){
-        this.casas.get(idCasa).getDivisao().values().stream() // perguntar ao stor porque é que o intellij diz para tirar o stream.
-                .forEach(d -> d.desligaAll(this.getTempoAtual()));
+        this.casas.desligaAllDevice(idCasa, this.getTempoAtual());
     }
 
     public boolean existeConta(Utilizador user){
@@ -231,92 +219,55 @@ public class Controlador implements Serializable {
     }
 
     public void adicionaGuest(int idCasa, int idGuest) {
-        this.casas.get(idCasa).addGuest(idGuest);
-        this.utilizadores.getUtilizadores().get(idGuest).addCasa(idCasa);
+        this.casas.adicionaGuest(idCasa, idGuest);
+        this.utilizadores.adicionaGuestU(idCasa, idGuest);
     }
 
     public void removeGuest(int idCasa, int idGuest){
-        this.casas.get(idCasa).removeGuest(idGuest);
-        this.utilizadores.getUtilizadores().get(idGuest).removeCasa(idCasa);
+        this.casas.removeGuest(idCasa, idGuest);
+        this.utilizadores.removeGuestU(idCasa, idGuest);
     }
 
     public String listaGuests(int idCasa){
-        return this.casas.get(idCasa).getIdGuests().stream()
+        return this.casas.getCasas().get(idCasa).getIdGuests().stream()
         .map(id -> this.utilizadores.getUtilizadores().get(id).toString())
-        .collect(Collectors.joining("\n")); // nao sei se isto esta bem tho
+        .collect(Collectors.joining("\n")); // a casa não tem informação sobre os utilizadores. este método fica aqui
     }
 
     public String listaHost(int idCasa){
-        int idHost = this.casas.get(idCasa).getIdHost();
+        int idHost = this.casas.getCasas().get(idCasa).getIdHost();
         return this.utilizadores.getUtilizadores().get(idHost).toString();
     }
 
     public double getConsumoMensalCasa(int idCasa) {
-        return this.casas.get(idCasa).getConsumoMensal(this.tempoAtual);
+        return this.casas.getConsumoMensalCasa(idCasa, this.getTempoAtual());
     }
 
     public void adicionaDispositivo(int idCasa, int idDivisao, ADomusSimples device){
-        this.casas.get(idCasa).getDivisao().get(idDivisao).addObj(device);
+        device.setIdObjeto(geradorId());
+        this.casas.adicionaDispositivo(idCasa, idDivisao, device);
     }
 
 
 
+    public int geradorId(){
+        int id;
+        do{
+            id = rand.nextInt(Integer.MAX_VALUE);
+        } while(idUsados.contains(id));
+        idUsados.add(id);
+        return id;
+    }
 
+    public void aquecerAC(int idCasa, int idDivisao, int idDevice){
+        this.casas.aquecerAC(idCasa, idDivisao, idDevice);
+    }
 
-  
+    public void arrefecerAC(int idCasa, int idDivisao, int idDevice){
+        this.casas.arrefecerAC(idCasa, idDivisao, idDevice);
+    }
 
-
-
-
-
-
-
-
-
-
-
-public void instantTest() {
-    DomusLampada l1 = new DomusLampada(1, "Philips", "HUE",     10.0, 10.0, 2700, true,  0, 0, 0, 50.0);
-    DomusLampada l2 = new DomusLampada(2, "Ikea",    "Tradfri",  8.0,  8.0,    0, false, 0, 0, 0, 30.0);
-    DomusLampada l3 = new DomusLampada(3, "Xiaomi",  "Yeelight", 9.0,  9.0, 4000, true,  0, 0, 0, 70.0);
-    DomusLampada l4 = new DomusLampada(4, "Philips", "HUE2",    12.0, 12.0, 3000, true,  0, 0, 0, 80.0);
-    DomusLampada l5 = new DomusLampada(5, "Osram",   "Smart+",   7.0,  7.0,    0, false, 0, 0, 0, 40.0);
-    DomusLampada l6 = new DomusLampada(6, "Ikea",    "Tradfri2", 6.0,  6.0,    0, false, 0, 0, 0, 20.0);
-    DomusLampada l7 = new DomusLampada(7, "Philips", "HUE3",    11.0, 11.0, 2700, true,  0, 0, 0, 60.0);
-
-    Divisao sala1      = new Divisao("Sala",       1, new ArrayList<>());
-    Divisao quarto1    = new Divisao("Quarto",     2, new ArrayList<>());
-    Divisao cozinha    = new Divisao("Cozinha",    3, new ArrayList<>());
-    Divisao escritorio = new Divisao("Escritório", 4, new ArrayList<>());
-
-    sala1.addObj(l1); sala1.addObj(l2); sala1.addObj(l3);
-    quarto1.addObj(l4);
-    cozinha.addObj(l5); cozinha.addObj(l6);
-    escritorio.addObj(l7);
-
-    Casa casa1 = new Casa(new HashMap<>(), 1, 1, "Rua A", "Casa Principal");
-    casa1.addDiv(sala1); casa1.addDiv(quarto1);
-    this.casas.put(1, casa1);
-
-    Casa casa2 = new Casa(new HashMap<>(), 1, 2, "Rua B", "Casa de Ferias");
-    casa2.addDiv(cozinha); casa2.addDiv(escritorio);
-    this.casas.put(2, casa2);
-
-    l1.ligaObj(0); l2.ligaObj(0); l3.ligaObj(0); l4.ligaObj(0);
-    this.tempoAtual = 120;
-    l1.desligaObj(120); l2.desligaObj(120); l3.desligaObj(120); l4.desligaObj(120);
-
-    l5.ligaObj(120); l6.ligaObj(120);
-    this.tempoAtual = 150;
-    l5.desligaObj(150); l6.desligaObj(150);
-
-    l1.ligaObj(150);
-    this.tempoAtual = 200;
-    l3.ligaObj(200);
-
-    Utilizador u1 = new Utilizador("joao", 267316020, 938756690, "joao@gmail.com", "1234", 50098, new ArrayList<>(List.of(1, 2)));
-    Utilizador u2 = new Utilizador("zeca", 987654321, 923456789, "zeca@gmail.com", "4321", 2, new ArrayList<>());
-    this.utilizadores.addUser(u1);
-    this.utilizadores.addUser(u2);
+    public void ventilarAC(int idCasa, int idDivisao, int idDevice){
+        this.casas.ventilarAC(idCasa, idDivisao, idDevice);
     }
 }

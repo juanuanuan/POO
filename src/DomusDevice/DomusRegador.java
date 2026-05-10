@@ -11,7 +11,7 @@ public class DomusRegador extends ADomusSimples {
         this.duracaoMinutos = 0;
     }
 
-    public DomusRegador(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int fluxoAgua, int duracaoMinutos,
+    public DomusRegador(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int duracaoMinutos,
         int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel){
         super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado, nivel);
         //this.fluxoAgua = fluxoAgua;

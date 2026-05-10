@@ -60,7 +60,7 @@ public class MenuGestaoCasa extends Menus{
                     break;
                 case 8:
                     System.out.println("ID do utilizador a adicionar: ");
-                    int idGuest = input.nextInt();
+                    int idGuest = controlador.geradorId();
                     controlador.adicionaGuest(idCasa, idGuest);
                     System.out.println("Guest adicionado.");
                     break;
@@ -70,8 +70,8 @@ public class MenuGestaoCasa extends Menus{
                 case 12: 
                     System.out.println("Division name: ");
                     String nomeDivisao = input.nextLine();
-                    System.out.println("Division Id: "); // o utilizador sabe o id da divisão ?
-                    int idDivisao = input.nextInt();
+                    System.out.println("Division Id: ");
+                    int idDivisao = controlador.geradorId();
                     controlador.adicionaDivisao(idCasa, nomeDivisao, idDivisao);
                     System.out.println("Division added.\n");
                     break;

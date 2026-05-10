@@ -56,7 +56,7 @@ public class MenuAuth extends Menus{
                     int novoNif = input.nextInt();
                     System.out.println("Telephone number: ");
                     int novoTlm = input.nextInt();
-                    int novoId = rand.nextInt(Integer.MAX_VALUE);
+                    int novoId = controlador.geradorId();
                     Utilizador novoUser = new Utilizador(nome, novoNif, novoTlm, novoEmail, novaPassword, novoId ,new ArrayList<Integer>());
                     controlador.existeConta(novoUser);
                     break;

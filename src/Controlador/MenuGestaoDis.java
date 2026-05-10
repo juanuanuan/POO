@@ -1,4 +1,5 @@
 package Controlador;
+import java.util.Random;
 
 import DomusDevice.*;
 
@@ -25,31 +26,75 @@ public class MenuGestaoDis extends Menus{
            opcao = lerInput();
            switch (opcao){
                case 1: {
-                   ADomusComplexo ac = new DomusAC();
+                   int id = controlador.geradorId();
+                   System.out.println("Manufacture: ");
+                   String marca = input.nextLine();
+                   System.out.println("Model: ");
+                   String modelo = input.nextLine();
+                   System.out.println("Base Consumption: ");
+                   double consumo = input.nextDouble();
+                   input.nextLine();
+                   System.out.println("Mode -> Standard (Ventilating)");
+                   DomusAC.ModoAC modo = DomusAC.ModoAC.VENTILAR;
+
+                   ADomusComplexo ac = new DomusAC(id, marca, modelo, consumo, 0, 0, 0, 0, 0, 16, modo);
                    controlador.adicionaDispositivo(idCasa, idDivisao, ac);
                    break;
                }
 
                case 2: {
-                   ADomusComplexo lamp = new DomusLampada();
+                   int id = controlador.geradorId();
+                   System.out.println("Manufacture: ");
+                   String marca = input.nextLine();
+                   System.out.println("Model: ");
+                   String modelo = input.nextLine();
+                   System.out.println("Base Consumption: ");
+                   double consumo = input.nextDouble();
+                   input.nextLine();
+                   ADomusComplexo lamp = new DomusLampada(id, marca, modelo, consumo, 0, 0, true, 0, 0, 0, 0);
                    controlador.adicionaDispositivo(idCasa, idDivisao, lamp);
                    break;
                }
 
                case 3: {
-                   ADomusSimples shutter = new DomusPercianas();
+                   int id = controlador.geradorId();
+                   System.out.println("Manufacture: ");
+                   String marca = input.nextLine();
+                   System.out.println("Model: ");
+                   String modelo = input.nextLine();
+                   System.out.println("Base Consumption: ");
+                   double consumo = input.nextDouble();
+                   input.nextLine();
+                   ADomusSimples shutter = new DomusPercianas(id, marca, modelo, consumo, 0, 0, 0, 0,  0);
                    controlador.adicionaDispositivo(idCasa, idDivisao, shutter);
                    break;
                }
 
                case 4: {
-                   ADomusSimples irrigator = new DomusRegador();
+                   int id = controlador.geradorId();
+                   System.out.println("Manufacture: ");
+                   String marca = input.nextLine();
+                   System.out.println("Model: ");
+                   String modelo = input.nextLine();
+                   System.out.println("Base Consumption: ");
+                   double consumo = input.nextDouble();
+                   input.nextLine();
+                   ADomusSimples irrigator = new DomusRegador(id, marca, modelo, consumo, 0, 0, 0, 0, 0, 0);
                    controlador.adicionaDispositivo(idCasa, idDivisao, irrigator);
                    break;
                }
 
                case 5: {
-                   ADomusSimples soundSys = new DomusSoundSystem();
+                   int id = controlador.geradorId();
+                   System.out.println("Manufacture: ");
+                   String marca = input.nextLine();
+                   System.out.println("Model: ");
+                   String modelo = input.nextLine();
+                   System.out.println("Base Consumption: ");
+                   double consumo = input.nextDouble();
+                   System.out.println("Radio Station: ");
+                   String estacao = input.nextLine();
+                   ADomusSimples soundSys = new DomusSoundSystem(id, marca, modelo, consumo, 0, estacao, 0, 0, 0, 0);
                    controlador.adicionaDispositivo(idCasa, idDivisao, soundSys);
                    break;
                }

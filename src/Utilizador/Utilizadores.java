@@ -1,8 +1,12 @@
 package Utilizador;
 
+import Domus.Casa;
+import Domus.Casas;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class Utilizadores implements Serializable {
@@ -72,5 +76,31 @@ public class Utilizadores implements Serializable {
         } return null;
     }
 
-     //FIXME: ha metodos a colocar aqui tambem.
+    public void removeCasaUser(int idUtilizador, int idCasa) {
+        this.utilizadores.get(idUtilizador).removeCasa(idCasa);
+
+    }
+
+    public void adicionaCasaUser(int idUtilizador, int idCasa) {
+        this.utilizadores.get(idUtilizador).addCasa(idCasa);
+    }
+
+    public String listaCasasUtilizador(int idUtilizador, Casas casas){
+        return this.utilizadores.get(idUtilizador).getIdCasas().stream()
+                .map(id -> casas.getCasas().toString())
+                .collect(Collectors.joining("\n"));
+    }
+
+    public void adicionaGuestU(int idCasa, int idGuest) {
+        this.utilizadores.get(idGuest).addCasa(idCasa);
+    }
+
+    public void removeGuestU(int idCasa, int idGuest){
+        this.utilizadores.get(idGuest).removeCasa(idCasa);
+    }
+
+
+
+
+    //FIXME: ha metodos a colocar aqui tambem.
 }

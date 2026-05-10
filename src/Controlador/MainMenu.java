@@ -45,7 +45,7 @@ public class MainMenu extends Menus{
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Opcao invalida.");
+                    System.out.println("Non-existent input.");
                     break;    
             }
         }while(opcao != 0);

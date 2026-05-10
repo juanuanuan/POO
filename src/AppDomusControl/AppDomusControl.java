@@ -12,7 +12,7 @@ public class AppDomusControl {
         Controlador controlador = Controlador.carregaEstado("estado.dat");
         if(controlador == null) {
             controlador = new Controlador();
-            controlador.instantTest();
+            Testing.popular(controlador);
         }
         MenuAuth menuAuth = new MenuAuth(input);
         menuAuth.executa(controlador);

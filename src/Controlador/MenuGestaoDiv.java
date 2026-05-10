@@ -15,17 +15,20 @@ public class MenuGestaoDiv extends Menus{
         System.out.println("3 - Consult division stats.");
         System.out.println("4 - Turn on a device.");
         System.out.println("5 - Turn off a device.");
-        System.out.println("6 - Boost a device");
-        System.out.println("7 - Eco a device");
-        System.out.println("8 - Add Device");
-        System.out.println("0 - Go back");
-        System.out.println("99 - Exit");
+        System.out.println("6 - Boost a device.");
+        System.out.println("7 - Eco a device.");
+        System.out.println("8 - Add Device.");
+        System.out.println("9 - AC Management.");
+        System.out.println("0 - Go back.");
+        System.out.println("99 - Exit.");
 
     }
 
     public void executa(Controlador controlador, int idCasa, int idDivisao){
 
         int opcao;
+        MenuGestaoDis menuDis = new MenuGestaoDis(input);
+        MenuGestaoAC menuAC = new MenuGestaoAC(input);
         do {
             opcao = lerInput();
             switch(opcao){
@@ -33,7 +36,7 @@ public class MenuGestaoDiv extends Menus{
                     System.out.println(controlador.listaDispositivos(idCasa, idDivisao)); 
                     break;
                 case 2:
-                    System.out.println(controlador.top1DeviceConsumo(idCasa)); // mudar aqui para o mais consumidor, e não os 3
+                    System.out.println(controlador.top1DeviceConsumo(idCasa));
                     break;
                 case 3: {
                     System.out.println("Top 3 por tempo: " + controlador.top3DevicesPorTempo(idCasa));
@@ -73,8 +76,14 @@ public class MenuGestaoDiv extends Menus{
                 }
 
                 case 8: {
-                    MenuGestaoDis menuDis = new MenuGestaoDis(input);
                     menuDis.executa(controlador, idCasa, idDivisao);
+                    break;
+                }
+
+                case 9: {
+                    System.out.println("Device ID: ");
+                    int id = input.nextInt();
+                    menuAC.executa(controlador, idCasa, idDivisao, id);
                 }
                 case 0: System.out.println("Go back.\n");
                     break;

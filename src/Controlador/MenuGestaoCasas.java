@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class MenuGestaoCasas extends Menus{
 
     public MenuGestaoCasas(Scanner input){
-        super(input, "Proprieties Management Menu." );
+        super(input, "Proprieties Management Menu.");
 
     }
 
@@ -16,7 +16,7 @@ public class MenuGestaoCasas extends Menus{
         System.out.println("3 - Remove Propriety from the data base.");
         System.out.println("4 - Add propriety to the data base.");
         System.out.println("5 - Single house management.");
-        System.out.println("6 - List the top 3 most consuming proprieties.");
+        System.out.println("6 - List the most consuming propriety.");
         System.out.println("0 - Go back.");
         System.out.println("99 - Exit.");
     }
@@ -36,7 +36,7 @@ public class MenuGestaoCasas extends Menus{
                     System.out.println("Propriety has been removed.\n");
                     break;
                 case 4:
-                    int idCasaNova = rand.nextInt(Integer.MAX_VALUE);
+                    int idCasaNova = controlador.geradorId();
                     System.out.println("Address: ");
                     String morada = input.nextLine();
                     System.out.println("Household name: ");
@@ -46,13 +46,17 @@ public class MenuGestaoCasas extends Menus{
                     break;
                 case 5:
                     System.out.println(controlador.listaCasasUtilizador(idUtilizador));
-                    System.out.println("Propriety Id:");
+                    System.out.println("Propriety Id: ");
                     int idCasa = input.nextInt();
                     if(controlador.getUtilizadores().getUtilizadores().get(idUtilizador).getIdCasas().contains(idCasa)) {
                         menuCasa.executa(controlador, idCasa);
                     } else {
                         System.out.println("Nao tem acesso a esta casa.");
                     }
+                    break;
+
+                case 6:
+                    System.out.println(controlador.casaQueMaisConsome().toString());
                     break;
                 case 0:
                     System.out.println("Go back.\n");

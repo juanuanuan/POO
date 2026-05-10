@@ -11,7 +11,7 @@ public class DomusSoundSystem extends ADomusSimples {
         this.estacao = "";
     }
 
-    public DomusSoundSystem(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, int volume, String estacao,
+    public DomusSoundSystem(int idObjeto, String marca, String modelo, double consumo, double consumoAtual, String estacao,
         int numAtivacoes, long tempoAcumulado, long momentoLigado, double nivel){
         super(idObjeto, marca, modelo, consumo, Estados.OFF, consumoAtual, numAtivacoes, tempoAcumulado, momentoLigado, nivel);
         //this.volume = volume;

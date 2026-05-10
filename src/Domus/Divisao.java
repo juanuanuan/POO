@@ -2,6 +2,8 @@ package Domus;
 
 import DomusDevice.ADomusSimples;
 import DomusDevice.ADomusComplexo;
+import DomusDevice.IDomusAC;
+
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -33,9 +35,7 @@ public class Divisao implements Serializable {
         this.divisao = other.getDivisao();
         this.idDivisao = other.getIdDivisao();
         this.dispositivos = new ArrayList<>();
-        for(ADomusSimples d : other.getDispositivos()){
-            this.dispositivos.add(d.clone());
-        }
+        other.dispositivos.forEach(d -> this.dispositivos.add(d.clone()));
     }
 
 
@@ -48,7 +48,9 @@ public class Divisao implements Serializable {
     }
 
     public List<ADomusSimples> getDispositivos() {
-        return this.dispositivos;
+        ArrayList<ADomusSimples> copia = new ArrayList<>();
+        this.dispositivos.forEach(d -> copia.add(d.clone()));
+        return copia;
     }
 
     public void setDivisao(String divisao) {
@@ -60,7 +62,8 @@ public class Divisao implements Serializable {
     }
 
     public void setDispositivos(List<ADomusSimples> dispositivos) {
-        this.dispositivos = dispositivos;
+        this.dispositivos = new ArrayList<>();
+        dispositivos.forEach(d -> this.dispositivos.add(d.clone()));
     }
 
 
@@ -73,8 +76,8 @@ public class Divisao implements Serializable {
 
     public String toString(){
         return  getDivisao() +
-                " Com ID atribuído: " + getIdDivisao() + "\n" +
-                "Lista de dispositivos associados: " + getDispositivos() + "\n";
+                "ID: " + getIdDivisao() + "\n" +
+                "Device list associated: " + getDispositivos() + "\n";
     }
 
     public int compareTo(Divisao o){
@@ -89,7 +92,7 @@ public class Divisao implements Serializable {
 
     public Divisao clone(){
         return new Divisao(this);
-    } // incompleto
+    }
 
     public void addObj(ADomusSimples dispositivo){
         dispositivos.add(dispositivo);
@@ -131,7 +134,7 @@ public class Divisao implements Serializable {
         return this.dispositivos.size();
     }
 
-    public List<ADomusSimples> top3PorTempo(long momentoAtual) {
+    public List<ADomusSimples> top3PorTempoD(long momentoAtual) {
         return this.dispositivos.stream()
             .sorted(Comparator.comparingLong(d -> -d.getTempoTotal(momentoAtual)))
             .limit(3)
@@ -139,12 +142,79 @@ public class Divisao implements Serializable {
             .collect(Collectors.toList());
     }
 
-    public List<ADomusSimples> top3PorAtivacoes() {
+    public List<ADomusSimples> top3PorAtivacoesD() {
         return this.dispositivos.stream()
             .sorted(Comparator.comparingInt(d -> -d.getNumAtivacoes()))
             .limit(3)
                 .map(ADomusSimples::clone)
             .collect(Collectors.toList());
+    }
+
+    public void ecoDevice(int idDevice){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof ADomusComplexo)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (ADomusComplexo) d)
+                .findFirst()
+                .ifPresent(ADomusComplexo::ecoObj);
+    }
+
+    public void boostDevice(int idDevice){
+        this.dispositivos.stream()
+                .filter(dSimples -> dSimples instanceof ADomusComplexo)
+                .filter(dSimples -> dSimples.getIdObjeto() == idDevice)
+                .map(dSimples -> (ADomusComplexo) dSimples)
+                .findFirst()
+                .ifPresent(ADomusComplexo::boostObj);
+
+    }
+
+    public void ligaDispositivo(int idDevice, long tempoAtual) {
+        this.dispositivos.stream()
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .findFirst()
+                .ifPresent(d -> d.ligaObj(tempoAtual));
+    }
+
+    public void desligaDispositivo(int idDevice, long tempoAtual) {
+        this.dispositivos.stream()
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .findFirst()
+                .ifPresent(d -> d.desligaObj(tempoAtual));
+    }
+
+    public String listaDispositivos() {
+        return this.dispositivos.stream()
+                .map(ADomusSimples::toString)
+                .collect(Collectors.joining("\n"));
+
+    }
+
+    public void aquecerAC(int idDevice){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof IDomusAC)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (IDomusAC) d)
+                .findFirst()
+                .ifPresent(IDomusAC::aquecerAC);
+    }
+
+    public void arrefecerAC(int idDevice){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof IDomusAC)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (IDomusAC) d)
+                .findFirst()
+                .ifPresent(IDomusAC::arrefecerAC);
+    }
+
+    public void ventilarAC(int idDevice){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof IDomusAC)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (IDomusAC) d)
+                .findFirst()
+                .ifPresent(IDomusAC::ventilarAC);
     }
 
 

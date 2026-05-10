@@ -6,7 +6,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import DomusDevice.ADomusComplexo;
 import DomusDevice.ADomusSimples;
+import DomusDevice.IDomusAC;
 
 public class Casa implements Serializable {
 
@@ -48,7 +51,9 @@ public class Casa implements Serializable {
     }
 
     public HashMap<Integer, Divisao> getDivisao() {
-        return new HashMap<>(this.divisao); // alterei para nao devolver a referencia direta 
+        HashMap<Integer, Divisao> copia = new HashMap<>();
+        this.divisao.forEach((id, d) -> copia.put(id, d.clone()));
+        return copia;
     }
 
     public int getIdHost() {
@@ -97,11 +102,6 @@ public class Casa implements Serializable {
 
     }
 
-    public void addDiv(Divisao div){
-        divisao.put(div.getIdDivisao(), div);
-
-    }
-
     public Casa clone(){
         return new Casa(this);
     }
@@ -139,9 +139,6 @@ public class Casa implements Serializable {
                 .orElse(null);
     }
 
-    public void removeDiv(int idDivisao) {
-        this.divisao.remove(idDivisao);
-    }
 
     public void desligaAllDevice(long momentoAtual){
         this.divisao.values().stream()
@@ -154,9 +151,7 @@ public class Casa implements Serializable {
     }
 
     public void removeGuest(int idGuest){
-        System.out.println("Antes: " + this.idGuests);
         this.idGuests.remove(Integer.valueOf(idGuest));
-        System.out.println("Depois: " + this.idGuests);
     }
 
     public boolean ehGuest(int idUtilizador){
@@ -169,6 +164,60 @@ public class Casa implements Serializable {
             .mapToDouble(d -> d.getConsumoObjeto() * d.getTempoTotal(momentoAtual) / 60.0)
             .sum();
     }
+
+    public void ecoDevice(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).ecoDevice(idDevice);
+    }
+
+    public void boostDevice(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).boostDevice(idDevice);
+
+    }
+
+    public void ligaDispositivo(int idDivisao, int idDevice, long tempoAtual) {
+        this.divisao.get(idDivisao).ligaDispositivo(idDevice, tempoAtual);
+    }
+
+    public void desligaDispositivo(int idDivisao, int idDevice, long tempoAtual) {
+        this.divisao.get(idDivisao).desligaDispositivo(idDevice, tempoAtual);
+    }
+
+    public String listaDivisoes() {
+        return this.divisao.values().stream()
+                .map(Divisao::toString)
+                .collect(Collectors.joining("\n"));
+    }
+
+    public String listaDispositivos(int idDivisao) {
+        return this.divisao.get(idDivisao).listaDispositivos();
+    }
+
+    public void adicionaDivisao(Divisao div) {
+        this.divisao.put(div.getIdDivisao(), div.clone());
+    }
+
+    public void removeDiv(int idDivisao) {
+        this.divisao.remove(idDivisao);
+    }
+
+    public void adicionaDispositivo(int idDivisao, ADomusSimples device){
+        this.divisao.get(idDivisao).addObj(device.clone());
+    }
+
+    public void aquecerAC(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).aquecerAC(idDevice);
+    }
+
+    public void arrefecerAC(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).arrefecerAC(idDevice);
+    }
+
+    public void ventilarAC(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).ventilarAC(idDevice);
+    }
+
+
+
 
     //FIXME: colocar aqui os metodos que retornam uma casa quaquer
 
