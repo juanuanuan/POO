@@ -1,12 +1,8 @@
 package Domus;
 
-import DomusDevice.ADomusComplexo;
 import DomusDevice.ADomusSimples;
-import DomusDevice.IDomusAC;
-import Utilizador.Utilizador;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -67,21 +63,24 @@ public class Casas implements Serializable {
                 .orElse(null);
     }
 
-    public List<ADomusSimples> top3DevicesPorTempo(int idCasa, long tempoAtual) {
-        return this.casas.get(idCasa).clone().top3DevicesPorTempo(tempoAtual);
+    public List<ADomusSimples> top3DevicesPorTempoCasa(int idCasa, long tempoAtual) {
+        return this.casas.get(idCasa).clone().top3DevicesPorTempoCasa(tempoAtual);
     }
 
-    public List<ADomusSimples> top3DevicesPorAtivacoes(int idCasa) {
-        return this.casas.get(idCasa).clone().top3DevicesPorAtivacoes();
+    public List<ADomusSimples> top3DevicesPorAtivacoesCasa(int idCasa) {
+        return this.casas.get(idCasa).clone().top3DevicesPorAtivacoesCasa();
     }
 
     public ADomusSimples top1DeviceConsumo(int idCasa){
         return this.casas.get(idCasa).top1DeviceConsumo().clone();
     }
 
-    public boolean ehHost(Utilizador user){
-        return this.casas.values().stream()
-                .anyMatch(c -> c.getIdHost() == user.getIdUtilizador());
+    public boolean ehHost(int idCasa, int idUtilizador){
+        return this.casas.get(idCasa).getIdHost() == idUtilizador;
+    }
+
+    public boolean ehGuest(int idCasa, int idUtilizador){
+        return this.casas.get(idCasa).ehGuest(idUtilizador);
     }
 
     public void desligaAllDevice(int idCasa, long tempoAtual){
@@ -148,6 +147,41 @@ public class Casas implements Serializable {
     public void adicionaDispositivo(int idCasa, int idDivisao, ADomusSimples device){
         this.casas.get(idCasa).adicionaDispositivo(idDivisao, device);
     }
+
+    public void aquecer(int idCasa, int idDivisao, int idDevice){
+        this.casas.get(idCasa).aquecer(idDivisao, idDevice);
+    }
+
+    public void arrefecer(int idCasa, int idDivisao, int idDevice){
+        this.casas.get(idCasa).arrefecer(idDivisao, idDevice);
+    }
+
+    public void ventilar(int idCasa, int idDivisao, int idDevice){
+        this.casas.get(idCasa).ventilar(idDivisao, idDevice);
+    }
+
+    public void setTemperatura(int idCasa, int idDivisao, int idDevice, int temperatura){
+        this.casas.get(idCasa).setTemperatura(idDivisao, idDevice, temperatura);
+    }
+
+    public List<ADomusSimples> top3DevicesPorTempoDivisao(int idCasa, int idDivisao) {
+        return this.casas.get(idCasa).top3DevicesPorTempoDivisao(idDivisao);
+    }
+
+    public List<ADomusSimples> top3DevicesPorAtivacoesDivisao(int idCasa, int idDivisao) {
+        return this.casas.get(idCasa).top3DevicesPorAtivacoesDivisao(idDivisao);
+    }
+
+    public void setNivelDevice(int idCasa, int idDivisao, int idDevice, double nivel){
+        this.casas.get(idCasa).setNivelDevice(idDivisao, idDevice, nivel);
+    }
+
+    public ADomusSimples getDispositivo(int idCasa, int idDivisao, int idDevice) {
+        return this.casas.get(idCasa).getDispositivo(idDivisao, idDevice);
+    }
+
+
+
 
 
 

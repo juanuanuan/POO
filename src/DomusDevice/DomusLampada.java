@@ -81,46 +81,7 @@ public class DomusLampada extends ADomusComplexo {
         return result;
     }
 
-  /*   public boolean equals(Object o) {
-        if(o == this) return true;
-        if(o == null || this.getClass() != o.getClass()) return false;
-        DomusLampada other = (DomusLampada) o;
-        return super.equals(o); //&&
-                //this.intensidade == other.intensidade &&
-                //this.temperaturaCorK == other.temperaturaCorK &&
-                //this.temCor == other.temCor; 
-}*/
-
 
 
 
 }
-
-
-// deixei isto em comentario, nao sei se precisavas disto ou nao
-
-/*     public void boostObj(){
-        super.setestadoAtual(Estado.BOOST);
-    public void boostObj(){
-        super.setEstadoAtual(Estado.BOOST);
-    }
-
-    public void ecoObj(){
-        super.setEstadoAtual(Estado.ECO);
-    }
-
-    public DomusLampada(){
-        super();
-    }
-
-    public DomusLampada(DomusLampada other){
-        super(other); // na duvida se esta certo.
-    }
-
-    public DomusLampada clone(){
-        return new DomusLampada(this);
-    } */
-
-
-
-

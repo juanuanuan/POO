@@ -18,19 +18,22 @@ public class Utilizadores implements Serializable {
 
 
     public Utilizadores(HashMap<Integer,Utilizador> utilizadores){
-        this.utilizadores = utilizadores;
+        this.utilizadores = new HashMap<>();
+        utilizadores.forEach((id, u) -> this.utilizadores.put(id, u.clone()));
     }
 
     public Utilizadores(Utilizadores other){
-        this.utilizadores = new HashMap<>(other.getUtilizadores());
+        this.utilizadores = new HashMap<>();
+        other.utilizadores.forEach((id, u) -> this.utilizadores.put(id, u.clone()));
     }
 
 
     public HashMap<Integer, Utilizador> getUtilizadores() {
-        return this.utilizadores;
+        HashMap<Integer, Utilizador> copia = new HashMap<>();
+        this.utilizadores.forEach((id, u) -> copia.put(id, u.clone()));
+        return copia;
     }
 
-    // na dúvida se um setter vale mesmo a pena definir, na minha opinião, só vale a pena se quisermos carregar um estado antigo, i.e., voltar um save atrás
 
 
 
@@ -61,11 +64,11 @@ public class Utilizadores implements Serializable {
     }
 
     public void addUser(Utilizador user){
-        utilizadores.put(user.getIdUtilizador(), user);
+        this.utilizadores.put(user.getIdUtilizador(), user.clone());
     }
 
     public void removeUser(Utilizador user){
-        utilizadores.remove(user.getIdUtilizador(), user);
+        this.utilizadores.remove(user.getIdUtilizador(), user);
     }
 
     public Utilizador efetuaLogin(String novoEmail, String novaPass){
@@ -100,7 +103,4 @@ public class Utilizadores implements Serializable {
     }
 
 
-
-
-    //FIXME: ha metodos a colocar aqui tambem.
 }

@@ -2,7 +2,7 @@ package Domus;
 
 import DomusDevice.ADomusSimples;
 import DomusDevice.ADomusComplexo;
-import DomusDevice.IDomusAC;
+import DomusDevice.IDomusTemp;
 
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -190,13 +190,75 @@ public class Divisao implements Serializable {
 
     }
 
+    public void aquecer(int idDevice){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof IDomusTemp)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (IDomusTemp) d)
+                .findFirst()
+                .ifPresent(IDomusTemp::aquecer);
+    }
 
+    public void arrefecer(int idDevice){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof IDomusTemp)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (IDomusTemp) d)
+                .findFirst()
+                .ifPresent(IDomusTemp::arrefecer);
+    }
+
+    public void ventilar(int idDevice){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof IDomusTemp)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (IDomusTemp) d)
+                .findFirst()
+                .ifPresent(IDomusTemp::ventilar);
+    }
+
+    public void setTemperatura(int idDevice, int temperatura){
+        this.dispositivos.stream()
+                .filter(d -> d instanceof IDomusTemp)
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .map(d -> (IDomusTemp) d)
+                .findFirst()
+                .ifPresent(d -> d.setTemperaturaAC(temperatura));
+    }
+
+    public List<ADomusSimples> top3DevicesPorTempoDivisao() {
+        return this.dispositivos.stream()
+                .sorted(Comparator.comparingLong(ADomusSimples::getTempoAcumulado).reversed())
+                .limit(3)
+                .map(ADomusSimples::clone)
+                .collect(Collectors.toList());
+    }
+
+    public List<ADomusSimples> top3DevicesPorAtivacoesDivisao() {
+        return this.dispositivos.stream()
+                .sorted(Comparator.comparingInt(ADomusSimples::getNumAtivacoes).reversed())
+                .limit(3)
+                .map(ADomusSimples::clone)
+                .collect(Collectors.toList());
+    }
+
+    public void setNivelDevice(int idDevice, double nivel){
+        this.dispositivos.stream()
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .findFirst()
+                .ifPresent(d -> d.setNivel(nivel));
+    }
+
+    public ADomusSimples getDispositivo(int idDevice) {
+        return this.dispositivos.stream()
+                .filter(d -> d.getIdObjeto() == idDevice)
+                .findFirst()
+                .map(ADomusSimples::clone)
+                .orElse(null);
+    }
 
 
     //FIXME: colocar aqui os metodos que retornam divisoes
-
-
-
 
 
 

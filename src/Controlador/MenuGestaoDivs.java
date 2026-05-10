@@ -35,9 +35,14 @@ public class MenuGestaoDivs extends Menus{
 
                 case 2: {
                     System.out.println("The SM (Shutdown Mode) turns off all your devices. Only the owner, or any user with such permissions is able to shutdown");
-                    if(controlador.ehHost()){
+                    /*
+                    if(controlador.podeGerir(idCasa)){
                         controlador.desligaAllDevice(idCasa);
-                    } else System.out.println("Permission denied.\n");
+                    }
+                     else System.out.println("Permission denied.\n");
+                     */
+                    controlador.desligaAllDevice(idCasa);
+                    System.out.println("All devices have been turned off.");
                     break;
                 }
                 case 0: 

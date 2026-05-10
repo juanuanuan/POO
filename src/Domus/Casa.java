@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import DomusDevice.ADomusComplexo;
 import DomusDevice.ADomusSimples;
-import DomusDevice.IDomusAC;
 
 public class Casa implements Serializable {
 
@@ -84,12 +82,28 @@ public class Casa implements Serializable {
         this.idCasa = idCasa;
     }
 
+    public void setNomeCasa(String nomeCasa) {
+        this.nomeCasa = nomeCasa;
+    }
+
+    public void setIdGuests(List<Integer> idGuests) {
+        this.idGuests = idGuests;
+    }
+
+    public void setDivisao(HashMap<Integer, Divisao> divisao) {
+        this.divisao = new HashMap<>();
+        divisao.forEach((id, d) -> this.divisao.put(id, d.clone()));
+    }
+
+    public void setMorada(String morada) {
+        this.morada = morada;
+    }
 
     public boolean equals(Object o) {
         if(o == this) return true;
         if(o == null || o.getClass() != this.getClass()) return false;
         Casa other = (Casa) o;
-        return (this.idHost == other.idHost && this.divisao.equals(other.divisao));
+        return (this.idCasa == other.idCasa);
     }
 
     public String toString(){
@@ -113,7 +127,7 @@ public class Casa implements Serializable {
             .sum();
     }
 
-    public List<ADomusSimples> top3DevicesPorTempo(long momentoAtual) {
+    public List<ADomusSimples> top3DevicesPorTempoCasa(long momentoAtual) {
         return this.divisao.values().stream()
             .flatMap(d -> d.getDispositivos().stream())
             .sorted(Comparator.comparingLong(d -> -d.getTempoTotal(momentoAtual)))
@@ -122,7 +136,7 @@ public class Casa implements Serializable {
             .collect(Collectors.toList());
     }
 
-    public List<ADomusSimples> top3DevicesPorAtivacoes() {
+    public List<ADomusSimples> top3DevicesPorAtivacoesCasa() {
         return this.divisao.values().stream()
             .flatMap(d -> d.getDispositivos().stream())
             .sorted(Comparator.comparingInt(d -> -d.getNumAtivacoes()))
@@ -203,6 +217,42 @@ public class Casa implements Serializable {
     public void adicionaDispositivo(int idDivisao, ADomusSimples device){
         this.divisao.get(idDivisao).addObj(device.clone());
     }
+
+    public void aquecer(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).aquecer(idDevice);
+    }
+
+    public void arrefecer(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).arrefecer(idDevice);
+    }
+
+    public void ventilar(int idDivisao, int idDevice){
+        this.divisao.get(idDivisao).ventilar(idDevice);
+    }
+
+    public void setTemperatura(int idDivisao, int idDevice, int temperatura){
+        this.divisao.get(idDivisao).setTemperatura(idDevice, temperatura);
+    }
+
+    public List<ADomusSimples> top3DevicesPorTempoDivisao(int idDivisao) {
+        return this.divisao.get(idDivisao).top3DevicesPorTempoDivisao();
+    }
+
+    public List<ADomusSimples> top3DevicesPorAtivacoesDivisao(int idDivisao) {
+        return this.divisao.get(idDivisao).top3DevicesPorAtivacoesDivisao();
+    }
+
+    public void setNivelDevice(int idDivisao, int idDevice, double nivel){
+        this.divisao.get(idDivisao).setNivelDevice(idDevice, nivel);
+    }
+
+    public ADomusSimples getDispositivo(int idDivisao, int idDevice) {
+        return this.divisao.get(idDivisao).getDispositivo(idDevice);
+    }
+
+
+
+
 
 
 

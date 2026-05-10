@@ -17,6 +17,7 @@ public class Testing {
 
         controlador.adicionaCasa(50098, 1, "Rua A", "Casa Principal");
         controlador.adicionaCasa(50098, 2, "Rua B", "Casa de Ferias");
+        controlador.adicionaGuest(1, 2);
 
         controlador.adicionaDivisao(1, "Sala",    1);
         controlador.adicionaDivisao(1, "Quarto",  2);

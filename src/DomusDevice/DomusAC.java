@@ -1,6 +1,6 @@
 package DomusDevice;
 
-public class DomusAC extends ADomusComplexo implements IDomusAC{
+public class DomusAC extends ADomusComplexo implements IDomusTemp {
 
     private int temperaturaAC; // entre 16 e 30
     private ModoAC modoAC;
@@ -60,7 +60,17 @@ public class DomusAC extends ADomusComplexo implements IDomusAC{
     }
 
 
+    public void aquecer(){
+        this.modoAC = ModoAC.AQUECER;
+    }
 
+    public void arrefecer(){
+        this.modoAC = ModoAC.ARREFECER;
+    }
+
+    public void ventilar(){
+        this.modoAC = ModoAC.VENTILAR;
+    }
 
 
 

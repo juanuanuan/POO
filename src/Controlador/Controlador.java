@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 
 import Domus.Casas;
 import Domus.Divisao;
-import DomusDevice.ADomusComplexo;
 import DomusDevice.ADomusSimples;
-import DomusDevice.DomusLampada;
 
 import Domus.Casa;
 import Utilizador.Utilizador;
@@ -56,7 +54,7 @@ public class Controlador implements Serializable {
     }
 
     public Utilizador getUser() {
-        return this.user;
+        return this.user.clone();
     }
 
     public Casas getCasas(){
@@ -131,12 +129,20 @@ public class Controlador implements Serializable {
         return this.casas.top3DivisoesComMaisDevices();
     }
 
-    public List<ADomusSimples> top3DevicesPorTempo(int idCasa) {
-        return this.casas.top3DevicesPorTempo(idCasa, this.getTempoAtual());
+    public List<ADomusSimples> top3DevicesPorTempoCasa(int idCasa) {
+        return this.casas.top3DevicesPorTempoCasa(idCasa, this.getTempoAtual());
     }
 
-    public List<ADomusSimples> top3DevicesPorAtivacoes(int idCasa) {
-        return this.casas.top3DevicesPorAtivacoes(idCasa);
+    public List<ADomusSimples> top3DevicesPorAtivacoesCasa(int idCasa) {
+        return this.casas.top3DevicesPorAtivacoesCasa(idCasa);
+    }
+
+    public List<ADomusSimples> top3DevicesPorTempoDivisao(int idCasa, int idDivisao) {
+        return this.casas.top3DevicesPorTempoDivisao(idCasa, idDivisao);
+    }
+
+    public List<ADomusSimples> top3DevicesPorAtivacoesDivisao(int idCasa, int idDivisao) {
+        return this.casas.top3DevicesPorAtivacoesDivisao(idCasa, idDivisao);
     }
 
     public void ligaDispositivo(int idCasa, int idDivisao, int idDevice) {
@@ -183,8 +189,12 @@ public class Controlador implements Serializable {
         this.utilizadores.removeCasaUser(idUtilizador,idCasa);
     }
 
-    public boolean ehHost(){
-        return this.casas.ehHost(this.user);
+    public boolean ehHost(int idCasa, int idUtilizador){
+        return this.casas.ehHost(idCasa, idUtilizador);
+    }
+
+    public boolean ehGuest(int idCasa, int idUtilizador){
+        return this.casas.ehGuest(idCasa, idUtilizador);
     }
 
     public ADomusSimples top1DeviceConsumo(int idCasa){
@@ -205,17 +215,19 @@ public class Controlador implements Serializable {
         this.casas.desligaAllDevice(idCasa, this.getTempoAtual());
     }
 
-    public boolean existeConta(Utilizador user){
-        boolean existentUser = this.utilizadores.getUtilizadores().values().stream()
+    public boolean existeConta(Utilizador user) {
+        return this.utilizadores.getUtilizadores().values().stream()
                 .anyMatch(u -> u.getNIF() == user.getNIF() || u.getEmail().equals(user.getEmail()));
 
-        if(!existentUser){
-            this.utilizadores.getUtilizadores().put(user.getIdUtilizador(), user);
-            return true;
-        }
+    }
 
-        System.out.println("User with this credentials already exists.\n");
-        return false;
+    public boolean criarConta(Utilizador user){
+        if(existeConta(user)){
+            System.out.println("User with this credentials already exists.\n");
+            return false;
+        }
+        this.utilizadores.addUser(user);
+        return true;
     }
 
     public void adicionaGuest(int idCasa, int idGuest) {
@@ -258,6 +270,33 @@ public class Controlador implements Serializable {
         idUsados.add(id);
         return id;
     }
+
+    public void aquecer(int idCasa, int idDivisao, int idDevice){
+        this.casas.aquecer(idCasa, idDivisao, idDevice);
+    }
+
+    public void arrefecer(int idCasa, int idDivisao, int idDevice){
+        this.casas.arrefecer(idCasa, idDivisao, idDevice);
+    }
+
+    public void ventilar(int idCasa, int idDivisao, int idDevice){
+        this.casas.ventilar(idCasa, idDivisao, idDevice);
+    }
+
+    public void setTemperatura(int idCasa, int idDivisao, int idDevice, int temperatura){
+        this.casas.setTemperatura(idCasa, idDivisao, idDevice, temperatura);
+    }
+
+    public void setNivelDevice(int idCasa, int idDivisao, int idDevice, double nivel){
+        this.casas.setNivelDevice(idCasa, idDivisao, idDevice, nivel);
+    }
+
+    public ADomusSimples getDispositivo(int idCasa, int idDivisao, int idDevice) {
+        return this.casas.getDispositivo(idCasa, idDivisao, idDevice);
+    }
+
+
+
 
 
 }
