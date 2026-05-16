@@ -102,7 +102,7 @@ public class CarRental implements Comparable<CarroEletrico> {
                 .count(); // versao 2 percorre com iteradores internos
     }
 
-    public Carro getCarroC(String cod){
+    public Carro getCarroC(String cod)throws CarroInexistenteException{
         if(!this.carros.containsKey(cod)){
             throw new CarroInexistenteException();
         }
@@ -113,7 +113,7 @@ public class CarRental implements Comparable<CarroEletrico> {
         } return null;
     }
 
-    public void registaViagem(String cod, float numKms){
+    public void registaViagem(String cod, float numKms)throws CarroInexistenteException{
         if(!this.carros.containsKey(cod)){
             throw new CarroInexistenteException();
         }
