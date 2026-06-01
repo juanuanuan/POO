@@ -1,6 +1,6 @@
-package Domus;
+package Model.Domus;
 
-import DomusDevice.ADomusSimples;
+import Model.DomusDevice.ADomusSimples;
 
 import java.io.Serializable;
 import java.util.Comparator;

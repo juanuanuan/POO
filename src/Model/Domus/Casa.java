@@ -1,4 +1,4 @@
-package Domus;
+package Model.Domus;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import DomusDevice.ADomusSimples;
+import Model.Domus.Divisao;
+
+import Model.DomusDevice.ADomusSimples;
 
 public class Casa implements Serializable {
 

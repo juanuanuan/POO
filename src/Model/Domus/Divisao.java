@@ -1,8 +1,8 @@
-package Domus;
+package Model.Domus;
 
-import DomusDevice.ADomusSimples;
-import DomusDevice.ADomusComplexo;
-import DomusDevice.IDomusTemp;
+import Model.DomusDevice.ADomusSimples;
+import Model.DomusDevice.ADomusComplexo;
+import Model.DomusDevice.IDomusTemp;
 
 import java.util.Comparator;
 import java.util.stream.Collectors;

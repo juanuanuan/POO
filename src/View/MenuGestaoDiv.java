@@ -1,6 +1,7 @@
-package Controlador;
+package View;
+import Controller.*;
 
-import DomusDevice.DomusAC;
+import Model.DomusDevice.DomusAC;
 
 import java.util.Scanner;
 

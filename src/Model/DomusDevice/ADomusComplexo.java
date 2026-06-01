@@ -1,4 +1,4 @@
-package DomusDevice;
+package Model.DomusDevice;
 
 public abstract class ADomusComplexo extends ADomusSimples implements IDomusComplexo{
 

@@ -1,7 +1,8 @@
-package Controlador;
+package View;
 import java.util.Random;
 
-import DomusDevice.*;
+import Model.DomusDevice.*;
+import Controller.*;
 
 import java.util.Scanner;
 

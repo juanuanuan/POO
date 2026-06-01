@@ -1,4 +1,4 @@
-package DomusDevice;
+package Model.DomusDevice;
 
 import java.io.Serializable;
 

@@ -1,16 +1,17 @@
-package Controlador;
+package Controller;
 
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import Domus.Casas;
-import Domus.Divisao;
-import DomusDevice.ADomusSimples;
+import Model.Domus.Casas;
+import Model.Domus.Divisao;
+import Model.DomusDevice.ADomusSimples;
 
-import Domus.Casa;
-import Utilizador.Utilizador;
-import Utilizador.Utilizadores;
+import Model.Domus.Casa;
+import Model.Utilizador.Utilizador;
+import Model.Utilizador.Utilizadores;
+import Model.*;
 
 public class Controlador implements Serializable {
     // Recebe métodos que salvam e carregam o estado da aplicação

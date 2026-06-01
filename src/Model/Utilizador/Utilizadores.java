@@ -1,7 +1,7 @@
-package Utilizador;
+package Model.Utilizador;
 
-import Domus.Casa;
-import Domus.Casas;
+import Model.Domus.Casa;
+import Model.Domus.Casas;
 
 import java.io.Serializable;
 import java.util.HashMap;

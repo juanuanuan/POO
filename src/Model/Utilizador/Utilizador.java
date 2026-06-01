@@ -1,6 +1,6 @@
-package Utilizador;
+package Model.Utilizador;
 
-import Domus.Casa;
+import Model.Domus.Casa;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.Serializable;

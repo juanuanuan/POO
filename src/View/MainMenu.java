@@ -1,6 +1,7 @@
-package Controlador;
+package View;
 
 import java.util.Scanner;
+import Controller.*;
 
 public class MainMenu extends Menus{
 

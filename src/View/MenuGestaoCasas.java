@@ -1,7 +1,8 @@
-package Controlador;
+package View;
 
 import java.util.Random;
 import java.util.Scanner;
+import Controller.*;
 
 public class MenuGestaoCasas extends Menus{
 

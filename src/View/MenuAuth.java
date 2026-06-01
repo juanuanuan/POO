@@ -1,9 +1,10 @@
-package Controlador;
+package View;
+import Controller.*;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import Utilizador.Utilizador;
+import Model.Utilizador.Utilizador;
 
 public class MenuAuth extends Menus{
 
