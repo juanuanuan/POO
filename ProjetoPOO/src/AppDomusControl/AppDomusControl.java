@@ -1,9 +1,9 @@
 package AppDomusControl;
 
-import Controlador.Controlador;
-import Controlador.MenuAuth;
-import DomusDevice.DomusLampada;
-import Utilizador.Utilizador;
+import Controller.Controlador;
+import View.MenuAuth;
+import Model.DomusDevice.DomusLampada;
+import Model.Utilizador.Utilizador;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
