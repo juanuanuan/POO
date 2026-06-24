@@ -4,9 +4,6 @@
 - Aluno A110393 - João Paulo 
 - A110879 - Miguel Poço 
 
-# Nota: 
-
- 
 ## Funcionalidades
  
 - Gestão estrutural de múltiplas casas, divisões e níveis de acesso de utilizadores
