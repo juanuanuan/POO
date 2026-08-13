@@ -17,10 +17,8 @@ public class Controlador implements Serializable {
     // Recebe métodos que salvam e carregam o estado da aplicação
     // lê ficheiros, recebe os metodos DomusDevice para criação de duplicatos.
 
-    // nao sei bem o propósito desta classe, se fica so para gestão do estado da aplicação, ou se lhe passamos métodos de controlo sobre os utilizadores, i.e., login registo, etc
-
     private Utilizadores utilizadores; 
-    private Casas casas; // FIXME: colocar isto na classe Casas. E trazer as casas para aqui, os menus nao presicam de ser trocados, continuam a chamar o controlador
+    private Casas casas; 
     private Utilizador user;
     private long tempoAtual;
     private Set<Integer> idUsados;
